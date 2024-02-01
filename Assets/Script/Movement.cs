@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 moveDeraction;
 
+    float moveX;
     private void Awake()
     {
         scaleX = transform.localScale.x;
@@ -38,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (isDashing) { return; }
-        ProcessInputs();
+        
         if (Input.GetButtonDown("Jump") && jumpCount > 0)
         {
             jumpPress = true;
@@ -54,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         if (isDashing) { return; }
+        ProcessInputs();
         Move();
         isOnGroundCheck();
         Jump();
@@ -62,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ProcessInputs()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");//x轴向量
+        moveX = Input.GetAxisRaw("Horizontal");//x轴向量
         //float moveY = Input.GetAxisRaw("Vertical");//y轴向量
 
         moveDeraction = new Vector2(moveX, 0).normalized; //单位向量
@@ -81,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        rg.velocity = new Vector2(moveDeraction.x * speed, rg.velocity.y); //运动方向
+        rg.velocity = new Vector2(moveX * speed, rg.velocity.y); //运动方向
     }
 
 
