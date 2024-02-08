@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ProcessInputs()
     {
-        moveX = Input.GetAxisRaw("Horizontal");//x轴向量
+        moveX = Input.GetAxis("Horizontal");//x轴向量
         //float moveY = Input.GetAxisRaw("Vertical");//y轴向量
 
         moveDeraction = new Vector2(moveX, 0).normalized; //单位向量
