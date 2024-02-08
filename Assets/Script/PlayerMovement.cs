@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     float moveX;
 
-    public int canTransmit = 1;
+    public int canTransmit = 2;
     private void Awake()
     {
         scaleX = transform.localScale.x;
