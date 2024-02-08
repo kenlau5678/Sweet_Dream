@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDeraction;
 
     float moveX;
+
+    public int canTransmit = 1;
     private void Awake()
     {
         scaleX = transform.localScale.x;

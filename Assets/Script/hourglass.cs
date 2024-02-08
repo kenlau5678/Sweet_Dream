@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class hourglass : MonoBehaviour
 {
-
-    public Vector3 point;
     public GameObject hourhand;
     public GameObject minutehand;
     public float hourAngles;
