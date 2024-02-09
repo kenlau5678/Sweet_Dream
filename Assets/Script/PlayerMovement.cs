@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public int canTransmit = 2;
     private void Awake()
     {
+        canTransmit = 2;
         scaleX = transform.localScale.x;
     }
     void Update()
