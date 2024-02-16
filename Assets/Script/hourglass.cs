@@ -33,7 +33,7 @@ public class hourglass : MonoBehaviour
     {
         if (isstay ==1 && Input.GetKeyDown(KeyCode.F))
         {
-
+            Debug.Log("OK");
             StartCoroutine(hourhand.GetComponent<HandRotation>().RotationCoroutine());
             StartCoroutine(minutehand.GetComponent<HandRotation>().RotationCoroutine());
 
