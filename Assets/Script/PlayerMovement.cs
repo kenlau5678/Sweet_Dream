@@ -34,9 +34,16 @@ public class PlayerMovement : MonoBehaviour
     float moveX;
 
     public int canTransmit = 2;
+
+    private float _fallSpeedYDampingChangeThreshold;
+
+    private void Start()
+    {
+        _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
+    }
     private void Awake()
     {
-        canTransmit = 2;
+        canTransmit = 2; 
         scaleX = transform.localScale.x;
     }
     void Update()
@@ -51,6 +58,18 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+
+        if(rg.velocity.y<_fallSpeedYDampingChangeThreshold && !CameraManager.instance.IsLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.instance.LerpYDamping(true);
+        }
+
+        if (rg.velocity.y >= 0f &&!CameraManager.instance.IsLerpingYDamping&&CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.instance.LerpedFromPlayerFalling = false;
+            CameraManager.instance.LerpYDamping(false);
+        }
+
     }
 
 
@@ -76,11 +95,13 @@ public class PlayerMovement : MonoBehaviour
         //倒转物体（包括子物件）
         if (moveX < 0)
         {
-            transform.localScale = new Vector3(-scaleX, transform.localScale.y, transform.localScale.z);
+            transform.rotation = Quaternion.Euler(0, -180, 0);
+            //transform.localScale = new Vector3(-scaleX, transform.localScale.y, transform.localScale.z);
         }
         else if (moveX > 0)
         {
-            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            //transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
     }
 
