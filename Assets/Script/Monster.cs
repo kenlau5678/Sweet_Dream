@@ -5,6 +5,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     public Transform player;
+	public float health = 100f;
 
 	public bool isFlipped = false;
 
@@ -25,5 +26,19 @@ public class Monster : MonoBehaviour
 			transform.Rotate(0f, 180f, 0f);
 			isFlipped = true;
 		}
+	}
+
+	public void TakeDamage(int damage)
+	{
+		health -= damage;
+		if(health <= 0)
+		{
+			Die();
+		}
+	}
+	void Die()
+	{
+		//Instantiate(deathEffect, transform.position, Quaternion.identity); //deathAnimator
+		Destroy(gameObject);
 	}
 }
