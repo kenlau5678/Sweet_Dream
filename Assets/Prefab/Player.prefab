@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &557815708416396389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1255614237395334384}
+  m_Layer: 0
+  m_Name: FeetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1255614237395334384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557815708416396389}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.506, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2815165761368082723}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4393280368915767346
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,6 +99,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6897467127232012932}
+  - {fileID: 1255614237395334384}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7669769164391475092
@@ -138,15 +170,31 @@ MonoBehaviour:
   coll: {fileID: 3884076319332119354}
   tr: {fileID: 6775916140424257228}
   speed: 5
-  jumpPower: 5.5
+  feetPos: {fileID: 1255614237395334384}
+  checkRadius: 0.3
+  jumpPower: 8
   isOnGround: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpTime: 0.35
+  baseJumpPower: 5.5
+  jumpPowerIncrement: 0.5
+  maxSpacePressDuration: 2
   dashingPower: 15
   dashingTime: 0.2
   dashingCooldown: 1
   canTransmit: 1
+  distance: 5
+  LadderMask:
+    serializedVersion: 2
+    m_Bits: 512
+  isTrigger: 0
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 5
+  pressJump: 0
+  jumpNum: 2
+  jumpRemainNum: 0
 --- !u!61 &3884076319332119354
 BoxCollider2D:
   m_ObjectHideFlags: 0
