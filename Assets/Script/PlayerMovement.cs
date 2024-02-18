@@ -8,70 +8,60 @@ using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //Object
+    //Object 对象相关变更量
     public Rigidbody2D rg; //Rigidbody2D 对象
     public Collider2D coll; //Collider2D 对象
-    public TrailRenderer tr;
-    public float speed; //speed
+    public TrailRenderer tr; //Trail Renderer对象
 
+    //Move 移动相关变量
+    public float speed; //角色移动速度
+    float scaleX;//玩家当前面向方向
+    float moveX;//x轴方向
+    //private Vector2 moveDeraction;
 
-    //Jump
-    public Transform feetPos;
-    public float checkRadius;
-    public float jumpPower;
-    public bool isOnGround;
-    public LayerMask groundLayer;
-    float scaleX;
-    int jumpCount;//跳跃次数
-    bool jumpPress; //按键状态
-    private float jumpTimeCounter;
-    public float jumpTime;
-    bool isjumping;
-
-
-    public float baseJumpPower = 5f;
-    public float jumpPowerIncrement = 0.2f;
+    //Jump 跳跃相关变量
+    public Transform feetPos;//Player的子对象，在Player底下，用于检测是否在地板Layer上
+    public float checkRadius;//feetPos检测半径
+    public LayerMask groundLayer;//地板Layer
+    public float jumpPower;//跳跃的力
+    public bool isOnGround;//表示是否在地上
     public float maxSpacePressDuration = 1f; // 最大按鍵時間
-
-    //Dush
-    private bool canDash = true;
-    private bool isDashing;
-    public float dashingPower;
-    public float dashingTime;
-    public float dashingCooldown;
-
-    private Vector2 moveDeraction;
-
-    float moveX;
-
-    public int canTransmit = 2;
-
-    private float _fallSpeedYDampingChangeThreshold;
-
-
-    public float distance;
-    public LayerMask LadderMask;
-    private bool isClimbing;
-    float inputVertical;
-    public bool isTrigger;
-
-    private float coyoteTime = 0.2f;
+    public float coyoteTime = 0.2f;//土狼时间（离开地面的土狼时间内还能跳跃）
     private float coyoteTimeCounter;
-
-    private float jumpBufferTime = 0.2f;
+    public float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
-
     public float fallMultiplier;//空中降落的速度
     public float lowJumpMultiplier;//跳跃高度的限制级别（数值越大跳的越矮）
     public bool pressJump;
     public int jumpNum;//一共能跳几次
     public int jumpRemainNum;//还能跳几次
     private bool hasDoubleJumped; // 用於追蹤是否已經進行了二段跳
-    private bool isJumping;
+    private bool isJumping;//表示是否在跳跃
+    float inputVertical;
+
+    //Dush 冲刺相关变量
+    private bool canDash = true;
+    private bool isDashing;//表示是否在冲刺
+    public float dashingPower;//冲刺给的力
+    public float dashingTime;//冲刺时间
+    public float dashingCooldown;//冲刺冷却时间
+
+    //Transmit 传送相关变量
+    public int canTransmit = 2;
+
+    //Camera 相机相关变量
+    private float _fallSpeedYDampingChangeThreshold;
+
+    //Ladder 楼梯相关变量
+    public LayerMask LadderMask;//楼梯Layer
+    private bool isClimbing;//表示是否在爬行状态
+    public bool isTrigger;//表示是否可以爬行，当楼梯触发到玩家会变成true
+
     private void Start()
     {
         _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
     }
+
     private void Awake()
     {
         canTransmit = 2; 
@@ -79,15 +69,11 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (isDashing) { return; }
+        if (isDashing) { return; }//确保如果在冲刺期间，角色不会有其他一点
         
-        //if (Input.GetButtonDown("Jump") && jumpCount > 0)
-        //{
-        //    jumpPress = true;
-        //}
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            StartCoroutine(Dash());
+            StartCoroutine(Dash());//触发冲刺函数
         }
 
         if(rg.velocity.y<_fallSpeedYDampingChangeThreshold && !CameraManager.instance.IsLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
@@ -108,46 +94,42 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        if (isDashing) { return; }
+        if (isDashing) { return; }//确保如果在冲刺期间，角色不会有其他一点
         ProcessInputs();
         Move();
         isOnGroundCheck();
-        Climb();
-
-        
+        Climb();    
     }
 
-
+    //处理玩家输入
     void ProcessInputs()
     {
         moveX = Input.GetAxis("Horizontal");//x轴向量
         //float moveY = Input.GetAxisRaw("Vertical");//y轴向量
 
-        moveDeraction = new Vector2(moveX, 0).normalized; //单位向量
+        //moveDeraction = new Vector2(moveX, 0).normalized; //单位向量
 
 
         //倒转物体（包括子物件）
         if (moveX < 0)
         {
             transform.rotation = Quaternion.Euler(0, -180, 0);
+            scaleX = -1;
             //transform.localScale = new Vector3(-scaleX, transform.localScale.y, transform.localScale.z);
         }
         else if (moveX > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            scaleX = 1;
             //transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
     }
 
+    //玩家运动函数
     void Move()
     {
-        rg.velocity = new Vector2(moveX * speed, rg.velocity.y); //运动方向
+        rg.velocity = new Vector2(moveX * speed, rg.velocity.y); //设置运动速度、方向， x为左右方向乘以速度，y为当前y方向速度
     }
-
-
-
-  
 
     //void Jump()
     //{
@@ -172,16 +154,20 @@ public class PlayerMovement : MonoBehaviour
     //        rg.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
     //    }
     //}
+
+    //跳跃函数
+    //1. 实现土狼时间
+    //2. 实现按键时长决定跳跃高度
     void Jump()
     {
         if (isOnGround)
         {
-            coyoteTimeCounter = coyoteTime;
+            coyoteTimeCounter = coyoteTime;//土狼时间计时器
             hasDoubleJumped = false; // 重置二段跳標記
         }
         else
         {
-            coyoteTimeCounter -= Time.deltaTime;
+            coyoteTimeCounter -= Time.deltaTime;//土狼时间器倒数
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -200,73 +186,80 @@ public class PlayerMovement : MonoBehaviour
             {
                 rg.velocity = new Vector2(rg.velocity.x, jumpPower);
                 jumpBufferCounter = 0f;
-                StartCoroutine(JumpCooldown());
+                StartCoroutine(JumpCooldown());//开始跳跃冷却函数
             }
             else if (!hasDoubleJumped && !isOnGround) // 二段跳
             {
                 rg.velocity = new Vector2(rg.velocity.x, jumpPower);
                 jumpBufferCounter = 0f;
                 hasDoubleJumped = true; // 標記已進行二段跳
-                StartCoroutine(JumpCooldown());
+                StartCoroutine(JumpCooldown());//开始跳跃冷却函数
             }
         }
 
         if (Input.GetButtonUp("Jump") && rg.velocity.y > 0f)
         {
+            //按键时长决定跳跃高度
             rg.velocity = new Vector2(rg.velocity.x, rg.velocity.y * 0.5f);
             coyoteTimeCounter = 0f;
         }
 
+        //rg.velocity.y小于零时
+        //即玩家在下落状态时
         if (rg.velocity.y < 0)
         {
+            //使玩家下落速度更快，手感更好
             rg.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
 
         }
     }
 
-
+    //攀爬函数
     void Climb()
     {
-        if (isTrigger)
+        if (isTrigger)//当触发到楼梯时isTrigger为true
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))//W键为爬楼梯
             {
                 isClimbing = true;
             }
-            else
+            else if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))//A、D键取消攀爬
             {
-                if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-                {
-                    isClimbing = false;
-                }
+                isClimbing = false;
             }
 
             if (isClimbing == true)
             {
                 inputVertical = Input.GetAxisRaw("Vertical");
-                rg.velocity = new Vector2(rg.velocity.x, inputVertical * speed);
-                rg.gravityScale = 0;
-
+                rg.velocity = new Vector2(rg.velocity.x, inputVertical * speed);//向上的速度
+                rg.gravityScale = 0;//攀爬时取消重力
             }
             else
             {
-                rg.gravityScale = 1;
+                rg.gravityScale = 1;//非攀爬状态时gravityScale变回原本数值
             }
         }
+        else
+        {
+            rg.gravityScale = 1;//离开楼梯时gravityScale变回原本数值
+        }
     }
+
+    //判断是否在地上
     void isOnGroundCheck()
     {
+        //检差给定圆心(feetPos.position)和半径范围(checkRadius)内有没有groundLayer对象
         isOnGround = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
     }
 
-
+    //冲刺函数
     private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
         float originalGravity = rg.gravityScale;
         rg.gravityScale = 0f;
-        rg.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        rg.velocity = new Vector2(scaleX * dashingPower, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
@@ -276,10 +269,12 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
+
+    //跳跃冷却
     private IEnumerator JumpCooldown()
     {
         isJumping = true;
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.4f);//冷却时间
         isJumping = false;
     }
 }

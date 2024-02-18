@@ -9,7 +9,7 @@ public class Ladder : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-                collision.GetComponent<Rigidbody2D>().gravityScale = 0;
+                
                 collision.GetComponent<PlayerMovement>().isTrigger = true;
         }
     }
@@ -18,7 +18,7 @@ public class Ladder : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponent<Rigidbody2D>().gravityScale = 1;
+            
             collision.GetComponent<PlayerMovement>().isTrigger = false;
         }
     }

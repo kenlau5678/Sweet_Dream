@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0506737b90d393e45af66b54659aad4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1056855576}
   isFlipped: 0
 --- !u!1 &98231354
 GameObject:
@@ -3794,7 +3794,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 619394802}
-
   - {fileID: 984221807}
   - {fileID: 708718658}
   - {fileID: 1187928888}
@@ -3803,3 +3802,6 @@ SceneRoots:
   - {fileID: 742626823}
   - {fileID: 1757433037}
   - {fileID: 284053022}
+  - {fileID: 93714462}
+  - {fileID: 506351423306039441}
+  - {fileID: 1564941975}
