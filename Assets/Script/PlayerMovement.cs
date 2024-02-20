@@ -12,12 +12,13 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rg; //Rigidbody2D 对象
     public Collider2D coll; //Collider2D 对象
     public TrailRenderer tr; //Trail Renderer对象
+    public Animator animator; //Animator 对象
 
     //Move 移动相关变量
     public float speed; //角色移动速度
     float scaleX;//玩家当前面向方向
     float moveX;//x轴方向
-    //private Vector2 moveDeraction;
+    private Vector2 moveDeraction;
 
     //Jump 跳跃相关变量
     public Transform feetPos;//Player的子对象，在Player底下，用于检测是否在地板Layer上
@@ -96,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isDashing) { return; }//确保如果在冲刺期间，角色不会有其他一点
         ProcessInputs();
+
         Move();
         isOnGroundCheck();
         Climb();    
@@ -104,12 +106,12 @@ public class PlayerMovement : MonoBehaviour
     //处理玩家输入
     void ProcessInputs()
     {
-        moveX = Input.GetAxis("Horizontal");//x轴向量
+        moveX = Input.GetAxisRaw("Horizontal");//x轴向量
         //float moveY = Input.GetAxisRaw("Vertical");//y轴向量
 
-        //moveDeraction = new Vector2(moveX, 0).normalized; //单位向量
+        moveDeraction = new Vector2(moveX, 0).normalized; //单位向量
 
-
+        Debug.Log(moveDeraction);
         //倒转物体（包括子物件）
         if (moveX < 0)
         {
@@ -122,6 +124,16 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
             scaleX = 1;
             //transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+        }
+
+        //Whether is runing
+        if (moveDeraction == Vector2.zero)
+        {
+            animator.SetBool("IsRun", false);
+        }
+        else
+        {
+            animator.SetBool("IsRun", true);
         }
     }
 
@@ -194,6 +206,8 @@ public class PlayerMovement : MonoBehaviour
                 jumpBufferCounter = 0f;
                 hasDoubleJumped = true; // 標記已進行二段跳
                 StartCoroutine(JumpCooldown());//开始跳跃冷却函数
+
+
             }
         }
 
@@ -250,6 +264,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //检差给定圆心(feetPos.position)和半径范围(checkRadius)内有没有groundLayer对象
         isOnGround = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
+        animator.SetBool("IsJumping", !isOnGround);
     }
 
     //冲刺函数
