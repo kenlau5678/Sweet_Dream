@@ -5,6 +5,7 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
+using static UnityEngine.ParticleSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,12 +14,14 @@ public class PlayerMovement : MonoBehaviour
     public Collider2D coll; //Collider2D 对象
     public TrailRenderer tr; //Trail Renderer对象
     public Animator animator; //Animator 对象
+    public ParticleSystem dust;
+    public GameObject dashShadow;
 
     //Move 移动相关变量
     public float speed; //角色移动速度
     float scaleX;//玩家当前面向方向
     float moveX;//x轴方向
-    private Vector2 moveDeraction;
+    private Vector2 moveDeraction;//运动方向
 
     //Jump 跳跃相关变量
     public Transform feetPos;//Player的子对象，在Player底下，用于检测是否在地板Layer上
@@ -47,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     public float dashingTime;//冲刺时间
     public float dashingCooldown;//冲刺冷却时间
 
+
     //Transmit 传送相关变量
     public int canTransmit = 2;
 
@@ -57,6 +61,9 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask LadderMask;//楼梯Layer
     private bool isClimbing;//表示是否在爬行状态
     public bool isTrigger;//表示是否可以爬行，当楼梯触发到玩家会变成true
+
+    public Sprite dashShadowIMG;
+    public Sprite reverseDashShadowIMG;
 
     private void Start()
     {
@@ -93,6 +100,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    public void creatDust()
+    {
+        dust.Play();
+    }
     private void FixedUpdate()
     {
         if (isDashing) { return; }//确保如果在冲刺期间，角色不会有其他一点
@@ -111,18 +122,19 @@ public class PlayerMovement : MonoBehaviour
 
         moveDeraction = new Vector2(moveX, 0).normalized; //单位向量
 
-        Debug.Log(moveDeraction);
         //倒转物体（包括子物件）
         if (moveX < 0)
         {
             transform.rotation = Quaternion.Euler(0, -180, 0);
             scaleX = -1;
             //transform.localScale = new Vector3(-scaleX, transform.localScale.y, transform.localScale.z);
+            dashShadow.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, reverseDashShadowIMG);
         }
         else if (moveX > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             scaleX = 1;
+            dashShadow.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, dashShadowIMG);
             //transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
 
@@ -176,6 +188,8 @@ public class PlayerMovement : MonoBehaviour
         {
             coyoteTimeCounter = coyoteTime;//土狼时间计时器
             hasDoubleJumped = false; // 重置二段跳標記
+
+            
         }
         else
         {
@@ -198,7 +212,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 rg.velocity = new Vector2(rg.velocity.x, jumpPower);
                 jumpBufferCounter = 0f;
+                creatDust();
                 StartCoroutine(JumpCooldown());//开始跳跃冷却函数
+
             }
             else if (!hasDoubleJumped && !isOnGround) // 二段跳
             {
@@ -264,7 +280,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //检差给定圆心(feetPos.position)和半径范围(checkRadius)内有没有groundLayer对象
         isOnGround = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
-        animator.SetBool("IsJumping", !isOnGround);
+        animator.SetBool("IsJumping", !isOnGround);//如果不在地上，就播放跳跃动画
+
     }
 
     //冲刺函数
@@ -272,14 +289,16 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        dashShadow.SetActive(true);
         float originalGravity = rg.gravityScale;
         rg.gravityScale = 0f;
         rg.velocity = new Vector2(scaleX * dashingPower, 0f);
-        tr.emitting = true;
+        //tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
+        //tr.emitting = false;
         rg.gravityScale = originalGravity;
         isDashing = false;
+        dashShadow.SetActive(false);
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
