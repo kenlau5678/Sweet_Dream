@@ -213,6 +213,7 @@ public class PlayerMovement : MonoBehaviour
                 rg.velocity = new Vector2(rg.velocity.x, jumpPower);
                 jumpBufferCounter = 0f;
                 creatDust();
+                AudioManager.instance.PlaySFX("Jump");
                 StartCoroutine(JumpCooldown());//¿ªÊ¼ÌøÔ¾ÀäÈ´º¯Êý
 
             }
