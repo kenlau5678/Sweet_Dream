@@ -9,6 +9,8 @@ public class Monster : MonoBehaviour
 
 	public bool isFlipped = false;
 
+	public float deathExplosionRadius = 10f;
+
 	public void LookAtPlayer()
 	{
 		Vector3 flipped = transform.localScale;
@@ -39,6 +41,16 @@ public class Monster : MonoBehaviour
 	void Die()
 	{
 		//Instantiate(deathEffect, transform.position, Quaternion.identity); //deathAnimator
+		Collider[] colliders = Physics.OverlapSphere(transform.position, deathExplosionRadius);// 在敌人死亡位置周围创建一个伤害范围
+        foreach (Collider col in colliders)// 对范围内的所有游戏对象应用伤害
+        {
+            // 检查是否是可以受到伤害的对象
+            if (col.CompareTag("Player") || col.CompareTag("Monster"))
+            {
+                //col.GetComponent<Health>().TakeDamage(damageAmount);
+            }
+        }
+
 		Destroy(gameObject);
 	}
 }

@@ -37,6 +37,8 @@ public class PlayerShoot : MonoBehaviour
                     rb.AddForce(firePoint.right * bulletforce * -1f, ForceMode2D.Impulse);
                 }
 
+//这里有个bug?当子弹反弹回来，碰到下一颗子弹会也爆炸（因为选择bullet为普通的刚体type）
+
         Destroy(bullet, 1f);
     }
 
