@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,9 +8,13 @@ public class hourglass : MonoBehaviour
 {
     public GameObject hourhand;
     public GameObject minutehand;
+
     public float hourAngles;
     public float minuteAngles;
+
     int isstay = 0;
+
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -38,5 +43,11 @@ public class hourglass : MonoBehaviour
             StartCoroutine(minutehand.GetComponent<HandRotation>().RotationCoroutine());
 
         }
+
+
     }
+
+
+
+
 }
