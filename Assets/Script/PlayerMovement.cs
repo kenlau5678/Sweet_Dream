@@ -282,6 +282,7 @@ public class PlayerMovement : MonoBehaviour
         //检差给定圆心(feetPos.position)和半径范围(checkRadius)内有没有groundLayer对象
         isOnGround = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
         animator.SetBool("IsJumping", !isOnGround);//如果不在地上，就播放跳跃动画
+        tr.emitting = !isOnGround;
 
     }
 
