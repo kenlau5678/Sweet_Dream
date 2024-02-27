@@ -198,6 +198,7 @@ MonoBehaviour:
   player: {fileID: 0}
   health: 100
   isFlipped: 0
+  deathExplosionRadius: 10
 --- !u!1 &5874255427157621380
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &409958227762264506
 Transform:
@@ -243,7 +244,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5795597501839919558
 Transform:

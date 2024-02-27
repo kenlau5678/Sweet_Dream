@@ -11,8 +11,10 @@ public class Monster : MonoBehaviour
 
 	public float deathExplosionRadius = 10f;
 
+
 	public void LookAtPlayer()
 	{
+		
 		Vector3 flipped = transform.localScale;
 		flipped.z *= -1f;
 
