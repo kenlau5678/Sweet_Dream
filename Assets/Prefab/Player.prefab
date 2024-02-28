@@ -9969,6 +9969,7 @@ MonoBehaviour:
   dashingPower: 15
   dashingTime: 0.2
   dashingCooldown: 1
+  UpOrDown: 1
   canTransmit: 1
   LadderMask:
     serializedVersion: 2

@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     public float dashingTime;//冲刺时间
     public float dashingCooldown;//冲刺冷却时间
 
-
+    public int UpOrDown = 1;
     //Transmit 传送相关变量
     public int canTransmit = 2;
 
@@ -187,9 +187,7 @@ public class PlayerMovement : MonoBehaviour
         if (isOnGround)
         {
             coyoteTimeCounter = coyoteTime;//土狼时间计时器
-            hasDoubleJumped = false; // 重置二段跳標記
-
-            
+            hasDoubleJumped = false; // 重置二段跳標記    
         }
         else
         {
@@ -237,11 +235,16 @@ public class PlayerMovement : MonoBehaviour
 
         //rg.velocity.y小于零时
         //即玩家在下落状态时
+        
         if (rg.velocity.y < 0)
         {
             //使玩家下落速度更快，手感更好
             rg.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
-
+            animator.SetBool("IsDown", true);
+        }
+        else
+        {
+            animator.SetBool("IsDown", false);
         }
     }
 
@@ -312,5 +315,11 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         yield return new WaitForSeconds(0.4f);//冷却时间
         isJumping = false;
+    }
+
+    public void ChangeG(int UD)
+    {
+        UpOrDown = UD;
+        Physics2D.gravity = new Vector2(0f, -1 * UpOrDown * Physics2D.gravity.y);
     }
 }
