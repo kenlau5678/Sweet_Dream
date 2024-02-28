@@ -65,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
     public Sprite dashShadowIMG;
     public Sprite reverseDashShadowIMG;
 
+    public Vector3 SavePos;
+
     private void Start()
     {
         _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
