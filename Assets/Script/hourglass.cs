@@ -8,10 +8,10 @@ public class hourglass : MonoBehaviour
 {
     public GameObject hourhand;
     public GameObject minutehand;
-
+    public bool rotateFlag = true;
     public float hourAngles;
     public float minuteAngles;
-
+    public Animator animator;
     int isstay = 0;
 
     
@@ -41,7 +41,16 @@ public class hourglass : MonoBehaviour
             Debug.Log("OK");
             StartCoroutine(hourhand.GetComponent<HandRotation>().RotationCoroutine());
             StartCoroutine(minutehand.GetComponent<HandRotation>().RotationCoroutine());
-
+            if(rotateFlag == true)
+            {
+                animator.SetTrigger("Rotate");
+                rotateFlag = false;
+            }
+            else
+            {
+                animator.SetTrigger("Return");
+                rotateFlag = true;
+            }
         }
 
 

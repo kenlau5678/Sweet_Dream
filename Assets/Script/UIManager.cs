@@ -45,10 +45,14 @@ public class UIManager : MonoBehaviour
     public void Pause()
     {
         menu.SetActive(true);
-        Time.timeScale =  0;
+        //menu.GetComponent<Animator>().SetTrigger("Show");
+        
         isPause = true;
         openingMenu = "Pause";
+        Time.timeScale = 0;
     }
+
+    
 
     public void Resume()
     {

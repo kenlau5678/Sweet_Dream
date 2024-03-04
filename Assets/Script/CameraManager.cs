@@ -28,9 +28,14 @@ public class CameraManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
         }
 
-        for(int i =0; i < _allVirtualCameras.Length; i++)
+        for (int i =0; i < _allVirtualCameras.Length; i++)
         {
             if (_allVirtualCameras[i].enabled)
             {

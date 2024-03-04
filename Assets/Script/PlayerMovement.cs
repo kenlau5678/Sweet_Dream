@@ -67,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 SavePos;
 
+    public PlatformManager platformManager;
     private void Start()
     {
         _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
@@ -208,20 +209,32 @@ public class PlayerMovement : MonoBehaviour
         // 增加二段跳的檢查
         if (jumpBufferCounter > 0f)
         {
+
+           
             if (coyoteTimeCounter > 0f && !isJumping) // 一段跳
             {
                 rg.velocity = new Vector2(rg.velocity.x, jumpPower);
+                if (platformManager != null)
+                {
+                    platformManager.TriggerPlatformChangeAppearing();
+                }
                 jumpBufferCounter = 0f;
                 creatDust();
                 AudioManager.instance.PlaySFX("Jump");
+
                 StartCoroutine(JumpCooldown());//开始跳跃冷却函数
 
             }
             else if (!hasDoubleJumped && !isOnGround) // 二段跳
             {
                 rg.velocity = new Vector2(rg.velocity.x, jumpPower);
+                if (platformManager != null)
+                {
+                    platformManager.TriggerPlatformChangeAppearing();
+                }
                 jumpBufferCounter = 0f;
                 hasDoubleJumped = true; // 標記已進行二段跳
+
                 StartCoroutine(JumpCooldown());//开始跳跃冷却函数
 
 
