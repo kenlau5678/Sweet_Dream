@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     public GameObject OptionMenu;
     bool isPause=false;
     string openingMenu = "None";
+    public Animator animator;
+    public GameObject PauseButtons;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,12 +66,16 @@ public class UIManager : MonoBehaviour
     public void Option()
     {
         OptionMenu.SetActive(true);
+        PauseButtons.SetActive(false);
         openingMenu = "Option";
+        animator.SetTrigger("Change");
+        
     }
 
     public void CloseOption()
     {
         OptionMenu.SetActive(false);
+        PauseButtons.SetActive(true);
         openingMenu = "Pause";
     }
 }

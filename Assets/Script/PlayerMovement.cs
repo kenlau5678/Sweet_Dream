@@ -228,10 +228,7 @@ public class PlayerMovement : MonoBehaviour
             else if (!hasDoubleJumped && !isOnGround) // 二段跳
             {
                 rg.velocity = new Vector2(rg.velocity.x, jumpPower);
-                if (platformManager != null)
-                {
-                    platformManager.TriggerPlatformChangeAppearing();
-                }
+
                 jumpBufferCounter = 0f;
                 hasDoubleJumped = true; // 標記已進行二段跳
 
