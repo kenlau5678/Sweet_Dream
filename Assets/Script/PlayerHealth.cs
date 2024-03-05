@@ -38,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("player died");
         CameraShake.Instance.shakeCamera(intensity, shaketime);
         //animator.SetBool("IsDead", true);
-        gameObject.SetActive(false);
+       // gameObject.SetActive(false);
         //GetComponent<Collider2D>().enabled = false; 
         Invoke("Reborn", 0.5f);
     }
@@ -46,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
     public void Reborn()
     {
         transform.position = GetComponent<PlayerMovement>().SavePos;
-        gameObject.SetActive(true);
+       // gameObject.SetActive(true);
     }
 
     //public void heal(int health)

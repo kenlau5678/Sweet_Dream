@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
     public GameObject menu;
     public GameObject OptionMenu;
     bool isPause=false;
@@ -13,7 +14,15 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //if (Instance == null)
+        //{
+        //    Instance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else if (Instance != this)
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     // Update is called once per frame
