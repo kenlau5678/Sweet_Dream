@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +10,16 @@ public class LoadScene : MonoBehaviour
     public GameObject player;
     public string sceneName;
     public Vector3 position;
+
+    public Fade fadeOut;
     public void SwitchScene()
     {
-        SceneManager.LoadScene(sceneName);
+        fadeOut.fadeImage.DOFade(1f, fadeOut.fadetime).OnComplete(() => SceneManager.LoadScene(sceneName));
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == sceneName)
