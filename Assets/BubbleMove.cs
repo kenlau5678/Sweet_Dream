@@ -12,6 +12,9 @@ public class BubbleMove : MonoBehaviour
     public float panDistance = 3f;
     public float panTime = 0.35f;
     public bool isTrigger=false;
+    public float intensity;
+
+    public float frequency;
     public enum PanDirection
     {
         Left,
@@ -48,8 +51,9 @@ public class BubbleMove : MonoBehaviour
                     targetPosition.y -= panDistance;
                     break;
             }
-
+            //CameraShake.Instance.shakeCameraWithFrequency(intensity,frequency,1);
             Bubble.transform.DOMove(targetPosition, panTime);
+
             flag = false;
         }
     }

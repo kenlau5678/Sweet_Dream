@@ -34,4 +34,13 @@ public class CameraShake : MonoBehaviour
             }
         }
     }
+
+    public void shakeCameraWithFrequency(float intensity, float frequency,float time)
+    {
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+        cinemachineBasicMultiChannelPerlin.m_FrequencyGain = frequency;
+        shakeTimer = time;
+    }
 }
