@@ -1,4 +1,4 @@
-<h1 align="center">Sweet Dream 美梦</h1>
+<h1 align="center">Sweet Dream 甜美的梦</h1>
 
  
 O.o队：刘健泓 刘仲衡 辛启轩
