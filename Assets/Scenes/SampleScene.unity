@@ -1527,7 +1527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3612870851972905121, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.85
+      value: 3.56
       objectReference: {fileID: 0}
     - target: {fileID: 3612870851972905121, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1585,9 +1585,13 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5597864517296085810, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9190219891644622636, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
       propertyPath: m_Size.x
-      value: 0.36853367
+      value: 0.4283285
       objectReference: {fileID: 0}
     - target: {fileID: 9190219891644622636, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
       propertyPath: m_Size.y
@@ -1595,11 +1599,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9190219891644622636, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
       propertyPath: m_Offset.x
-      value: 0.1699788
+      value: 0.17424983
       objectReference: {fileID: 0}
     - target: {fileID: 9190219891644622636, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
       propertyPath: m_Offset.y
       value: -0.07598141
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190219891644622636, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190219891644622636, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9190219891644622636, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -1612,7 +1624,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4297543045507704670, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1352354401}
   m_SourcePrefab: {fileID: 100100000, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
 --- !u!1 &1187928885
 GameObject:
@@ -2084,6 +2099,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 140df53ca1f709543904b79ecd0bfe98, type: 3}
+--- !u!1 &1352354394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4297543045507704670, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
+  m_PrefabInstance: {fileID: 1077234014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1352354401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352354394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2989872ff71cd4093869063d83d298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1056855576}
+  health: 100
+  isFlipped: 0
 --- !u!1 &1383062955 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1612338392341656474, guid: 9505f9887c61ce54f9fd066d57ec3654, type: 3}
@@ -2709,6 +2744,10 @@ PrefabInstance:
     - target: {fileID: 4297543045507704670, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
       propertyPath: m_Name
       value: ClockBumper
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297543045507704670, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4879643729494257697, guid: 587ce39a0234c2c40858988f230457b2, type: 3}
       propertyPath: m_FlipX
