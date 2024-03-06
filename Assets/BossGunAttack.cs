@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossHandAttack : StateMachineBehaviour
+public class BossGunAttack : StateMachineBehaviour
 {
     public float attackTimer;
-    public float minTime;
-    public float maxTime;
+    public float minTime = 1f;
+    public float maxTime = 2f;
     private int rand;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -27,10 +27,10 @@ public class BossHandAttack : StateMachineBehaviour
             }
             else if(rand == 1)
             {
-                animator.SetTrigger("ToGunAttack");
+                animator.SetTrigger("ToHandAttack");
             }
             else{
-                animator.SetTrigger("ToHandWalk");
+                animator.SetTrigger("ToGunWalk");
             }
             
         }
@@ -46,5 +46,4 @@ public class BossHandAttack : StateMachineBehaviour
       
     }
 
-   
 }

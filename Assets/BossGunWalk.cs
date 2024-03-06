@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossHandWalk : StateMachineBehaviour
+public class BossGunWalk : StateMachineBehaviour
 {
     private int rand;
     public float attackTimer;
-    public float minTime;
-    public float maxTime;
+    public float minTime = 2f;
+    public float maxTime = 3f;
 
     public float distanceToPlayer;
     public float speed;
@@ -27,9 +27,9 @@ public class BossHandWalk : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(attackTimer <= 0)
+       if(attackTimer <= 0)
         {
-             if(rand == 0)
+            if(rand == 0)
             {
                     animator.SetTrigger("ToHandAttack");
             }
@@ -47,7 +47,6 @@ public class BossHandWalk : StateMachineBehaviour
         Vector2 target = new Vector2(player.position.x, rb.position.y);
 		Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
 	    rb.MovePosition(newPos);
-        
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -56,5 +55,5 @@ public class BossHandWalk : StateMachineBehaviour
        
     }
 
-   
+    
 }
