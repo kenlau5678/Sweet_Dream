@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     //Attack
     public Transform attackPoint; // AttackPoint ���
-    public GameObject bulletPrefab;
+    public Animator animator;
     float nextAttackTime = 0f;
     public float AttackRate = 2f;
     public float attackRange = 0.5f;
@@ -40,19 +40,20 @@ public class PlayerAttack : MonoBehaviour
     //Attack Function
     void Attack()
     {
-        //animator.SetTrigger("Attack");//Trigger parameter of animater
+        animator.SetTrigger("Attack");//Trigger parameter of animater
         //��OverlapCircleAll�д���Բ��λ�á��뾶�Ͳ�����������Ի�ȡ������Բ�ص���collider��
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        Shoot();//Use shooting function
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHealth>().TakeDamage(25);//enemy take damage
             Debug.Log("attack");
         }
     }
-    void Shoot()
-    {
-        Instantiate(bulletPrefab, attackPoint.position,attackPoint.rotation);
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.CompareTag("Enemy"))
+        {
+            //enemy hit animation;
+        }
     }
     // Gizmos �����߿� ��
     private void OnDrawGizmos()

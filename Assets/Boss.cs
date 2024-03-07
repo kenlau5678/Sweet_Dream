@@ -9,8 +9,12 @@ public class Boss : MonoBehaviour
 
 	public bool isFlipped = false;
 
+	//private bool isHit;
+	private Vector2 direction;
+	private AnimatorStateInfo info;
+	private Animator animator;
 
-
+	private int attackCount = 0;
 	public void LookAtPlayer()
 	{
 		
@@ -34,6 +38,7 @@ public class Boss : MonoBehaviour
 	public void TakeDamage(int damage)
 	{
 		health -= damage;
+		animator.SetTrigger("Hit");
 		if(health <= 0)
 		{
 			Die();
@@ -43,7 +48,6 @@ public class Boss : MonoBehaviour
 	{
 		//Instantiate(deathEffect, transform.position, Quaternion.identity); //deathAnimator
 		
-
 		Destroy(gameObject);
 	}
 }

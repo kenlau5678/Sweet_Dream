@@ -6,7 +6,7 @@ public class PlayerShoot : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
-    public float bulletforce = 20f;
+    public float bulletforce = 2f;
     public Animator animator;
     // Start is called before the first frame update
     void Start()

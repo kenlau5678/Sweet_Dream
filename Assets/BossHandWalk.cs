@@ -27,27 +27,27 @@ public class BossHandWalk : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(attackTimer <= 0)
-        {
-             if(rand == 0)
-            {
-                    animator.SetTrigger("ToHandAttack");
-            }
-            else
-            {
-                    animator.SetTrigger("ToGunAttack");
-            }
-        }
-        else{
-            attackTimer -= Time.deltaTime;
-        }
-        //移动模组
+        //移动功能
         distanceToPlayer = Vector2.Distance(animator.transform.position, player.position);
         boss.LookAtPlayer();
         Vector2 target = new Vector2(player.position.x, rb.position.y);
 		Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
 	    rb.MovePosition(newPos);
-        
+        //switch other animations
+        if(attackTimer <= 0)
+        {
+             if(rand == 0)
+            {
+                animator.SetTrigger("ToHandAttack");
+            }
+            else
+            {
+                animator.SetTrigger("ToGunAttack");
+            }
+        }
+        else{
+            attackTimer -= Time.deltaTime;
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

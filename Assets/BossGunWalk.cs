@@ -17,7 +17,7 @@ public class BossGunWalk : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       rand = Random.Range(0,2);//switch 2 different attack modes
+       rand = Random.Range(0,10);//switch 2 different attack modes
        attackTimer = Random.Range(minTime,maxTime);//random attack time
        player = GameObject.FindGameObjectWithTag("Player").transform;
        rb = animator.GetComponent<Rigidbody2D>();
@@ -29,11 +29,11 @@ public class BossGunWalk : StateMachineBehaviour
     {
        if(attackTimer <= 0)
         {
-            if(rand == 0)
+            if(rand <=2)//30% switch to hand attack
             {
                     animator.SetTrigger("ToHandAttack");
             }
-            else
+            else//70%
             {
                     animator.SetTrigger("ToGunAttack");
             }
@@ -52,7 +52,7 @@ public class BossGunWalk : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       
+
     }
 
     

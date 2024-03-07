@@ -11,7 +11,7 @@ public class BossGunAttack : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rand = Random.Range(0,3);//switch 2 different attack modes
+        rand = Random.Range(0,10);//switch 2 different attack modes
         attackTimer = Random.Range(minTime,maxTime);
     }
 
@@ -20,17 +20,17 @@ public class BossGunAttack : StateMachineBehaviour
     {
         if(attackTimer <= 0)
         {
-            if(rand == 0)
+            if(rand <=1)
             {
                 //attack();
-                attackTimer = Random.Range(minTime,maxTime);//reset timer
+                attackTimer = 1f;//reset timer
             }
-            else if(rand == 1)
+            else if(rand >3 && rand <=7)
             {
-                animator.SetTrigger("ToHandAttack");
+                animator.SetTrigger("ToGunWalk");
             }
             else{
-                animator.SetTrigger("ToGunWalk");
+                animator.SetTrigger("ToHandAttack");
             }
             
         }
@@ -43,7 +43,7 @@ public class BossGunAttack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      
+        
     }
 
 }

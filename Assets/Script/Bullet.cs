@@ -20,8 +20,10 @@ public class Bullet : MonoBehaviour
 
             if (collision.collider.tag == "Monster")
             {
+                Debug.Log("monster");
                 CameraShake.Instance.shakeCamera(intensity, shaketime);
-                //collision.collider.GetComponent<Monster>().TakeDamage(damage);
+                collision.collider.GetComponent<Monster>().TakeDamage(damage);
+                collision.collider.GetComponent<Boss>().TakeDamage(damage);
             }
             Destroy(gameObject);
         }
