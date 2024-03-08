@@ -45,12 +45,12 @@ public class PlayerAttack : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(25);//enemy take damage
+            enemy.GetComponent<Monster>().TakeDamage(25);//enemy take damage
             Debug.Log("attack");
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Enemy"))
+        if(other.CompareTag("Monster"))
         {
             //enemy hit animation;
         }

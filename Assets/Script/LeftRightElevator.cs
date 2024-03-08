@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class LeftRightElevator : MonoBehaviour
 {
-    private bool flag = true;
     public float coolDownTime;
     public Rigidbody2D rb;
+    public float moveDistance;
+    public float moveTime;
     // Start is called before the first frame update
+    public LeftRight leftRight;
+    public enum LeftRight
+    {
+        Left,
+        Right
+    }
     void Start()
     {
         StartCoroutine(LeftRightMove());
@@ -25,16 +32,16 @@ public class LeftRightElevator : MonoBehaviour
     {
         while(true) 
         {
-            if (flag)
+            if (leftRight == LeftRight.Right)
             {
-                rb.DOMoveX(transform.position.x + 3, 1);
-                flag = false;
+                rb.DOMoveX(transform.position.x + moveDistance, moveTime);
+                leftRight = LeftRight.Left;
             }
-            else
+            else if (leftRight == LeftRight.Left)
             {
                 
-                rb.DOMoveX(transform.position.x - 3, 1);
-                flag = true;
+                rb.DOMoveX(transform.position.x - moveDistance, moveTime);
+                leftRight = LeftRight.Right;
 
             }
             yield return new WaitForSeconds(coolDownTime);

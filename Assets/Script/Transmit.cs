@@ -6,6 +6,7 @@ public class Transmit : MonoBehaviour
 {
     public Transform Point;
 
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.GetComponent<PlayerMovement>().canTransmit);

@@ -10,9 +10,11 @@ public class Monster : MonoBehaviour
 	public bool isFlipped = false;
 
 	public float deathExplosionRadius = 10f;
-
-
-	public void LookAtPlayer()
+	public Rigidbody2D rb;
+	public float knockbackForce = 5f;
+    public float intensity;
+    public float shaketime;
+    public void LookAtPlayer()
 	{
 		
 		Vector3 flipped = transform.localScale;
@@ -35,24 +37,27 @@ public class Monster : MonoBehaviour
 	public void TakeDamage(int damage)
 	{
 		health -= damage;
-		if(health <= 0)
+        CameraShake.Instance.shakeCamera(intensity, shaketime);
+        if (transform.position.x - player.transform.position.x > 0)
+		{
+
+			rb.AddForce(Vector2.right * knockbackForce, ForceMode2D.Impulse);
+		}
+		else
+		{
+			rb.AddForce(Vector2.left * knockbackForce, ForceMode2D.Impulse);
+
+		}
+        if (health <= 0)
 		{
 			Die();
 		}
 	}
-	void Die()
-	{
-		//Instantiate(deathEffect, transform.position, Quaternion.identity); //deathAnimator
-		Collider[] colliders = Physics.OverlapSphere(transform.position, deathExplosionRadius);// 在敌人死亡位置周围创建一个伤害范围
-        foreach (Collider col in colliders)// 对范围内的所有游戏对象应用伤害
-        {
-            // 检查是否是可以受到伤害的对象
-            if (col.CompareTag("Player") || col.CompareTag("Monster"))
-            {
-                //col.GetComponent<Health>().TakeDamage(damageAmount);
-            }
-        }
+    void Die()
+    {
+        Debug.Log("enemy died");
+        Destroy(gameObject);
+        GetComponent<Collider2D>().enabled = false;
 
-		Destroy(gameObject);
-	}
+    }
 }
