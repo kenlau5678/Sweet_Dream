@@ -20,17 +20,14 @@ public class BossGunAttack : StateMachineBehaviour
     {
         if(attackTimer <= 0)
         {
-            if(rand <=1)
-            {
-                //attack();
-                attackTimer = 1f;//reset timer
-            }
-            else if(rand >3 && rand <=7)
+            if(rand <=4)
             {
                 animator.SetTrigger("ToGunWalk");
+
             }
             else{
-                animator.SetTrigger("ToHandAttack");
+                animator.SetBool("isShoot",true);
+
             }
             
         }
