@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
                 Debug.Log("monster");
                 CameraShake.Instance.shakeCamera(intensity, shaketime);
                 collision.collider.GetComponent<Monster>().TakeDamage(damage);
-                collision.collider.GetComponent<Boss>().TakeDamage(damage);
+                //collision.collider.GetComponent<Boss>().TakeDamage(damage);
             }
             Destroy(gameObject);
         }

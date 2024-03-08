@@ -71,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
+        
     }
 
     private void Awake()
