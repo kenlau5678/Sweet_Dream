@@ -9,7 +9,6 @@ TagManager:
   - Platform
   - Boundary
   - Virtual Camera
-  - Boss
   layers:
   - Default
   - TransparentFX

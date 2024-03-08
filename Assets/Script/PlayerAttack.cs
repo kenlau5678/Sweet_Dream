@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Monster"))
+        if(other.CompareTag("Enemy"))
         {
             //enemy hit animation;
         }

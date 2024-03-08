@@ -113,12 +113,12 @@ TextureImporter:
       name: Boss_attack_1-1_0
       rect:
         serializedVersion: 2
-        x: 1134
-        y: 105
-        width: 785
-        height: 1227
+        x: 1035
+        y: 94
+        width: 945
+        height: 1312
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
