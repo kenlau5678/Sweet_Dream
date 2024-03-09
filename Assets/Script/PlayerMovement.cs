@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     //Move 移动相关变量
     public float speed; //角色移动速度
     float scaleX;//玩家当前面向方向
+    float dashFoward=1;
     float moveX;//x轴方向
     private Vector2 moveDeraction;//运动方向
 
@@ -68,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 SavePos;
 
     public PlatformManager platformManager;
+
+    public Transform followPoint;
     private void Start()
     {
         _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
@@ -129,17 +133,20 @@ public class PlayerMovement : MonoBehaviour
         //倒转物体（包括子物件）
         if (moveX < 0)
         {
-            transform.rotation = Quaternion.Euler(0, -180, 0);
-            scaleX = -1;
-            //transform.localScale = new Vector3(-scaleX, transform.localScale.y, transform.localScale.z);
+            followPoint.DORotate(new Vector3(0, -180, 0),0.5f);
+            //transform.rotation = Quaternion.Euler(0, -180, 0);
+            dashFoward = -1;
+            transform.localScale = new Vector3(-scaleX, transform.localScale.y, transform.localScale.z);
             dashShadow.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, reverseDashShadowIMG);
+
         }
         else if (moveX > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            scaleX = 1;
+            followPoint.DORotate(new Vector3(0, 0, 0), 0.5f);
+            //transform.rotation = Quaternion.Euler(0, 0, 0);
+            dashFoward = 1;
             dashShadow.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, dashShadowIMG);
-            //transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
 
         //Whether is runing
@@ -313,7 +320,7 @@ public class PlayerMovement : MonoBehaviour
         dashShadow.SetActive(true);
         float originalGravity = rg.gravityScale;
         rg.gravityScale = 0f;
-        rg.velocity = new Vector2(scaleX * dashingPower, 0f);
+        rg.velocity = new Vector2(dashFoward * dashingPower, 0f);
         //tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         //tr.emitting = false;

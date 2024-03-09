@@ -10,9 +10,13 @@ public class ChangeScale : MonoBehaviour
     public Vector3 startScale;
     public Vector3 scale;
     public float changeTime = 1f;
+    public GameObject KeyUI;
+    public float moveDistance;
+    Vector3 startPosition;
     // Start is called before the first frame update
     void Start()
     {
+        startPosition = KeyUI.transform.position;
         startScale = transform.localScale;
     }
 
@@ -22,11 +26,21 @@ public class ChangeScale : MonoBehaviour
         if (triggerPoint.GetComponent<TriggerPoint>().isTrigger == true)
         {
             transform.DOScale(scale, changeTime);
+            KeyUI.SetActive(true);
+            KeyUI.transform.DOMoveY(startPosition.y + moveDistance, changeTime);
         }
         else
         {
             transform.DOScale(startScale, changeTime);
+            KeyUI.transform.DOMoveY(startPosition.y, changeTime);
+            
         }
+
+        if (Vector3.Distance(KeyUI.transform.position, startPosition) < 0.1f)
+        {
+            KeyUI.SetActive(false);
+        }
+
     }
 
 }

@@ -28,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
     public Rigidbody2D rb;
     public float force;
     public Light2D light;
+    public Animator animator;
     void Start()
     {
         currentHeath = maxHeath;
@@ -52,11 +53,14 @@ public class PlayerHealth : MonoBehaviour
     public void Die()
     {
         Debug.Log("player died");
-        CameraShake.Instance.shakeCamera(intensity, shaketime);
-        //animator.SetBool("IsDead", true);
+        CameraShake.Instance.shakeCamera(2*intensity, shaketime);
+        animator.SetTrigger("Die");
+        
+        light.DOColor(new Color(25f / 255f, 25f / 255f, 25f / 255f), 0.2f).OnComplete(() => light.DOColor(Color.white, 1f));
+        
        // gameObject.SetActive(false);
         //GetComponent<Collider2D>().enabled = false; 
-        Invoke("Reborn", 0.5f);
+        Invoke("Reborn", 0.75f);
     }
 
     public void Reborn()
