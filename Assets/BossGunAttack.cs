@@ -25,11 +25,12 @@ public class BossGunAttack : StateMachineBehaviour
                 animator.SetTrigger("ToGunWalk");
 
             }
-            else{
+            else if(rand <=8){
                 animator.SetBool("isShoot",true);
-
             }
-            
+            else{
+                animator.SetBool("isHandWalk",true);
+            }
         }
         else{
             attackTimer -= Time.deltaTime;

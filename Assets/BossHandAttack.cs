@@ -27,10 +27,10 @@ public class BossHandAttack : StateMachineBehaviour
            
             }
             else{
-                animator.SetTrigger("ToHandWalk");
+                animator.SetBool("ToHandWalk",true);
                 
             }
-            attackTimer = 1f;//reset timer
+            //attackTimer = 1f;//reset timer
 
             
         }
