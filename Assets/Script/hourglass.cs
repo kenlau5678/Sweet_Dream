@@ -41,8 +41,7 @@ public class hourglass : MonoBehaviour
             Debug.Log("OK");
             StartCoroutine(hourhand.GetComponent<HandRotation>().RotationCoroutine());
             StartCoroutine(minutehand.GetComponent<HandRotation>().RotationCoroutine());
-            CameraShake.Instance.shakeCameraWithFrequency(1f,2f,1f);
-            if (rotateFlag == true)
+            if(rotateFlag == true)
             {
                 animator.SetTrigger("Rotate");
                 rotateFlag = false;
