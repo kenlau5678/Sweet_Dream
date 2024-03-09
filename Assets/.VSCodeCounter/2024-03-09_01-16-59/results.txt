@@ -1,0 +1,71 @@
+Date : 2024-03-09 01:16:59
+Directory : d:\Unity_Project\Sweet_Dream\Assets\Script
+Total : 47 files,  2022 codes, 241 comments, 431 blanks, all 2694 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |         47 |      2,022 |        241 |        431 |      2,694 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                     | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                        |         47 |      2,022 |        241 |        431 |      2,694 |
++--------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                 | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\Unity_Project\Sweet_Dream\Assets\Script\(noUse)PlayerAttack.cs        | C#       |         12 |          2 |          5 |         19 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\AudioManager.cs               | C#       |         50 |          0 |         12 |         62 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\BubbleMove.cs                 | C#       |         65 |          3 |         12 |         80 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Bug.cs                        | C#       |         92 |          8 |         18 |        118 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Bullet.cs                     | C#       |         28 |          1 |          4 |         33 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\ButtonSelect.cs               | C#       |         21 |          1 |          3 |         25 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\CameraControlTrigger.cs       | C#       |         85 |          0 |         13 |         98 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\CameraFollow.cs               | C#       |         25 |          3 |          6 |         34 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\CameraManager.cs              | C#       |        114 |          0 |         27 |        141 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\CameraShake.cs                | C#       |         41 |          0 |          6 |         47 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\ChangeScale.cs                | C#       |         26 |          2 |          5 |         33 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\DetectionZone.cs              | C#       |         38 |          2 |          8 |         48 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\DialogueManager.cs            | C#       |         74 |          4 |         18 |         96 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\DialogueTrigger.cs            | C#       |         35 |          1 |          7 |         43 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\DownPlatform.cs               | C#       |         60 |          6 |         12 |         78 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Elevator.cs                   | C#       |         48 |          2 |          7 |         57 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\EnemyHealth.cs                | C#       |         26 |          1 |          7 |         34 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Fade.cs                       | C#       |         39 |          2 |          8 |         49 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\HandRotation.cs               | C#       |         31 |          0 |          6 |         37 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\IntervalsAppearingPlatform.cs | C#       |         29 |          2 |          9 |         40 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Key.cs                        | C#       |         40 |          2 |          6 |         48 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Ladder.cs                     | C#       |         20 |          0 |          6 |         26 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\LeftRightElevator.cs          | C#       |         41 |          2 |         11 |         54 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\LoadScene.cs                  | C#       |         37 |          2 |          9 |         48 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Monster.cs                    | C#       |         54 |          0 |          9 |         63 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\MonsterFixedPointNev.cs       | C#       |         57 |          6 |          7 |         70 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\MonsterNavMesh.cs             | C#       |         13 |         49 |          4 |         66 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\PersistOnSceneLoad.cs         | C#       |         19 |          0 |          3 |         22 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\PlatformManager.cs            | C#       |         29 |          4 |          5 |         38 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\PlayEffect.cs                 | C#       |         18 |          1 |          6 |         25 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\PlayerAttack.cs               | C#       |         49 |         11 |          7 |         67 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\PlayerFly.cs                  | C#       |          6 |          0 |          2 |          8 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\PlayerHealth.cs               | C#       |         49 |         20 |         12 |         81 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\PlayerMovement.cs             | C#       |        243 |         51 |         48 |        342 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\PlayerShoot.cs                | C#       |         35 |          3 |         10 |         48 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\SavePoint.cs                  | C#       |         19 |          2 |          6 |         27 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\ShowBlocks.cs                 | C#       |         44 |          5 |          9 |         58 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Sound.cs                      | C#       |          9 |          0 |          3 |         12 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Spikes.cs                     | C#       |         19 |          2 |          6 |         27 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Star.cs                       | C#       |         35 |          2 |          7 |         44 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\Transmit.cs                   | C#       |         23 |          0 |          7 |         30 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\TriggerPoint.cs               | C#       |         29 |          3 |          4 |         36 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\UIManager.cs                  | C#       |         63 |         12 |         16 |         91 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\VerticalPlatform.cs           | C#       |         23 |         14 |          6 |         43 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\ground.cs                     | C#       |         19 |          2 |          6 |         27 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\hourglass.cs                  | C#       |         51 |          0 |         13 |         64 |
+| d:\Unity_Project\Sweet_Dream\Assets\Script\monsterRun.cs                 | C#       |         39 |          8 |         10 |         57 |
+| Total                                                                    |          |      2,022 |        241 |        431 |      2,694 |
++--------------------------------------------------------------------------+----------+------------+------------+------------+------------+
