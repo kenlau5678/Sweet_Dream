@@ -8,6 +8,10 @@ public class BossShooting : MonoBehaviour
     private Animator BossAnimator;
     private SpriteRenderer gunRenderer;
     Boss boss;
+    public Transform FirePoint;
+    public GameObject LaserPrefab;
+    float DefaultLength = 20f;
+    
     void Start()
     {
         // 获取Animator和SpriteRenderer组件
@@ -34,11 +38,39 @@ public class BossShooting : MonoBehaviour
 
                 // 将手臂节点朝向玩家位置
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                Shoot();
             }
         }
         else
         {
             gunRenderer.enabled = false;
+        }
+    }
+    void Shoot()
+    {
+            // 获取枪口位置和方向
+        Vector3 gunPosition = FirePoint.position; // 你需要替换成实际的枪口位置
+        Vector3 gunDirection = FirePoint.right; 
+
+        // 创建射线
+        RaycastHit2D hit = Physics2D.Raycast(gunPosition, gunDirection);
+
+        // 实例化镭射 Prefab
+        GameObject laser = Instantiate(LaserPrefab, gunPosition, Quaternion.identity);
+
+        // 处理射中的逻辑
+        if (hit.collider != null)
+        {
+            // 射中了物体，你可以在这里处理伤害逻辑
+            Debug.Log("Hit: " + hit.collider.gameObject.name);
+            laser.transform.position = hit.point;
+
+        }
+        else
+        {
+            // 如果没有射中物体，设置默认的终点
+            laser.transform.position = gunPosition + gunDirection * DefaultLength;
         }
     }
 }
