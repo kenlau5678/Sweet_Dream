@@ -242,8 +242,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3299073064938939638}
   serializedVersion: 8
-  lengthInSec: 3
-  simulationSpeed: 1
+  lengthInSec: 5
+  simulationSpeed: 5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -317,7 +317,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 3.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -370,7 +370,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1.38
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -424,7 +424,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.81886786, g: 0.81886786, b: 0.81886786, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -805,7 +805,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 3000
+    maxNumParticles: 20000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -952,7 +952,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.13
+      value: 0.73
       mode: 0
       spread: 0
       speed:
@@ -1692,7 +1692,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -5223,7 +5223,6 @@ GameObject:
   - component: {fileID: 1185948969305348486}
   - component: {fileID: 3093369367703526373}
   - component: {fileID: 5437811466934992886}
-  - component: {fileID: 3370148307010113033}
   - component: {fileID: 8923611138975056526}
   m_Layer: 0
   m_Name: Transmit
@@ -5299,22 +5298,6 @@ CircleCollider2D:
   m_Offset: {x: -0.005013466, y: 0}
   serializedVersion: 2
   m_Radius: 0.74064994
---- !u!114 &3370148307010113033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7499606925139216604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f0bb58b42e8c247be1790211f339cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerPoint: {fileID: 8778173143060018740}
-  startScale: {x: 0, y: 0, z: 0}
-  scale: {x: 1.1, y: 1.1, z: 1.1}
-  changeTime: 1
 --- !u!114 &8923611138975056526
 MonoBehaviour:
   m_ObjectHideFlags: 0
