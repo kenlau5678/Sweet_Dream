@@ -18,11 +18,12 @@ public class BossGunAttack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(attackTimer <= 0)
-        {
+        animator.SetBool("isShoot",false);
+        // if(attackTimer <= 0)
+        // {
             if(rand <=4)
             {
-                animator.SetTrigger("ToGunWalk");
+                animator.SetBool("isGunWalk",true);
 
             }
             else if(rand <=8){
@@ -31,10 +32,10 @@ public class BossGunAttack : StateMachineBehaviour
             else{
                 animator.SetBool("isHandWalk",true);
             }
-        }
-        else{
-            attackTimer -= Time.deltaTime;
-        }
+        // }
+        // else{
+        //     attackTimer -= Time.deltaTime;
+        // }
         
     }
 

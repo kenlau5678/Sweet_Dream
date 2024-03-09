@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class BossShooting : MonoBehaviour
 {
-    public Transform player; // 玩家的Transform
+    public Transform player;
     private Animator BossAnimator;
     private SpriteRenderer gunRenderer;
     Boss boss;
     public Transform FirePoint;
-    public GameObject LaserPrefab;
+    public LineRenderer LaserPrefab;
     float DefaultLength = 20f;
+    public float laserDamage = 20f;
+    public float laserDuration = 0.05f;
     
     void Start()
     {
         // 获取Animator和SpriteRenderer组件
         BossAnimator = GetComponentInParent<Animator>();
         gunRenderer = GetComponentInChildren<SpriteRenderer>();
+        
     }
 
     void Update()
@@ -39,7 +42,7 @@ public class BossShooting : MonoBehaviour
                 // 将手臂节点朝向玩家位置
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-                Shoot();
+                //Shoot();
             }
         }
         else
@@ -47,7 +50,7 @@ public class BossShooting : MonoBehaviour
             gunRenderer.enabled = false;
         }
     }
-    void Shoot()
+    /*void Shoot()
     {
             // 获取枪口位置和方向
         Vector3 gunPosition = FirePoint.position; // 你需要替换成实际的枪口位置
@@ -56,23 +59,41 @@ public class BossShooting : MonoBehaviour
         // 创建射线
         RaycastHit2D hit = Physics2D.Raycast(gunPosition, gunDirection);
 
-        // 实例化镭射 Prefab
-        GameObject laser = Instantiate(LaserPrefab, gunPosition, Quaternion.identity);
+         // 实例化镭射 Prefab
+        LineRenderer laser = Instantiate(LaserPrefab, gunPosition, Quaternion.identity);
 
         // 处理射中的逻辑
         if (hit.collider != null)
         {
             // 射中了物体，你可以在这里处理伤害逻辑
             Debug.Log("Hit: " + hit.collider.gameObject.name);
-            laser.transform.position = hit.point;
+            if(hit.collider.CompareTag("Player"))
+            {
+                Debug.Log("TakeDamage");
+               // PlayerScript playerScript = hit.collider.GetComponent<PlayerScript>();//获取玩家的脚本
+               // playerScript.TakeDamage(laserDamage);//调用玩家脚本的受伤函数
+            }
+
+           
+            laser.SetPosition(1, hit.point);
 
         }
         else
         {
             // 如果没有射中物体，设置默认的终点
-            laser.transform.position = gunPosition + gunDirection * DefaultLength;
+            laser.SetPosition(1, gunPosition + gunDirection * DefaultLength);
         }
+        laser.enabled = true;
+        // 启动协程，延迟销毁镭射
+        StartCoroutine(DestroyLaserAfterDelay(laser, laserDuration));
     }
+    IEnumerator DestroyLaserAfterDelay(LineRenderer laser, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        // 在延迟之后销毁镭射
+        laser.enabled = false;
+        Destroy(laser.gameObject);
+    }*/
 }
 
  

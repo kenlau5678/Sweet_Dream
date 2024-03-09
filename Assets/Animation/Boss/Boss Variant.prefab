@@ -97,7 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a12db78dca1c804795a0a625c4b1e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 5
+  player: {fileID: 0}
+  FirePoint: {fileID: 0}
+  LaserPrefab: {fileID: 7159041073060837498, guid: e575edb34911dbc45822f55fa24a0b17, type: 3}
+  laserDamage: 20
+  laserDuration: 2
 --- !u!1001 &2233646543288354265
 PrefabInstance:
   m_ObjectHideFlags: 0

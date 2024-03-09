@@ -8,61 +8,62 @@ using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using static UnityEngine.ParticleSystem;
 
+
 public class PlayerMovement : MonoBehaviour
 {
-    //Object ¶ÔÏóÏà¹Ø±ä¸üÁ¿
-    public Rigidbody2D rg; //Rigidbody2D ¶ÔÏó
-    public Collider2D coll; //Collider2D ¶ÔÏó
-    public TrailRenderer tr; //Trail Renderer¶ÔÏó
-    public Animator animator; //Animator ¶ÔÏó
+    //Object ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½
+    public Rigidbody2D rg; //Rigidbody2D ï¿½ï¿½ï¿½ï¿½
+    public Collider2D coll; //Collider2D ï¿½ï¿½ï¿½ï¿½
+    public TrailRenderer tr; //Trail Rendererï¿½ï¿½ï¿½ï¿½
+    public Animator animator; //Animator ï¿½ï¿½ï¿½ï¿½
     public ParticleSystem dust;
     public GameObject dashShadow;
 
-    //Move ÒÆ¶¯Ïà¹Ø±äÁ¿
-    public float speed; //½ÇÉ«ÒÆ¶¯ËÙ¶È
-    float scaleX;//Íæ¼Òµ±Ç°ÃæÏò·½Ïò
+    //Move ï¿½Æ¶ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½
+    public float speed; //ï¿½ï¿½É«ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
+    float scaleX;//ï¿½ï¿½Òµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     float dashFoward=1;
-    float moveX;//xÖá·½Ïò
-    private Vector2 moveDeraction;//ÔË¶¯·½Ïò
+    float moveX;//xï¿½á·½ï¿½ï¿½
+    private Vector2 moveDeraction;//ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    //Jump ÌøÔ¾Ïà¹Ø±äÁ¿
-    public Transform feetPos;//PlayerµÄ×Ó¶ÔÏó£¬ÔÚPlayerµ×ÏÂ£¬ÓÃÓÚ¼ì²âÊÇ·ñÔÚµØ°åLayerÉÏ
-    public float checkRadius;//feetPos¼ì²â°ë¾¶
-    public LayerMask groundLayer;//µØ°åLayer
-    public float jumpPower;//ÌøÔ¾µÄÁ¦
-    public bool isOnGround;//±íÊ¾ÊÇ·ñÔÚµØÉÏ
-    public float maxSpacePressDuration = 1f; // ×î´ó°´æI•rég
-    public float coyoteTime = 0.2f;//ÍÁÀÇÊ±¼ä£¨Àë¿ªµØÃæµÄÍÁÀÇÊ±¼äÄÚ»¹ÄÜÌøÔ¾£©
+    //Jump ï¿½ï¿½Ô¾ï¿½ï¿½Ø±ï¿½ï¿½ï¿½
+    public Transform feetPos;//Playerï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½Playerï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ÚµØ°ï¿½Layerï¿½ï¿½
+    public float checkRadius;//feetPosï¿½ï¿½ï¿½ë¾¶
+    public LayerMask groundLayer;//ï¿½Ø°ï¿½Layer
+    public float jumpPower;//ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+    public bool isOnGround;//ï¿½ï¿½Ê¾ï¿½Ç·ï¿½ï¿½Úµï¿½ï¿½ï¿½
+    public float maxSpacePressDuration = 1f; // ï¿½ï¿½ï¿½ï¿½Iï¿½rï¿½g
+    public float coyoteTime = 0.2f;//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¨ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½
     private float coyoteTimeCounter;
     public float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
-    public float fallMultiplier;//¿ÕÖĞ½µÂäµÄËÙ¶È
-    public float lowJumpMultiplier;//ÌøÔ¾¸ß¶ÈµÄÏŞÖÆ¼¶±ğ£¨ÊıÖµÔ½´óÌøµÄÔ½°«£©
+    public float fallMultiplier;//ï¿½ï¿½ï¿½Ğ½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+    public float lowJumpMultiplier;//ï¿½ï¿½Ô¾ï¿½ß¶Èµï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÔ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½
     public bool pressJump;
-    public int jumpNum;//Ò»¹²ÄÜÌø¼¸´Î
-    public int jumpRemainNum;//»¹ÄÜÌø¼¸´Î
-    private bool hasDoubleJumped; // ÓÃì¶×·Û™ÊÇ·ñÒÑ½›ßMĞĞÁË¶ş¶ÎÌø
-    private bool isJumping;//±íÊ¾ÊÇ·ñÔÚÌøÔ¾
+    public int jumpNum;//Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int jumpRemainNum;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private bool hasDoubleJumped; // ï¿½ï¿½ï¿½×·Û™ï¿½Ç·ï¿½ï¿½Ñ½ï¿½ï¿½Mï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½
+    private bool isJumping;//ï¿½ï¿½Ê¾ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾
     float inputVertical;
 
-    //Dush ³å´ÌÏà¹Ø±äÁ¿
+    //Dush ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½
     private bool canDash = true;
-    private bool isDashing;//±íÊ¾ÊÇ·ñÔÚ³å´Ì
-    public float dashingPower;//³å´Ì¸øµÄÁ¦
-    public float dashingTime;//³å´ÌÊ±¼ä
-    public float dashingCooldown;//³å´ÌÀäÈ´Ê±¼ä
+    private bool isDashing;//ï¿½ï¿½Ê¾ï¿½Ç·ï¿½ï¿½Ú³ï¿½ï¿½
+    public float dashingPower;//ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float dashingTime;//ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    public float dashingCooldown;//ï¿½ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ï¿½
 
     public int UpOrDown = 1;
-    //Transmit ´«ËÍÏà¹Ø±äÁ¿
+    //Transmit ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½
     public int canTransmit = 2;
 
-    //Camera Ïà»úÏà¹Ø±äÁ¿
+    //Camera ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½
     private float _fallSpeedYDampingChangeThreshold;
 
-    //Ladder Â¥ÌİÏà¹Ø±äÁ¿
-    public LayerMask LadderMask;//Â¥ÌİLayer
-    private bool isClimbing;//±íÊ¾ÊÇ·ñÔÚÅÀĞĞ×´Ì¬
-    public bool isTrigger;//±íÊ¾ÊÇ·ñ¿ÉÒÔÅÀĞĞ£¬µ±Â¥Ìİ´¥·¢µ½Íæ¼Ò»á±ä³Étrue
+    //Ladder Â¥ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½
+    public LayerMask LadderMask;//Â¥ï¿½ï¿½Layer
+    private bool isClimbing;//ï¿½ï¿½Ê¾ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+    public bool isTrigger;//ï¿½ï¿½Ê¾ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½Â¥ï¿½İ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½true
 
     public Sprite dashShadowIMG;
     public Sprite reverseDashShadowIMG;
@@ -85,11 +86,11 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (isDashing) { return; }//È·±£Èç¹ûÔÚ³å´ÌÆÚ¼ä£¬½ÇÉ«²»»áÓĞÆäËûÒ»µã
+        if (isDashing) { return; }//È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½Ú¼ä£¬ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
         
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            StartCoroutine(Dash());//´¥·¢³å´Ìº¯Êı
+            StartCoroutine(Dash());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½
         }
 
         if(rg.velocity.y<_fallSpeedYDampingChangeThreshold && !CameraManager.instance.IsLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
@@ -114,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (isDashing) { return; }//È·±£Èç¹ûÔÚ³å´ÌÆÚ¼ä£¬½ÇÉ«²»»áÓĞÆäËûÒ»µã
+        if (isDashing) { return; }//È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½Ú¼ä£¬ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
         ProcessInputs();
 
         Move();
@@ -122,15 +123,15 @@ public class PlayerMovement : MonoBehaviour
         Climb();    
     }
 
-    //´¦ÀíÍæ¼ÒÊäÈë
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void ProcessInputs()
     {
-        moveX = Input.GetAxisRaw("Horizontal");//xÖáÏòÁ¿
-        //float moveY = Input.GetAxisRaw("Vertical");//yÖáÏòÁ¿
+        moveX = Input.GetAxisRaw("Horizontal");//xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //float moveY = Input.GetAxisRaw("Vertical");//yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        moveDeraction = new Vector2(moveX, 0).normalized; //µ¥Î»ÏòÁ¿
+        moveDeraction = new Vector2(moveX, 0).normalized; //ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
 
-        //µ¹×ªÎïÌå£¨°üÀ¨×ÓÎï¼ş£©
+        //ï¿½ï¿½×ªï¿½ï¿½ï¿½å£¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (moveX < 0)
         {
             followPoint.DORotate(new Vector3(0, -180, 0),0.5f);
@@ -160,10 +161,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Íæ¼ÒÔË¶¯º¯Êı
+    //ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½
     void Move()
     {
-        rg.velocity = new Vector2(moveX * speed, rg.velocity.y); //ÉèÖÃÔË¶¯ËÙ¶È¡¢·½Ïò£¬ xÎª×óÓÒ·½Ïò³ËÒÔËÙ¶È£¬yÎªµ±Ç°y·½ÏòËÙ¶È
+        rg.velocity = new Vector2(moveX * speed, rg.velocity.y); //ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½Ù¶È¡ï¿½ï¿½ï¿½ï¿½ï¿½ xÎªï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½yÎªï¿½ï¿½Ç°yï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
     }
 
     //void Jump()
@@ -190,19 +191,19 @@ public class PlayerMovement : MonoBehaviour
     //    }
     //}
 
-    //ÌøÔ¾º¯Êı
-    //1. ÊµÏÖÍÁÀÇÊ±¼ä
-    //2. ÊµÏÖ°´¼üÊ±³¤¾ö¶¨ÌøÔ¾¸ß¶È
+    //ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+    //1. Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    //2. Êµï¿½Ö°ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ß¶ï¿½
     void Jump()
     {
         if (isOnGround)
         {
-            coyoteTimeCounter = coyoteTime;//ÍÁÀÇÊ±¼ä¼ÆÊ±Æ÷
-            hasDoubleJumped = false; // ÖØÖÃ¶ş¶ÎÌø˜ËÓ›    
+            coyoteTimeCounter = coyoteTime;//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+            hasDoubleJumped = false; // ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó›    
         }
         else
         {
-            coyoteTimeCounter -= Time.deltaTime;//ÍÁÀÇÊ±¼äÆ÷µ¹Êı
+            coyoteTimeCounter -= Time.deltaTime;//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -214,12 +215,12 @@ public class PlayerMovement : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
 
-        // Ôö¼Ó¶ş¶ÎÌøµÄ™z²é
+        // ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä™zï¿½ï¿½
         if (jumpBufferCounter > 0f)
         {
 
            
-            if (coyoteTimeCounter > 0f && !isJumping) // Ò»¶ÎÌø
+            if (coyoteTimeCounter > 0f && !isJumping) // Ò»ï¿½ï¿½ï¿½ï¿½
             {
                 rg.velocity = new Vector2(rg.velocity.x, jumpPower);
                 if (platformManager != null)
@@ -230,10 +231,10 @@ public class PlayerMovement : MonoBehaviour
                 creatDust();
                 AudioManager.instance.PlaySFX("Jump");
 
-                StartCoroutine(JumpCooldown());//¿ªÊ¼ÌøÔ¾ÀäÈ´º¯Êı
+                StartCoroutine(JumpCooldown());//ï¿½ï¿½Ê¼ï¿½ï¿½Ô¾ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½
 
             }
-            else if (!hasDoubleJumped && !isOnGround) // ¶ş¶ÎÌø
+            else if (!hasDoubleJumped && !isOnGround) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             {
                 rg.velocity = new Vector2(rg.velocity.x, jumpPower);
                 if (platformManager != null)
@@ -241,9 +242,9 @@ public class PlayerMovement : MonoBehaviour
                     platformManager.TriggerPlatformChangeAppearing();
                 }
                 jumpBufferCounter = 0f;
-                hasDoubleJumped = true; // ˜ËÓ›ÒÑßMĞĞ¶ş¶ÎÌø
+                hasDoubleJumped = true; // ï¿½ï¿½Ó›ï¿½ï¿½ï¿½Mï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½
 
-                StartCoroutine(JumpCooldown());//¿ªÊ¼ÌøÔ¾ÀäÈ´º¯Êı
+                StartCoroutine(JumpCooldown());//ï¿½ï¿½Ê¼ï¿½ï¿½Ô¾ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½
 
 
             }
@@ -251,17 +252,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonUp("Jump") && rg.velocity.y > 0f)
         {
-            //°´¼üÊ±³¤¾ö¶¨ÌøÔ¾¸ß¶È
+            //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ß¶ï¿½
             rg.velocity = new Vector2(rg.velocity.x, rg.velocity.y * 0.5f);
             coyoteTimeCounter = 0f;
         }
 
-        //rg.velocity.yĞ¡ÓÚÁãÊ±
-        //¼´Íæ¼ÒÔÚÏÂÂä×´Ì¬Ê±
+        //rg.velocity.yĞ¡ï¿½ï¿½ï¿½ï¿½Ê±
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬Ê±
         
         if (rg.velocity.y < 0)
         {
-            //Ê¹Íæ¼ÒÏÂÂäËÙ¶È¸ü¿ì£¬ÊÖ¸Ğ¸üºÃ
+            //Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È¸ï¿½ï¿½ì£¬ï¿½Ö¸Ğ¸ï¿½ï¿½ï¿½
             rg.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
             animator.SetBool("IsDown", true);
         }
@@ -271,16 +272,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //ÅÊÅÀº¯Êı
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void Climb()
     {
-        if (isTrigger)//µ±´¥·¢µ½Â¥ÌİÊ±isTriggerÎªtrue
+        if (isTrigger)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥ï¿½ï¿½Ê±isTriggerÎªtrue
         {
-            if (Input.GetKey(KeyCode.W))//W¼üÎªÅÀÂ¥Ìİ
+            if (Input.GetKey(KeyCode.W))//Wï¿½ï¿½Îªï¿½ï¿½Â¥ï¿½ï¿½
             {
                 isClimbing = true;
             }
-            else if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))//A¡¢D¼üÈ¡ÏûÅÊÅÀ
+            else if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))//Aï¿½ï¿½Dï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             {
                 isClimbing = false;
             }
@@ -288,31 +289,31 @@ public class PlayerMovement : MonoBehaviour
             if (isClimbing == true)
             {
                 inputVertical = Input.GetAxisRaw("Vertical");
-                rg.velocity = new Vector2(rg.velocity.x, inputVertical * speed);//ÏòÉÏµÄËÙ¶È
-                rg.gravityScale = 0;//ÅÊÅÀÊ±È¡ÏûÖØÁ¦
+                rg.velocity = new Vector2(rg.velocity.x, inputVertical * speed);//ï¿½ï¿½ï¿½Ïµï¿½ï¿½Ù¶ï¿½
+                rg.gravityScale = 0;//ï¿½ï¿½ï¿½ï¿½Ê±È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
             else
             {
-                rg.gravityScale = 1;//·ÇÅÊÅÀ×´Ì¬Ê±gravityScale±ä»ØÔ­±¾ÊıÖµ
+                rg.gravityScale = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬Ê±gravityScaleï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Öµ
             }
         }
         else
         {
-            rg.gravityScale = 1;//Àë¿ªÂ¥ÌİÊ±gravityScale±ä»ØÔ­±¾ÊıÖµ
+            rg.gravityScale = 1;//ï¿½ë¿ªÂ¥ï¿½ï¿½Ê±gravityScaleï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Öµ
         }
     }
 
-    //ÅĞ¶ÏÊÇ·ñÔÚµØÉÏ
+    //ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½Úµï¿½ï¿½ï¿½
     void isOnGroundCheck()
     {
-        //¼ì²î¸ø¶¨Ô²ĞÄ(feetPos.position)ºÍ°ë¾¶·¶Î§(checkRadius)ÄÚÓĞÃ»ÓĞgroundLayer¶ÔÏó
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½(feetPos.position)ï¿½Í°ë¾¶ï¿½ï¿½Î§(checkRadius)ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½groundLayerï¿½ï¿½ï¿½ï¿½
         isOnGround = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
-        animator.SetBool("IsJumping", !isOnGround);//Èç¹û²»ÔÚµØÉÏ£¬¾Í²¥·ÅÌøÔ¾¶¯»­
+        animator.SetBool("IsJumping", !isOnGround);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ï£ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
         tr.emitting = !isOnGround;
 
     }
 
-    //³å´Ìº¯Êı
+    //ï¿½ï¿½Ìºï¿½ï¿½ï¿½
     private IEnumerator Dash()
     {
         canDash = false;
@@ -332,11 +333,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    //ÌøÔ¾ÀäÈ´
+    //ï¿½ï¿½Ô¾ï¿½ï¿½È´
     private IEnumerator JumpCooldown()
     {
         isJumping = true;
-        yield return new WaitForSeconds(0.4f);//ÀäÈ´Ê±¼ä
+        yield return new WaitForSeconds(0.4f);//ï¿½ï¿½È´Ê±ï¿½ï¿½
         isJumping = false;
     }
 

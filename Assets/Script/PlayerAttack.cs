@@ -52,6 +52,12 @@ public class PlayerAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Monster"))
         {
+            Monster monster = other.GetComponent<Monster>();
+            if (monster != null)
+            {
+                monster.TakeDamage(10);
+                Debug.Log("monster gets hit");
+            }
             //enemy hit animation;
         }
     }
