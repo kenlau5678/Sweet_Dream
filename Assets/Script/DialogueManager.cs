@@ -9,7 +9,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance;
     //public Image characterIcon;
     public TextMeshProUGUI characterName;
-    public TextMeshProUGUI dialogueArea;
+    public Text dialogueArea;
 
     private Queue<DialogueLine> lines;
     public bool isDialogueActive = false;

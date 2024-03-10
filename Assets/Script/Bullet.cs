@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -18,7 +17,7 @@ public class Bullet : MonoBehaviour
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.5f);
 
-            if (collision.collider.tag == "Monster")
+            if (collision.collider.tag == "Monster"|| collision.collider.tag == "Boss")
             {
                 Debug.Log("monster");
                 CameraShake.Instance.shakeCamera(intensity, shaketime);

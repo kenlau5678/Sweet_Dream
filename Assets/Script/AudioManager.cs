@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        
+        PlayMusic("BG");
     }
     private void Awake()
     {

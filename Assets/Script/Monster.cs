@@ -1,19 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public HealthBar healthBar;
     public Transform player;
-	public float health = 100f;
+	public int health;
+	public int maxHeath = 250;
 
-	public bool isFlipped = false;
+    public bool isFlipped = false;
 
 	public float deathExplosionRadius = 10f;
 	public Rigidbody2D rb;
 	public float knockbackForce = 5f;
     public float intensity;
     public float shaketime;
+
+    private void Start()
+    {
+        health = maxHeath;
+        if (healthBar!=null)
+		{
+            
+            healthBar.SetMaxhealth(maxHeath);
+        }
+    }
     public void LookAtPlayer()
 	{
 		
@@ -37,7 +50,11 @@ public class Monster : MonoBehaviour
 	public void TakeDamage(int damage)
 	{
 		health -= damage;
+		if (healthBar != null)
+		{ healthBar.SetHealth(health); }
+            
         CameraShake.Instance.shakeCamera(intensity, shaketime);
+		Debug.Log("Takeed");
         if (transform.position.x - player.transform.position.x > 0)
 		{
 

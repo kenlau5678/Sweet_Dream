@@ -23,7 +23,7 @@ public class BossAttack : MonoBehaviour
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(10);
+                playerHealth.TakeDamage(20);
             }
             PlayerHit playerHit = other.GetComponent<PlayerHit>();
             if(transform.localScale.x > 0)

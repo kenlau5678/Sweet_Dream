@@ -18,7 +18,7 @@ public static class DOTweenExtensions
 public class PlayerHealth : MonoBehaviour
 {
 
-    //public HealthBar healthBar;
+    public HealthBar healthBar;
 
     public int maxHeath = 100;
     public int currentHeath;
@@ -32,14 +32,21 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHeath = maxHeath;
+        if(healthBar!=null)
+        {
+            healthBar.SetMaxhealth(maxHeath);
+        }
         
-        //healthBar.SetMaxhealth(maxHeath);
     }
 
     public void TakeDamage(int damge)
     {
         currentHeath -= damge;
-        //healthBar.SetHealth(currentHeath);
+        if (healthBar != null)
+        { 
+            healthBar.SetHealth(currentHeath);
+        }
+            
         Debug.Log(currentHeath);
         //animator.SetTrigger("Hurt");
         //GameManager.camShake.Shake();
@@ -66,7 +73,12 @@ public class PlayerHealth : MonoBehaviour
     public void Reborn()
     {
         transform.position = GetComponent<PlayerMovement>().SavePos;
-       // gameObject.SetActive(true);
+        currentHeath = maxHeath;
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHeath);
+        }
+        // gameObject.SetActive(true);
     }
 
     //public void heal(int health)
