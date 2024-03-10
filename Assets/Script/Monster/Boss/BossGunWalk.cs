@@ -22,6 +22,7 @@ public class BossGunWalk : StateMachineBehaviour
        player = GameObject.FindGameObjectWithTag("Player").transform;
        rb = animator.GetComponent<Rigidbody2D>();
        boss = animator.GetComponent<Boss>();
+       animator.SetBool("isShoot",false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -53,7 +54,8 @@ public class BossGunWalk : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        animator.SetBool("isGunWalk",false);
+        animator.ResetTrigger("ToHandAttack");
     }
 
     

@@ -18,7 +18,6 @@ public class BossAttack : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        Debug.Log("hit");
         if(other.CompareTag("Player")){
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth != null)
@@ -26,14 +25,14 @@ public class BossAttack : MonoBehaviour
                 playerHealth.TakeDamage(20);
             }
             PlayerHit playerHit = other.GetComponent<PlayerHit>();
-            if(transform.localScale.x > 0)
-                {
-                    playerHit.GetHit(Vector2.right);
-                }
-            else if(transform.localScale.x < 0)
-                {
-                    playerHit.GetHit(Vector2.left);
-                }
+            // if(transform.localScale.x > 0)
+            //     {
+            //         playerHit.GetHit(Vector2.right);
+            //     }
+            // else if(transform.localScale.x < 0)
+            //     {
+            //         playerHit.GetHit(Vector2.left);
+            //     }
         }
     } 
 }
