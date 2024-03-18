@@ -7,62 +7,55 @@ using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using static UnityEngine.ParticleSystem;
 
-
 public class PlayerMovement : MonoBehaviour
 {
-    //Object ������ر����
-    public Rigidbody2D rg; //Rigidbody2D ����
-    public Collider2D coll; //Collider2D ����
-    public TrailRenderer tr; //Trail Renderer����
-    public Animator animator; //Animator ����
+    // Objects
+    public Rigidbody2D rg; // Rigidbody2D Object
+    public Collider2D coll; // Collider2D Object
+    public TrailRenderer tr; // Trail Renderer Object
+    public Animator animator; // Animator Object
     public ParticleSystem dust;
     public GameObject dashShadow;
 
-    //Move �ƶ���ر���
-    public float speed; //��ɫ�ƶ��ٶ�
-    float scaleX;//��ҵ�ǰ������
-    float dashFoward=1;
-    float moveX;//x�᷽��
-    private Vector2 moveDeraction;//�˶�����
-
-    //Jump ��Ծ��ر���
-    public Transform feetPos;//Player���Ӷ�����Player���£����ڼ���Ƿ��ڵذ�Layer��
-    public float checkRadius;//feetPos���뾶
-    public LayerMask groundLayer;//�ذ�Layer
-    public float jumpPower;//��Ծ����
-    public bool isOnGround;//��ʾ�Ƿ��ڵ���
-    public float maxSpacePressDuration = 1f; // ����I�r�g
-    public float coyoteTime = 0.2f;//����ʱ�䣨�뿪���������ʱ���ڻ�����Ծ��
+    // Move parameters
+    public float speed;
+    float scaleX; // Face direction X
+    float dashForward = 1; // Dash direction
+    private Vector2 moveDirection; // Move direction
+    float moveX;
+    // Jump parameters
+    public Transform feetPos; // Player's feet position
+    public float checkRadius; // Radius for ground check
+    public LayerMask groundLayer; // Ground layer
+    public float jumpPower; // Jump power
+    public bool isOnGround; // Indicates if on ground
+    public float maxSpacePressDuration = 1f; // Max duration for holding space
+    public float coyoteTime = 0.2f; // Time allowed to jump after leaving ground
     private float coyoteTimeCounter;
     public float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
-    public float fallMultiplier;//���н�����ٶ�
-    public float lowJumpMultiplier;//��Ծ�߶ȵ����Ƽ�����ֵԽ������Խ����
+    public float fallMultiplier; // Fall speed multiplier
+    public float lowJumpMultiplier; // Low jump multiplier
     public bool pressJump;
-    public int jumpNum;//һ����������
-    public int jumpRemainNum;//����������
-    private bool hasDoubleJumped; // ���׷ۙ�Ƿ��ѽ��M���˶�����
-    private bool isJumping;//��ʾ�Ƿ�����Ծ
-    float inputVertical;
+    public int jumpNum; // Number of jumps allowed
+    public int jumpRemainNum; // Remaining jumps
+    private bool hasDoubleJumped; // Indicates if double jumped
+    private bool isJumping; // Indicates if jumping
 
-    //Dush �����ر���
+    // Dash parameters
     private bool canDash = true;
-    private bool isDashing;//��ʾ�Ƿ��ڳ��
-    public float dashingPower;//��̸�����
-    public float dashingTime;//���ʱ��
-    public float dashingCooldown;//�����ȴʱ��
+    private bool isDashing; // Indicates if dashing
+    public float dashingPower; // Dash power
+    public float dashingTime; // Dash duration
+    public float dashingCooldown; // Dash cooldown
 
     public int UpOrDown = 1;
-    //Transmit ������ر���
-    public int canTransmit = 2;
+    public int canTransmit = 2; // Transmission ability
 
-    //Camera �����ر���
-    private float _fallSpeedYDampingChangeThreshold;
-
-    //Ladder ¥����ر���
-    public LayerMask LadderMask;//¥��Layer
-    private bool isClimbing;//��ʾ�Ƿ�������״̬
-    public bool isTrigger;//��ʾ�Ƿ�������У���¥�ݴ�������һ���true
+    // Ladder parameters
+    public LayerMask LadderMask; // Ladder layer
+    private bool isClimbing; // Indicates if climbing
+    public bool isTrigger; // Indicates if in ladder trigger area
 
     public Sprite dashShadowIMG;
     public Sprite reverseDashShadowIMG;
@@ -72,137 +65,87 @@ public class PlayerMovement : MonoBehaviour
     public PlatformManager platformManager;
 
     public Transform followPoint;
+    private float _fallSpeedYDampingChangeThreshold;
     private void Start()
     {
         _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
-        
     }
 
     private void Awake()
     {
-        canTransmit = 2; 
+        canTransmit = 2;
         scaleX = transform.localScale.x;
     }
+
     void Update()
     {
-        if (isDashing) { return; }//ȷ������ڳ���ڼ䣬��ɫ����������һ��
-        
+        if (isDashing) return; // If dashing, skip the rest
+
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            StartCoroutine(Dash());//������̺���
+            StartCoroutine(Dash()); // Start dash coroutine
         }
 
-        if(rg.velocity.y<_fallSpeedYDampingChangeThreshold && !CameraManager.instance.IsLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
-        {
-            CameraManager.instance.LerpYDamping(true);
-        }
-
-        if (rg.velocity.y >= 0f &&!CameraManager.instance.IsLerpingYDamping&&CameraManager.instance.LerpedFromPlayerFalling)
-        {
-            CameraManager.instance.LerpedFromPlayerFalling = false;
-            CameraManager.instance.LerpYDamping(false);
-        }
+        UpdateCameraDamping();
 
         pressJump = Input.GetButton("Jump");
         Jump();
     }
 
-
-    public void creatDust()
-    {
-        dust.Play();
-    }
     private void FixedUpdate()
     {
-        if (isDashing) { return; }//ȷ������ڳ���ڼ䣬��ɫ����������һ��
+        if (isDashing) return; // If dashing, skip the rest
         ProcessInputs();
-
         Move();
         isOnGroundCheck();
-        Climb();    
+        Climb();
     }
 
-    //�����������
+    // Process input for movement and rotation
     void ProcessInputs()
     {
-        moveX = Input.GetAxisRaw("Horizontal");//x������
-        //float moveY = Input.GetAxisRaw("Vertical");//y������
+        moveX = Input.GetAxisRaw("Horizontal"); // x-axis input
 
-        moveDeraction = new Vector2(moveX, 0).normalized; //��λ����
+        moveDirection = new Vector2(moveX, 0).normalized; // Unit vector for movement
 
-        //��ת���壨�����������
+        // Flip character and set dash direction
         if (moveX < 0)
         {
-            followPoint.DORotate(new Vector3(0, -180, 0),0.5f);
-            //transform.rotation = Quaternion.Euler(0, -180, 0);
-            dashFoward = -1;
+            followPoint.DORotate(new Vector3(0, -180, 0), 0.5f);
+            dashForward = -1;
             transform.localScale = new Vector3(-scaleX, transform.localScale.y, transform.localScale.z);
             dashShadow.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, reverseDashShadowIMG);
-
         }
         else if (moveX > 0)
         {
             followPoint.DORotate(new Vector3(0, 0, 0), 0.5f);
-            //transform.rotation = Quaternion.Euler(0, 0, 0);
-            dashFoward = 1;
+            dashForward = 1;
             dashShadow.GetComponent<ParticleSystem>().textureSheetAnimation.SetSprite(0, dashShadowIMG);
             transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
 
-        //Whether is runing
-        if (moveDeraction == Vector2.zero)
-        {
-            animator.SetBool("IsRun", false);
-        }
-        else
-        {
-            animator.SetBool("IsRun", true);
-        }
+        // Set animation state for running
+        animator.SetBool("IsRun", moveDirection != Vector2.zero);
     }
 
-    //����˶�����
+    // Move the player
     void Move()
     {
-        rg.velocity = new Vector2(moveX * speed, rg.velocity.y); //�����˶��ٶȡ����� xΪ���ҷ�������ٶȣ�yΪ��ǰy�����ٶ�
+        rg.velocity = new Vector2(moveX * speed, rg.velocity.y);
     }
 
-    //void Jump()
-    //{
-    //    if (Input.GetButtonDown("Jump"))
-    //    {
-    //        if (isOnGround)
-    //        {
-    //            jumpRemainNum = jumpNum;
-    //        }
-    //        if (pressJump && jumpRemainNum-- > 0)
-    //        {
-    //            rg.velocity = new Vector2(rg.velocity.x, jumpPower);
-    //        }
-    //    }
-    //    if (rg.velocity.y < 0)
-    //    {
-    //        rg.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
-
-    //    }
-    //    else if (rg.velocity.y > 0 && !pressJump)
-    //    {
-    //        rg.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
-    //    }
-    //}
-
-    //��Ծ����
-    //1. ʵ������ʱ��
-    //2. ʵ�ְ���ʱ��������Ծ�߶�
+    // Jump logic
     void Jump()
     {
+        // Coyote time and double jump logic
         if (isOnGround)
         {
-            coyoteTimeCounter = coyoteTime;//����ʱ���ʱ��
-            hasDoubleJumped = false; // ���ö�������ӛ    
+            coyoteTimeCounter = coyoteTime;
+            hasDoubleJumped = false;
         }
         else
         {
-            coyoteTimeCounter -= Time.deltaTime;//����ʱ��������
+            coyoteTimeCounter -= Time.deltaTime;
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -214,54 +157,28 @@ public class PlayerMovement : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
 
-        // ���Ӷ������ęz��
         if (jumpBufferCounter > 0f)
         {
-
-           
-            if (coyoteTimeCounter > 0f && !isJumping) // һ����
+            if (coyoteTimeCounter > 0f && !isJumping)
             {
-                rg.velocity = new Vector2(rg.velocity.x, jumpPower);
-                if (platformManager != null)
-                {
-                    platformManager.TriggerPlatformChangeAppearing();
-                }
-                jumpBufferCounter = 0f;
-                creatDust();
-                AudioManager.instance.PlaySFX("Jump");
-
-                StartCoroutine(JumpCooldown());//��ʼ��Ծ��ȴ����
-
+                PerformJump();
             }
-            else if (!hasDoubleJumped && !isOnGround) // ������
+            else if (!hasDoubleJumped && !isOnGround)
             {
-                rg.velocity = new Vector2(rg.velocity.x, jumpPower);
-                if (platformManager != null)
-                {
-                    platformManager.TriggerPlatformChangeAppearing();
-                }
-                jumpBufferCounter = 0f;
-                hasDoubleJumped = true; // ��ӛ���M�ж�����
-
-                StartCoroutine(JumpCooldown());//��ʼ��Ծ��ȴ����
-
-
+                PerformJump();
+                hasDoubleJumped = true;
             }
         }
 
         if (Input.GetButtonUp("Jump") && rg.velocity.y > 0f)
         {
-            //����ʱ��������Ծ�߶�
             rg.velocity = new Vector2(rg.velocity.x, rg.velocity.y * 0.5f);
             coyoteTimeCounter = 0f;
         }
 
-        //rg.velocity.yС����ʱ
-        //�����������״̬ʱ
-        
+        // Gravity adjustment for smoother jumps
         if (rg.velocity.y < 0)
         {
-            //ʹ��������ٶȸ��죬�ָи���
             rg.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
             animator.SetBool("IsDown", true);
         }
@@ -271,48 +188,63 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //��������
+    // Perform a jump action
+    private void PerformJump()
+    {
+        rg.velocity = new Vector2(rg.velocity.x, jumpPower);
+        if (platformManager != null)
+        {
+            platformManager.TriggerPlatformChangeAppearing();
+        }
+        jumpBufferCounter = 0f;
+        creatDust();
+        AudioManager.instance.PlaySFX("Jump");
+        StartCoroutine(JumpCooldown());
+    }
+    public void creatDust()
+    {
+        dust.Play();
+    }
+    // Climb logic for ladders
     void Climb()
     {
-        if (isTrigger)//��������¥��ʱisTriggerΪtrue
+        if (isTrigger)
         {
-            if (Input.GetKey(KeyCode.W))//W��Ϊ��¥��
+            if (Input.GetKey(KeyCode.W))
             {
                 isClimbing = true;
             }
-            else if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))//A��D��ȡ������
+            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             {
                 isClimbing = false;
             }
 
-            if (isClimbing == true)
+            if (isClimbing)
             {
-                inputVertical = Input.GetAxisRaw("Vertical");
-                rg.velocity = new Vector2(rg.velocity.x, inputVertical * speed);//���ϵ��ٶ�
-                rg.gravityScale = 0;//����ʱȡ������
+                float inputVertical = Input.GetAxisRaw("Vertical");
+                rg.velocity = new Vector2(rg.velocity.x, inputVertical * speed);
+                rg.gravityScale = 0;
             }
             else
             {
-                rg.gravityScale = 1;//������״̬ʱgravityScale���ԭ����ֵ
+                rg.gravityScale = 1;
             }
         }
         else
         {
-            rg.gravityScale = 1;//�뿪¥��ʱgravityScale���ԭ����ֵ
+            rg.gravityScale = 1;
         }
     }
 
-    //�ж��Ƿ��ڵ���
+    // Check if the player is on the ground
     void isOnGroundCheck()
     {
-        //������Բ��(feetPos.position)�Ͱ뾶��Χ(checkRadius)����û��groundLayer����
         isOnGround = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
-        animator.SetBool("IsJumping", !isOnGround);//������ڵ��ϣ��Ͳ�����Ծ����
+        animator.SetBool("IsJumping", !isOnGround);
         tr.emitting = !isOnGround;
-
     }
 
-    //��̺���
+    // Dash coroutine
     private IEnumerator Dash()
     {
         canDash = false;
@@ -320,10 +252,8 @@ public class PlayerMovement : MonoBehaviour
         dashShadow.SetActive(true);
         float originalGravity = rg.gravityScale;
         rg.gravityScale = 0f;
-        rg.velocity = new Vector2(dashFoward * dashingPower, 0f);
-        //tr.emitting = true;
+        rg.velocity = new Vector2(dashForward * dashingPower, 0f);
         yield return new WaitForSeconds(dashingTime);
-        //tr.emitting = false;
         rg.gravityScale = originalGravity;
         isDashing = false;
         dashShadow.SetActive(false);
@@ -331,15 +261,30 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-
-    //��Ծ��ȴ
+    // Cooldown for jumping
     private IEnumerator JumpCooldown()
     {
         isJumping = true;
-        yield return new WaitForSeconds(0.4f);//��ȴʱ��
+        yield return new WaitForSeconds(0.4f);
         isJumping = false;
     }
 
+    // Update camera damping based on player's fall speed
+    private void UpdateCameraDamping()
+    {
+        if (rg.velocity.y < _fallSpeedYDampingChangeThreshold && !CameraManager.instance.IsLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.instance.LerpYDamping(true);
+        }
+
+        if (rg.velocity.y >= 0f && !CameraManager.instance.IsLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.instance.LerpedFromPlayerFalling = false;
+            CameraManager.instance.LerpYDamping(false);
+        }
+    }
+
+    // Change gravity direction
     public void ChangeG(int UD)
     {
         UpOrDown = UD;

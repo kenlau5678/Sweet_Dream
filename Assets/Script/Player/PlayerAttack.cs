@@ -26,16 +26,16 @@ public class PlayerAttack : MonoBehaviour
         if (Time.time >= nextAttackTime)
         {
             //canmove = true;
-            if (Input.GetKeyDown(KeyCode.J))
+            if (Input.GetMouseButtonDown(0))
             {
                 Attack();
                 //canmove = false;
-
 
                 nextAttackTime = Time.time + 1f / AttackRate;
             }
         }
     }
+
 
     //Attack Function
     void Attack()

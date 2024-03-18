@@ -51,7 +51,7 @@ public class BubbleMove : MonoBehaviour
                     targetPosition.y -= panDistance;
                     break;
             }
-            //CameraShake.Instance.shakeCameraWithFrequency(intensity,frequency,1);
+            CameraShake.Instance.shakeCameraWithFrequency(intensity,frequency,1);
             Bubble.transform.DOMove(targetPosition, panTime);
 
             flag = false;

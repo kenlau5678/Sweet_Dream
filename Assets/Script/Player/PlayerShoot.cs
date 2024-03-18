@@ -17,7 +17,7 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetMouseButtonDown(1))
         {
             Shoot();
         }
