@@ -66,8 +66,11 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform followPoint;
     private float _fallSpeedYDampingChangeThreshold;
+
+    public bool isHit = false;
     private void Start()
     {
+        //this.GetComponent<SaveGameData>().Load();
         _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
     }
 
@@ -80,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (isDashing) return; // If dashing, skip the rest
-
+        if (isHit) return;
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash()); // Start dash coroutine
@@ -95,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (isDashing) return; // If dashing, skip the rest
+        if(isHit) return;
         ProcessInputs();
         Move();
         isOnGroundCheck();

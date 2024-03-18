@@ -100,6 +100,7 @@ public class Bug : MonoBehaviour
             Rigidbody2D playerRb = collision.collider.GetComponent<Rigidbody2D>();
             if (playerRb != null)
             {
+                playerRb.GetComponent<PlayerMovement>().isHit = true;
                 if(transform.position.x - playerRb.transform.position.x>0)
                 {
                    
@@ -111,6 +112,7 @@ public class Bug : MonoBehaviour
                     rb.AddForce(Vector2.left * knockbackForce, ForceMode2D.Impulse);
                     playerRb.AddForce(Vector2.right * knockbackForce, ForceMode2D.Impulse);
                 }
+                playerRb.GetComponent<PlayerMovement>().isHit = false;
             }
         }
     }
