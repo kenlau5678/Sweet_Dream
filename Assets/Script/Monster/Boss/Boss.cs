@@ -9,6 +9,7 @@ public class Boss : MonoBehaviour
     public float currentHeath;
 
 	public bool isFlipped = false;
+	public float attackRange = 5f;
 
 	public float hitSpeed;//受击后退速度
 	private bool isHit;//受击判定
@@ -16,7 +17,7 @@ public class Boss : MonoBehaviour
 	private AnimatorStateInfo info;//动画状态
 	private Animator animator;
 	new private Rigidbody2D rigidbody;
-	private int attackCount = 0;
+
 
 	void Start()
 	{
@@ -28,6 +29,7 @@ public class Boss : MonoBehaviour
 
 	void Update()
 	{
+		DistanceToPlayer();
 		LookAtPlayer();
 		info = animator.GetCurrentAnimatorStateInfo(0);
 		if(isHit)
@@ -57,6 +59,16 @@ public class Boss : MonoBehaviour
 		}
 	}
 
+	public void DistanceToPlayer() // 获取Boss和玩家之间的距离
+	{
+		
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+		if(distanceToPlayer <= attackRange)
+		{
+			Debug.Log(distanceToPlayer);
+		}
+		
+	}
 	public void GetHit(Vector2 hitDirection)
 	{
 		//transform.localScale = new Vector3(-hitDirection.x,1,1);//受击朝向伤害来源
