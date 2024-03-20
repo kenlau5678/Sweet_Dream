@@ -97,22 +97,21 @@ public class Bug : MonoBehaviour
             collision.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(20);
 
             // »÷ÍËÍæ¼Ò
-            Rigidbody2D playerRb = collision.collider.GetComponent<Rigidbody2D>();
-            if (playerRb != null)
+            PlayerHit playerhit = collision.collider.GetComponent<PlayerHit>();
+            if (playerhit != null)
             {
-                playerRb.GetComponent<PlayerMovement>().isHit = true;
-                if(transform.position.x - playerRb.transform.position.x>0)
+                playerhit.GetComponent<PlayerMovement>().isHit = true;
+                if(transform.position.x - playerhit.transform.position.x>0)
                 {
                    
                    rb.AddForce(Vector2.right * knockbackForce, ForceMode2D.Impulse);
-                   playerRb.AddForce(Vector2.left * knockbackForce, ForceMode2D.Impulse);
+                    playerhit.GetHit(playerhit.transform.position - transform.position);
                 }
                 else
                 {
                     rb.AddForce(Vector2.left * knockbackForce, ForceMode2D.Impulse);
-                    playerRb.AddForce(Vector2.right * knockbackForce, ForceMode2D.Impulse);
+                    playerhit.GetHit(playerhit.transform.position - transform.position);
                 }
-                playerRb.GetComponent<PlayerMovement>().isHit = false;
             }
         }
     }

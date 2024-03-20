@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     float scaleX; // Face direction X
     float dashForward = 1; // Dash direction
     private Vector2 moveDirection; // Move direction
-    float moveX;
+    public float moveX;
     // Jump parameters
     public Transform feetPos; // Player's feet position
     public float checkRadius; // Radius for ground check
@@ -68,10 +68,20 @@ public class PlayerMovement : MonoBehaviour
     private float _fallSpeedYDampingChangeThreshold;
 
     public bool isHit = false;
+
+    PlayerHit playerHitComponent;
     private void Start()
     {
-        //this.GetComponent<SaveGameData>().Load();
+        // 获取 PlayerHit 组件并存储在一个变量中
+        playerHitComponent = GetComponent<PlayerHit>();
         _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
+    }
+
+
+
+    private bool CheckForActionBlockers()
+    {
+        return playerHitComponent.isHit || isDashing;
     }
 
     private void Awake()
@@ -82,8 +92,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (isDashing) return; // If dashing, skip the rest
-        if (isHit) return;
+        if (CheckForActionBlockers()) return;
+
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash()); // Start dash coroutine
@@ -97,8 +107,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDashing) return; // If dashing, skip the rest
-        if(isHit) return;
+        if (CheckForActionBlockers()) return;
+
         ProcessInputs();
         Move();
         isOnGroundCheck();
