@@ -11,6 +11,8 @@ public class BossHandWalk : StateMachineBehaviour
 
     public float distanceToPlayer;
     public float speed = 5f;
+    public float shootRange = 12f;
+    public float dashRange = 6f;
     Boss boss;
     Transform player;
 	Rigidbody2D rb;
@@ -22,6 +24,7 @@ public class BossHandWalk : StateMachineBehaviour
        player = GameObject.FindGameObjectWithTag("Player").transform;
        rb = animator.GetComponent<Rigidbody2D>();
        boss = animator.GetComponent<Boss>();
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -36,14 +39,24 @@ public class BossHandWalk : StateMachineBehaviour
         //switch other animations
        // if(attackTimer <= 0)
         //{
-             if(rand == 0)
+            if(distanceToPlayer >= shootRange )
             {
-                animator.SetTrigger("ToHandAttack");
-            }
-            else
-            {
+                Debug.Log("GUNNNN");
                 animator.SetTrigger("ToGunAttack");
             }
+            if(distanceToPlayer <= dashRange )
+            {
+                Debug.Log("dash");
+                animator.SetTrigger("ToHandAttack");
+            }
+            //  if(rand == 0)
+            // {
+            //     animator.SetTrigger("ToHandAttack");
+            // }
+            // else
+            // {
+            //     animator.SetTrigger("ToGunAttack");
+            // }
         // }
         // else{
         //     attackTimer -= Time.deltaTime;
