@@ -212,7 +212,11 @@ public class PlayerMovement : MonoBehaviour
         }
         jumpBufferCounter = 0f;
         creatDust();
-        AudioManager.instance.PlaySFX("Jump");
+        if(AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX("Jump");
+        }
+
         StartCoroutine(JumpCooldown());
     }
     public void creatDust()

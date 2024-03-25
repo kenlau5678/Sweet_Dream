@@ -9962,6 +9962,8 @@ GameObject:
   - component: {fileID: 2486379149113561593}
   - component: {fileID: 295683890180163100}
   - component: {fileID: 2546534930990581885}
+  - component: {fileID: 1100794177959339054}
+  - component: {fileID: 4910817006139177999}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10063,6 +10065,7 @@ MonoBehaviour:
   dust: {fileID: 5790325362011968719}
   dashShadow: {fileID: 359043868454567891}
   speed: 5
+  moveX: 0
   feetPos: {fileID: 1255614237395334384}
   checkRadius: 0.1
   groundLayer:
@@ -10092,6 +10095,7 @@ MonoBehaviour:
   SavePos: {x: 0, y: 0, z: 0}
   platformManager: {fileID: 0}
   followPoint: {fileID: 4867238817607598529}
+  isHit: 0
 --- !u!61 &3884076319332119354
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10338,6 +10342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee4d333d5faa924083f6af42891d9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   maxHeath: 100
   currentHeath: 0
   intensity: 5
@@ -10366,3 +10371,32 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &1100794177959339054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698563535126180571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e5771eccf4d1c42a9156f815fc6895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  savePosition: {x: 0, y: 0, z: 0}
+--- !u!114 &4910817006139177999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698563535126180571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b089135d23ffc864f85fa868cdba2d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSpeed: 2
+  hitDuration: 0.2
+  isHit: 0
