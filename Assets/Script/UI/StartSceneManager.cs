@@ -1,8 +1,10 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class StartSceneManager : MonoBehaviour
 {
@@ -18,6 +20,12 @@ public class StartSceneManager : MonoBehaviour
 
     public string sceneName;
     public Fade fadeOut;
+
+
+    public int level;
+    public Vector3 savePos;
+    public List<string> sceneNames = new List<string>();
+
     void Start()
     {
         Fade.GetComponent<Image>().DOFade(0f, fadeTime).OnComplete(() =>
@@ -30,6 +38,12 @@ public class StartSceneManager : MonoBehaviour
             textMeshPro.DOFade(1f, fadeTime);
             isButtonPressed = false;
         });
+        var gameData = this.GetComponent<SaveGameData>();
+        gameData.LoadFromJson();
+
+        level = gameData.level;
+        savePos = gameData.savePosition;
+
     }
 
     void Update()
@@ -58,6 +72,28 @@ public class StartSceneManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    public void ContinueGamePlay()
+    {
+        
+        var gameData = this.GetComponent<SaveGameData>();
+        Debug.Log(gameData.SaveFileExists());
+        if (gameData.SaveFileExists())
+        {
+            gameData.LoadFromJson();
+
+            level = gameData.level;
+            savePos = gameData.savePosition;
+
+            startMenu.SetActive(false);
+            fadeOut.fadeImage.DOFade(1f, fadeOut.fadetime).OnComplete(() => SceneManager.LoadScene(sceneNames[level]));
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        else
+        {
+            StartGamePlay();
+        }
+    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

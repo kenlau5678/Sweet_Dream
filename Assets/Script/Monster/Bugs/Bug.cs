@@ -25,7 +25,10 @@ public class Bug : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+       if(rb.velocity.y<0)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * 15f * Time.deltaTime;
+        }
     }
     private void FixedUpdate()
     {
