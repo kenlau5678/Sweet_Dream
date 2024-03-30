@@ -805,6 +805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 786097748}
   - component: {fileID: 786097749}
+  - component: {fileID: 786097750}
   m_Layer: 0
   m_Name: StartSceneManager
   m_TagString: Untagged
@@ -849,6 +850,29 @@ MonoBehaviour:
   menuTime: 1
   sceneName: TestScene
   fadeOut: {fileID: 391015759}
+  level: 0
+  savePos: {x: 0, y: 0, z: 0}
+  sceneNames:
+  - TestScene
+  - Purple_Scene
+  - Yellow_Scene
+  - Blue_Scene
+  - Green_Scene
+  - Red_Scene
+--- !u!114 &786097750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786097747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e5771eccf4d1c42a9156f815fc6895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  savePosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1023575767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,6 +1053,54 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1032194133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032194135}
+  - component: {fileID: 1032194134}
+  m_Layer: 5
+  m_Name: SaveSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1032194134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032194133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd97e0649f665044196a5ca96fae9116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &1032194135
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032194133}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.028975071, y: 0.028975071, z: 0.028975071}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 113.9255, y: 79.378586}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1901856235
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,7 +1741,7 @@ GameObject:
   - component: {fileID: 6614022304345866992}
   - component: {fileID: 2091980424495754257}
   m_Layer: 5
-  m_Name: Music
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2025,9 +2097,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7475784898680885174}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: Option
+      - m_Target: {fileID: 786097749}
+        m_TargetAssemblyTypeName: StartSceneManager, Assembly-CSharp
+        m_MethodName: ContinueGamePlay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2196,6 +2268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 0}
   OptionMenu: {fileID: 7311885029133069757}
+  MusicMenu: {fileID: 0}
   animator: {fileID: 1235972808399912402}
   PauseButtons: {fileID: 0}
 --- !u!114 &7475784898680885175
@@ -2372,3 +2445,4 @@ SceneRoots:
   - {fileID: 993155992757379770}
   - {fileID: 108179841}
   - {fileID: 2119048365}
+  - {fileID: 1032194135}

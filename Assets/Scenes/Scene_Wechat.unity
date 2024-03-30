@@ -480,15 +480,15 @@ PrefabInstance:
       objectReference: {fileID: 235919333}
     - target: {fileID: 2768741307420224070, guid: 5c6d0d86ab3866e4097747bff8e7825b, type: 3}
       propertyPath: sceneName
-      value: TestScene
+      value: Purple_Scene
       objectReference: {fileID: 0}
     - target: {fileID: 2768741307420224070, guid: 5c6d0d86ab3866e4097747bff8e7825b, type: 3}
       propertyPath: position.x
-      value: 163
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2768741307420224070, guid: 5c6d0d86ab3866e4097747bff8e7825b, type: 3}
       propertyPath: position.y
-      value: 1.17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8650198551510205284, guid: 5c6d0d86ab3866e4097747bff8e7825b, type: 3}
       propertyPath: m_SortingOrder
@@ -3632,7 +3632,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1657218418052944128, guid: 9505f9887c61ce54f9fd066d57ec3654, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6964,7 +6965,7 @@ Transform:
   m_GameObject: {fileID: 632173923971542812}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.618898, y: 45.481606, z: -9.940302}
+  m_LocalPosition: {x: 13.615864, y: 45.481606, z: -9.940302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6979,7 +6980,7 @@ Transform:
   m_GameObject: {fileID: 3006655608023429677}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.9605613, y: 45.481613, z: -9.940302}
+  m_LocalPosition: {x: 7.960463, y: 45.481613, z: -9.940302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -18,6 +18,7 @@ public class Monster : MonoBehaviour
     public float intensity;
     public float shaketime;
 
+	public ParticleSystem Blood;
     private void Start()
     {
         health = maxHeath;
@@ -55,6 +56,10 @@ public class Monster : MonoBehaviour
             
         CameraShake.Instance.shakeCamera(intensity, shaketime);
 		Debug.Log("Takeed");
+		if(Blood!= null)
+		{
+			Blood.Play();
+		}
         if (transform.position.x - player.transform.position.x > 0)
 		{
 
