@@ -3,40 +3,36 @@ using UnityEngine;
 
 public class GroundDistanceCheck : MonoBehaviour
 {
-    public Transform footPoint; // 脚部位置点
-    public LayerMask groundLayer; // 地面图层
-    public float maxDistance = 100f; // 最大距离
+    public LayerMask groundLayer; // 用于确定哪些层被视为地面的LayerMask
+    public float triggerDistance = 1.0f; // 触发特定函数的距离阈值
 
-    public Transform currentGroundObject; // 当前碰到的物体
-    public Transform previousGroundObject; // 上一个碰到的物体
-
+    public Vector3 lastFeetPointPosition = Vector3.zero; // 上一个接触点的位置
+    private bool hasLastPoint = false; // 是否已经记录了上一个接触点
+    public float intensity;
+    public float shaketime;
+    public float frequency;
+    public Transform feetPos;
+    public float checkRadius;
     void Update()
     {
-        currentGroundObject = null;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(footPoint.position, 0.1f, groundLayer);
-
-        foreach (Collider2D collider in colliders)
+        
+        // 从 FeetPoint 向下射线检测以寻找地面
+        if (Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer))
         {
-            currentGroundObject = collider.transform;
-        }
-
-        if (currentGroundObject != null)
-        {
-            Debug.Log("Current object: " + currentGroundObject.name);
-
-            if (previousGroundObject != null && currentGroundObject != previousGroundObject)
+            if (hasLastPoint)
             {
-                Debug.Log("Previous object: " + previousGroundObject.name);
+                float distance = lastFeetPointPosition.y-feetPos.position.y;
+                if (distance > triggerDistance)
+                {
+                    // 当距离大于阈值时触发特定函数
+                    CameraShake.Instance.shakeCameraWithFrequency(intensity, frequency, shaketime);
+                }
             }
 
-            previousGroundObject = currentGroundObject;
+            // 更新上一个接触点的位置
+            lastFeetPointPosition = feetPos.position;
+            hasLastPoint = true;
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(footPoint.position, 0.1f);
-    }
 }
