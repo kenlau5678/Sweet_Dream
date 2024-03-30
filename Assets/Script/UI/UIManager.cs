@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public GameObject menu;
     public GameObject OptionMenu;
-    public GameObject MusicMenu;
     bool isPause=false;
     string openingMenu = "None";
     public Animator animator;
@@ -78,19 +77,9 @@ public class UIManager : MonoBehaviour
     {
         OptionMenu.SetActive(true);
         PauseButtons.SetActive(false);
-        MusicMenu.SetActive(false);
         openingMenu = "Option";
         animator.SetTrigger("Change");
         
-    }
-
-    public void Music()
-    {
-        MusicMenu.SetActive(true);
-        OptionMenu.SetActive(false);
-        PauseButtons.SetActive(false);
-        openingMenu = "Music";
-        animator.SetTrigger("Music");
     }
 
     public void CloseOption()
@@ -105,5 +94,4 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
-    
 }

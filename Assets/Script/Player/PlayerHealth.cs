@@ -29,7 +29,6 @@ public class PlayerHealth : MonoBehaviour
     public float force;
     public Light2D light;
     public Animator animator;
-    public ParticleSystem Blood;
     void Start()
     {
         currentHeath = maxHeath;
@@ -47,13 +46,11 @@ public class PlayerHealth : MonoBehaviour
         { 
             healthBar.SetHealth(currentHeath);
         }
-        if(Blood != null) Blood.Play();
+            
         Debug.Log(currentHeath);
-        
         //animator.SetTrigger("Hurt");
         //GameManager.camShake.Shake();
         CameraShake.Instance.shakeCamera(intensity, shaketime);
-        this.GetComponent<TimeStop>().StopTime(0.1f, 10, 0.1f);
         light.DOColor(new Color(100f/255f, 100f / 255f, 100f / 255f), 0.1f).OnComplete(() => light.DOColor(Color.white, 1f));
         if (currentHeath <= 0)
         {

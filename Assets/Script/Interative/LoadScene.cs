@@ -12,8 +12,6 @@ public class LoadScene : MonoBehaviour
     public Vector3 position;
 
     public Fade fadeOut;
-
-    public Transform PlayersavePoint;
     public void SwitchScene()
     {
         fadeOut.fadeImage.DOFade(1f, fadeOut.fadetime).OnComplete(() => SceneManager.LoadScene(sceneName));
@@ -31,11 +29,6 @@ public class LoadScene : MonoBehaviour
             {
                 player.transform.position = position;
             }
-            if(PlayersavePoint!=null)
-            {
-                player.GetComponent<PlayerPosition>().savePos = PlayersavePoint.position;
-            }
-
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
