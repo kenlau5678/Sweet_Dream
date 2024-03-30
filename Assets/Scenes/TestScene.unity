@@ -36101,7 +36101,11 @@ PrefabInstance:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: -2.1075723
+=======
+      value: 221.40094
+>>>>>>> parent of 12ad17f (hit effect and time stop)
 =======
       value: 221.40094
 >>>>>>> parent of 12ad17f (hit effect and time stop)
@@ -36121,7 +36125,11 @@ PrefabInstance:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: -3.3990917
+=======
+      value: 221.40096
+>>>>>>> parent of 12ad17f (hit effect and time stop)
 =======
       value: 221.40096
 >>>>>>> parent of 12ad17f (hit effect and time stop)
@@ -36137,10 +36145,13 @@ PrefabInstance:
       value: 8.1
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       objectReference: {fileID: 0}
     - target: {fileID: 7377796675550633591, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: orthographic size
       value: 6.2296405
+=======
+>>>>>>> parent of 12ad17f (hit effect and time stop)
 =======
 >>>>>>> parent of 12ad17f (hit effect and time stop)
 =======
