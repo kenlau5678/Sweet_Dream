@@ -151,46 +151,63 @@ public class PlayerMovement : MonoBehaviour
     // Jump logic
     void Jump()
     {
-        // Coyote time and double jump logic
+        UpdateCoyoteTime();
+        UpdateJumpBuffer();
+
+        ProcessJumpInput();
+        ApplyExtraGravity();
+        LimitJumpHeight();
+    }
+
+    // 更新Coyote时间逻辑
+    void UpdateCoyoteTime()
+    {
         if (isOnGround)
         {
-            coyoteTimeCounter = coyoteTime;
-            hasDoubleJumped = false;
+            coyoteTimeCounter = coyoteTime; // 重置Coyote时间
+            hasDoubleJumped = false; // 重置双跳状态
         }
         else
         {
-            coyoteTimeCounter -= Time.deltaTime;
+            coyoteTimeCounter -= Time.deltaTime; // 减少Coyote时间
         }
+    }
 
+    // 更新跳跃缓冲逻辑
+    void UpdateJumpBuffer()
+    {
         if (Input.GetButtonDown("Jump"))
         {
-            jumpBufferCounter = jumpBufferTime;
+            jumpBufferCounter = jumpBufferTime; // 重置跳跃缓冲
         }
         else
         {
-            jumpBufferCounter -= Time.deltaTime;
+            jumpBufferCounter -= Time.deltaTime; // 减少跳跃缓冲
         }
+    }
 
+    // 处理跳跃输入
+    void ProcessJumpInput()
+    {
         if (jumpBufferCounter > 0f)
         {
             if (coyoteTimeCounter > 0f && !isJumping)
             {
                 PerformJump();
+                jumpBufferCounter = 0; // 使用后重置跳跃缓冲
             }
             else if (!hasDoubleJumped && !isOnGround)
             {
                 PerformJump();
                 hasDoubleJumped = true;
+                jumpBufferCounter = 0; // 使用后重置跳跃缓冲
             }
         }
+    }
 
-        if (Input.GetButtonUp("Jump") && rg.velocity.y > 0f)
-        {
-            rg.velocity = new Vector2(rg.velocity.x, rg.velocity.y * 0.5f);
-            coyoteTimeCounter = 0f;
-        }
-
-        // Gravity adjustment for smoother jumps
+    // 应用额外重力以加速下落
+    void ApplyExtraGravity()
+    {
         if (rg.velocity.y < 0)
         {
             rg.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
@@ -201,11 +218,19 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsDown", false);
         }
     }
-
+    void LimitJumpHeight()
+    {
+        if (Input.GetButtonUp("Jump") && rg.velocity.y > 0f)
+        {
+            rg.velocity = new Vector2(rg.velocity.x, rg.velocity.y * 0.5f); // 减少向上的速度
+            coyoteTimeCounter = 0f; // 确保不能再次触发Coyote时间跳跃
+        }
+    }
     // Perform a jump action
     private void PerformJump()
     {
         rg.velocity = new Vector2(rg.velocity.x, jumpPower);
+
         if (platformManager != null)
         {
             platformManager.TriggerPlatformChangeAppearing();
@@ -216,7 +241,10 @@ public class PlayerMovement : MonoBehaviour
         {
             AudioManager.instance.PlaySFX("Jump");
         }
-
+        if (AchievementSystem.Instance != null)
+        {
+            AchievementSystem.Instance.JumpAchieve(); // 假设你有一个跳跃成就的逻辑
+        }
         StartCoroutine(JumpCooldown());
     }
     public void creatDust()

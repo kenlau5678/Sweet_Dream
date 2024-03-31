@@ -47,6 +47,10 @@ public class PlayerAttack : MonoBehaviour
         {
             enemy.GetComponent<Monster>().TakeDamage(attackDamage);//enemy take damage
             Debug.Log("attack");
+            if (AchievementSystem.Instance != null)
+            {
+                AchievementSystem.Instance.AttackAchieve();
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
@@ -57,6 +61,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 monster.TakeDamage(10);
                 Debug.Log("monster gets hit");
+
             }
             //enemy hit animation;
         }

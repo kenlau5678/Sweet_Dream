@@ -21,6 +21,7 @@ public class Fade : MonoBehaviour
 
         FadeIn();
         fadeImage = fadeObject.GetComponent<Image>();
+        fadeImage.enabled = true;
 
     }
 
