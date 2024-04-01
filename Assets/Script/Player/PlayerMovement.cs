@@ -287,6 +287,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isOnGround = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
         animator.SetBool("IsJumping", !isOnGround);
+        animator.SetBool("IsOnGround", isOnGround);
         tr.emitting = !isOnGround;
     }
 

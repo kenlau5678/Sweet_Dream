@@ -1154,6 +1154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Background: {fileID: 403570335}
   SelectColor: {r: 0.32452828, g: 0.58259016, b: 1, a: 1}
+  currentColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1901856238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1626,6 +1627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Background: {fileID: 1158634601480029836}
   SelectColor: {r: 0.3254902, g: 0.58431375, b: 1, a: 1}
+  currentColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!222 &2142289528409634992
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2036,6 +2038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Background: {fileID: 4168296832225621325}
   SelectColor: {r: 0.3254902, g: 0.58431375, b: 1, a: 1}
+  currentColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &6463506586245050417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,6 +2179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Background: {fileID: 1685533031646363061}
   SelectColor: {r: 0.32452828, g: 0.58259016, b: 1, a: 1}
+  currentColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!223 &7266677559233633217
 Canvas:
   m_ObjectHideFlags: 0
