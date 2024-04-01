@@ -7,14 +7,39 @@ public class MusicMenu : MonoBehaviour
 {
 
     public Slider _musicSlider, _sfxSlider;
-
+    public Text musicLabel,sfxLabel;
+    private void Start()
+    {
+        _musicSlider.value = AudioManager.instance.musicSource.volume;
+        _sfxSlider.value = AudioManager.instance.sfxSource.volume;
+    }
     public void ToggleMusic()
     {
         AudioManager.instance.ToggleMusic();
+
+        if (AudioManager.instance.musicSource.mute)
+        {
+            musicLabel.GetComponent<ButtonSelect>().currentColor = Color.gray;
+        }
+        else
+        {
+            musicLabel.GetComponent <ButtonSelect>().currentColor = Color.white;
+        }
+
+        
     }
 
     public void ToggleSFX()
     {
+
+        if (AudioManager.instance.sfxSource.mute)
+        {
+            sfxLabel.GetComponent<ButtonSelect>().currentColor = Color.gray;
+        }
+        else
+        {
+            sfxLabel.GetComponent<ButtonSelect>().currentColor = Color.white;
+        }
         AudioManager.instance.ToggleSFX();
     }
 

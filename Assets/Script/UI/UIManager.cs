@@ -43,6 +43,10 @@ public class UIManager : MonoBehaviour
                 {
                     CloseOption();
                 }
+                else if(openingMenu == "Music")
+                {
+                    CloseMusic();
+                }
             }
             else
             {
@@ -99,7 +103,14 @@ public class UIManager : MonoBehaviour
         PauseButtons.SetActive(true);
         openingMenu = "Pause";
     }
-
+    public void CloseMusic()
+    {
+        MusicMenu.SetActive(false);
+        OptionMenu.SetActive(true);
+        PauseButtons.SetActive(false);
+        openingMenu = "Option";
+        animator.SetTrigger("Change");
+    }
     public void Quit()
     {
         Application.Quit();

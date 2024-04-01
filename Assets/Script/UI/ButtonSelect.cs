@@ -9,8 +9,12 @@ public class ButtonSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     public GameObject Background;
     public Color SelectColor;
+    public Color currentColor = Color.white;
     // Start is called before the first frame update
-
+    private void Update()
+    {
+        
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         Background.SetActive(true);
@@ -19,6 +23,6 @@ public class ButtonSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerExit(PointerEventData eventData)
     {
         Background.SetActive(false);
-        GetComponentInChildren<Text>().color = Color.white;
+        GetComponentInChildren<Text>().color = currentColor;
     }
 }
