@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject menu;
     public GameObject OptionMenu;
     public GameObject MusicMenu;
+    public GameObject ControlMenu;
     bool isPause=false;
     string openingMenu = "None";
     public Animator animator;
@@ -46,6 +47,10 @@ public class UIManager : MonoBehaviour
                 else if(openingMenu == "Music")
                 {
                     CloseMusic();
+                }
+                else if(openingMenu == "Control")
+                {
+                    CloseControl();
                 }
             }
             else
@@ -97,6 +102,16 @@ public class UIManager : MonoBehaviour
         animator.SetTrigger("Music");
     }
 
+    public void Control()
+    {
+        ControlMenu.SetActive(true);
+        MusicMenu.SetActive(false);
+        OptionMenu.SetActive(false);
+        PauseButtons.SetActive(false);
+        openingMenu = "Control";
+        animator.SetTrigger("Control");
+    }
+
     public void CloseOption()
     {
         OptionMenu.SetActive(false);
@@ -105,6 +120,16 @@ public class UIManager : MonoBehaviour
     }
     public void CloseMusic()
     {
+        MusicMenu.SetActive(false);
+        OptionMenu.SetActive(true);
+        PauseButtons.SetActive(false);
+        openingMenu = "Option";
+        animator.SetTrigger("Change");
+    }
+
+    public void CloseControl()
+    {
+        ControlMenu.SetActive(false);
         MusicMenu.SetActive(false);
         OptionMenu.SetActive(true);
         PauseButtons.SetActive(false);

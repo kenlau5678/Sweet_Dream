@@ -118,7 +118,16 @@ public class PlayerMovement : MonoBehaviour
     // Process input for movement and rotation
     void ProcessInputs()
     {
-        moveX = Input.GetAxisRaw("Horizontal"); // x-axis input
+        moveX = 0; // Reset moveX to 0
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveX = -1;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            moveX = 1;
+        }
 
         moveDirection = new Vector2(moveX, 0).normalized; // Unit vector for movement
 

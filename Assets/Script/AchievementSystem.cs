@@ -21,6 +21,7 @@ public class AchievementSystem : MonoBehaviour
     public List<Achievement> achievements = new List<Achievement>();
 
     public Transform achievementPanel;
+    public Vector3 AchPosition;
     public Text achievementNameText;
     public Text achievementDescriptionText;
 
@@ -39,6 +40,7 @@ public class AchievementSystem : MonoBehaviour
 
     private void Start()
     {
+        AchPosition = achievementPanel.transform.localPosition;
         //PopThePanel();
         // 初始化成就列表
         // 例如：achievements.Add(newVideoAmountAchievement);
@@ -92,9 +94,9 @@ public class AchievementSystem : MonoBehaviour
 
         // 向左移动面板
         Sequence mySequence = DOTween.Sequence();
-        mySequence.Append(achievementPanel.DOLocalMoveX(achievementPanel.localPosition.x-620, 1f).SetEase(Ease.OutExpo)); // 向左移动到0的位置，时间为1秒，使用OutExpo缓动函数
+        mySequence.Append(achievementPanel.DOLocalMoveX(AchPosition.x-620, 1f).SetEase(Ease.OutExpo)); // 向左移动到0的位置，时间为1秒，使用OutExpo缓动函数
         mySequence.AppendInterval(1); // 保持1秒
-        mySequence.Append(achievementPanel.DOLocalMoveX(achievementPanel.localPosition.x +620, 1f).SetEase(Ease.InExpo)); // 向右移动回初始位置，时间为1秒，使用InExpo缓动函数
+        mySequence.Append(achievementPanel.DOLocalMoveX(AchPosition.x, 1f).SetEase(Ease.InExpo)); // 向右移动回初始位置，时间为1秒，使用InExpo缓动函数
 
         // 注意：根据你的面板起始位置和移动需求，你可能需要调整这些值
     }
