@@ -9,10 +9,10 @@ public class Transmit : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.GetComponent<PlayerMovement>().canTransmit);
+       
         if (collision.tag == "Player" && collision.GetComponent<PlayerMovement>().canTransmit ==2)
         {
-           
+            Debug.Log(collision.GetComponent<PlayerMovement>().canTransmit);
             collision.GetComponent<PlayerMovement>().canTransmit = 0;
            
             collision.transform.position = Point.transform.position;

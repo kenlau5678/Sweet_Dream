@@ -43,7 +43,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         isDialogueActive =true;
-
+        
         box.SetActive(true);
         lines.Clear();
         foreach (DialogueLine dialogueLine in dialogue.dialogueLines) 
@@ -53,7 +53,7 @@ public class DialogueManager : MonoBehaviour
         
         DisplayNextDialogueLine();
         Debug.Log(lines.Count);
-
+        
 
 
     }

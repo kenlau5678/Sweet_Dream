@@ -63,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
     public void Die()
     {
         Debug.Log("player died");
-        CameraShake.Instance.shakeCamera(2*intensity, shaketime);
+        CameraShake.Instance.shakeCamera(3*intensity, shaketime);
         animator.SetTrigger("Die");
         if (Blood != null) Blood.Play();
         light.DOColor(new Color(25f / 255f, 25f / 255f, 25f / 255f), 0.2f).OnComplete(() => light.DOColor(Color.white, 1f));

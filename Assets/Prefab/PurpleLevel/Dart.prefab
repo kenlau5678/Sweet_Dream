@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7210083303155105163}
   - component: {fileID: 2810842183379427721}
   - component: {fileID: 6518553939146720293}
-  - component: {fileID: 8058403989554976801}
   - component: {fileID: 6406770702938159702}
+  - component: {fileID: 6627038371073049615}
   m_Layer: 0
   m_Name: Dart
   m_TagString: Untagged
@@ -178,8 +178,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &8058403989554976801
-BoxCollider2D:
+--- !u!114 &6406770702938159702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3598825172190993611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0598659f7bd224aa8dc53a7037847f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!60 &6627038371073049615
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -210,7 +222,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.039732933, y: 0.3381511}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -220,18 +232,23 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.7287884, y: 3.0536978}
-  m_EdgeRadius: 0
---- !u!114 &6406770702938159702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3598825172190993611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c0598659f7bd224aa8dc53a7037847f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Points:
+    m_Paths:
+    - - {x: 0.408555, y: -0.1493168}
+      - {x: 0.34996125, y: -0.16396524}
+      - {x: 0.3646097, y: 1.1250974}
+      - {x: 0.3353128, y: 1.1690427}
+      - {x: -0.22132786, y: 1.1690427}
+      - {x: -0.2359763, y: 1.1250974}
+      - {x: -0.25062475, y: 0.8760739}
+      - {x: -0.26527318, y: -0.17861368}
+      - {x: -0.51429665, y: -0.1493168}
+      - {x: -0.5435935, y: -0.22255899}
+      - {x: -0.5435935, y: -0.3397465}
+      - {x: -0.10414035, y: -0.89638716}
+      - {x: 0.027695598, y: -0.9842778}
+      - {x: 0.13023467, y: -0.9842778}
+      - {x: 0.6282816, y: -0.32509807}
+      - {x: 0.6282816, y: -0.20791055}
+      - {x: 0.5989847, y: -0.10537148}
+  m_UseDelaunayMesh: 0
