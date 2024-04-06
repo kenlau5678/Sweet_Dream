@@ -855,9 +855,7 @@ MonoBehaviour:
   sceneNames:
   - TestScene
   - Purple_Scene
-  - Yellow_Scene
   - Blue_Scene
-  - Green_Scene
   - Red_Scene
 --- !u!114 &786097750
 MonoBehaviour:

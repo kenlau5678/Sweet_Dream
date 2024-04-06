@@ -39,11 +39,20 @@ public class PlayerHealth : MonoBehaviour
             healthBar.SetMaxhealth(maxHeath);
         }
         
+        if(GetComponent<PlayerPosition>().level == 3)
+        {
+            currentHeath-=15;
+            healthBar.SetHealth(currentHeath);
+        }
     }
 
     public void HPHealth(int health)
     {
         currentHeath += health;
+        if(currentHeath > maxHeath)
+        { 
+            currentHeath = maxHeath; 
+        }
         if (healthBar != null)
         {
             healthBar.SetHealth(currentHeath);

@@ -74,7 +74,10 @@ public class SaveGameData : MonoBehaviour
         string filePath = Path.Combine(Application.persistentDataPath, PLAYER_DATA_FILE);
         return File.Exists(filePath);
     }
-
+    public void DeletFile()
+    {
+        SaveManager.DeleteSaveFile(PLAYER_DATA_FILE);
+    }
 
 #if UNITY_EDITOR
     [UnityEditor.MenuItem("Develop/Delete")]

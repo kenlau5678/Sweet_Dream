@@ -66,6 +66,8 @@ public class StartSceneManager : MonoBehaviour
 
     public void StartGamePlay()
     {
+        var gameData = this.GetComponent<SaveGameData>();
+        gameData.DeletFile();
         startMenu.SetActive(false);
         fadeOut.fadeImage.DOFade(1f, fadeOut.fadetime).OnComplete(() => SceneManager.LoadScene(sceneName));
 
