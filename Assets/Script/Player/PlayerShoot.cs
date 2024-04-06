@@ -25,20 +25,30 @@ public class PlayerShoot : MonoBehaviour
 
     public void Shoot()
     {
+        if (GetComponent<MagicPower>().currentMagicPower < 20) return;
+
         animator.SetTrigger("Shoot");
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-                if (transform.lossyScale.x > 0)
-                {
-                    rb.AddForce(firePoint.right * bulletforce, ForceMode2D.Impulse);
-                }
-                else
-                {
-                    rb.AddForce(firePoint.right * bulletforce * -1f, ForceMode2D.Impulse);
-                }
+        if (transform.lossyScale.x > 0)
+        {
+            rb.AddForce(firePoint.right * bulletforce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce(firePoint.right * bulletforce * -1f, ForceMode2D.Impulse);
+        }
 
-    //这里有个bug?当子弹反弹回来，碰到下一颗子弹会也爆炸（因为选择bullet为普通的刚体type）
+        if (GetComponent<MagicPower>().currentMagicPower < 20)
+        {
+            GetComponent<MagicPower>().currentMagicPower = 0;
+        }
+        else
+        {
+            GetComponent<MagicPower>().currentMagicPower -= 20;
+        }
 
+        GetComponent<MagicPower>().magicBar.SetMagic(GetComponent<MagicPower>().currentMagicPower);
         Destroy(bullet, 1f);
     }
 

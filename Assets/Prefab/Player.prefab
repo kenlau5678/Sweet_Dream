@@ -14845,7 +14845,6 @@ GameObject:
   - component: {fileID: 3884076319332119354}
   - component: {fileID: 7109134310467482325}
   - component: {fileID: 6775916140424257228}
-  - component: {fileID: 1835691692734948995}
   - component: {fileID: 5688358137913681782}
   - component: {fileID: 2486379149113561593}
   - component: {fileID: 295683890180163100}
@@ -15173,18 +15172,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &1835691692734948995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7698563535126180571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d98ab48628c8ee4b99dca4178aeb2e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &5688358137913681782
 Animator:
   serializedVersion: 5
