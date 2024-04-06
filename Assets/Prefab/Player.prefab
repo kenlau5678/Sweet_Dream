@@ -14854,6 +14854,8 @@ GameObject:
   - component: {fileID: 1657218418052944128}
   - component: {fileID: 9100954808019513617}
   - component: {fileID: 7823719864148458119}
+  - component: {fileID: 5800654667686780402}
+  - component: {fileID: 4309348007180236489}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -15330,3 +15332,31 @@ MonoBehaviour:
   frequency: 0.5
   feetPos: {fileID: 1255614237395334384}
   checkRadius: 0.1
+--- !u!114 &5800654667686780402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698563535126180571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1613578da7061419835b6cb2ae428e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicBar: {fileID: 0}
+  maxMagicPower: 100
+  currentMagicPower: 0
+--- !u!114 &4309348007180236489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698563535126180571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871b114731549f74daff950905f48ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15

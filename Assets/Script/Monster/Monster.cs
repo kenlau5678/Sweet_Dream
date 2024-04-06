@@ -82,4 +82,31 @@ public class Monster : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
 
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Player")
+        {
+            // 给玩家造成伤害
+            collision.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(20);
+
+            // 击退玩家
+            PlayerHit playerhit = collision.collider.GetComponent<PlayerHit>();
+            if (playerhit != null)
+            {
+                playerhit.GetComponent<PlayerMovement>().isHit = true;
+                if (transform.position.x - playerhit.transform.position.x > 0)
+                {
+
+                    rb.AddForce(Vector2.right * knockbackForce, ForceMode2D.Impulse);
+                    playerhit.GetHit(playerhit.transform.position - transform.position);
+                }
+                else
+                {
+                    rb.AddForce(Vector2.left * knockbackForce, ForceMode2D.Impulse);
+                    playerhit.GetHit(playerhit.transform.position - transform.position);
+                }
+            }
+        }
+    }
 }

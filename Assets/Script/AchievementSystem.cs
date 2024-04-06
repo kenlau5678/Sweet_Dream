@@ -77,6 +77,12 @@ public class AchievementSystem : MonoBehaviour
         Debug.Log("JUMP!");
     }
 
+    public void WhereGOAchieve()
+    {
+        UpdateAchievements(1, "WhereYouGo?"); // 假设 "New Video" 是你为视频数量成就设置的名称
+        Debug.Log("WhereYouGo?");
+    }
+
     void PopNewAchievement(Achievement ach)
     {
         achievementNameText.text = ach.achievementName;

@@ -14,7 +14,9 @@ public class RotatePerform : MonoBehaviour
     public int maxCount = 5; // Maximum rotations allowed in one direction
     public  int currentCount = 0; // Current count of rotations
     public bool rotateForward = true; // True if rotating forward, false if rotating backward
-
+    public float rotateDuration = 1f;
+    public float intensity;
+    public float frequency;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,8 @@ public class RotatePerform : MonoBehaviour
         {
             isRotating = true;
             float angle = rotateForward ? RotateAngle : -RotateAngle; // Determine direction based on rotateForward
-            RotateObject.transform.DORotate(new Vector3(0, 0, RotateObject.transform.eulerAngles.z + angle), 1f, RotateMode.FastBeyond360)
+            CameraShake.Instance.shakeCameraWithFrequency(intensity, frequency, rotateDuration);
+            RotateObject.transform.DORotate(new Vector3(0, 0, RotateObject.transform.eulerAngles.z + angle), rotateDuration, RotateMode.FastBeyond360)
                 .OnComplete(() => isRotating = false);
             currentCount++;
             if (currentCount >= maxCount)

@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-
+using UnityEngine.UI;
 
 public static class DOTweenExtensions
 {
@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
     public Light2D light;
     public Animator animator;
     public ParticleSystem Blood;
+    public Image BG;
     void Start()
     {
         currentHeath = maxHeath;
@@ -40,35 +41,43 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damge)
+    public void HPHealth(int health)
     {
-        currentHeath -= damge;
+        currentHeath += health;
         if (healthBar != null)
-        { 
+        {
             healthBar.SetHealth(currentHeath);
         }
-        if(Blood != null) Blood.Play();
-        Debug.Log(currentHeath);
-        
-        //animator.SetTrigger("Hurt");
-        //GameManager.camShake.Shake();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHeath -= damage;
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHeath);
+        }
+        if (Blood != null) Blood.Play();
         CameraShake.Instance.shakeCamera(intensity, shaketime);
         this.GetComponent<TimeStop>().StopTime(0.1f, 10, 0.1f);
-        light.DOColor(new Color(100f/255f, 100f / 255f, 100f / 255f), 0.1f).OnComplete(() => light.DOColor(Color.white, 1f));
+        // 应用颜色变化
+        var darkColor = new Color(100f / 255f, 100f / 255f, 100f / 255f);
+        light.DOColor(darkColor, 0.1f).OnComplete(() => light.DOColor(Color.white, 1f));
+        BG.DOColor(darkColor, 0.1f).OnComplete(() => BG.DOColor(Color.white, 1f)); // 同时变化BG颜色
+
         if (currentHeath <= 0)
         {
             Die();
         }
     }
+
     public void Die()
     {
-        Debug.Log("player died");
-        CameraShake.Instance.shakeCamera(3*intensity, shaketime);
-        animator.SetTrigger("Die");
-        if (Blood != null) Blood.Play();
-        light.DOColor(new Color(25f / 255f, 25f / 255f, 25f / 255f), 0.2f).OnComplete(() => light.DOColor(Color.white, 1f));
-        
-       // gameObject.SetActive(false);
+        var deathColor = new Color(25f / 255f, 25f / 255f, 25f / 255f);
+        light.DOColor(deathColor, 0.2f).OnComplete(() => light.DOColor(Color.white, 1f));
+        BG.DOColor(deathColor, 0.2f).OnComplete(() => BG.DOColor(Color.white, 1f)); // 同时变化BG颜色
+        CameraShake.Instance.shakeCamera(3 * intensity, shaketime);
+        // gameObject.SetActive(false);
         //GetComponent<Collider2D>().enabled = false; 
         Invoke("Reborn", 0.75f);
     }

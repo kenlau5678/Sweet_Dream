@@ -8,11 +8,24 @@ public class PlayerShoot : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletforce = 2f;
     public Animator animator;
+    private MagicPower MP;
     // Start is called before the first frame update
     void Start()
     {
-        
+        int currentLevel = GetComponent<PlayerPosition>().level;
+        switch (currentLevel)
+        {
+            case 1:
+            case 2:
+                // 如果是级别1或2，则不执行任何操作。
+                break;
+            default:
+                // 在其他所有级别，获取MagicPower组件。
+                MP = GetComponent<MagicPower>();
+                break;
+        }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -25,7 +38,11 @@ public class PlayerShoot : MonoBehaviour
 
     public void Shoot()
     {
-        if (GetComponent<MagicPower>().currentMagicPower < 20) return;
+        if(MP != null)
+        {
+            if (MP.currentMagicPower < 20) return;
+        }
+
 
         animator.SetTrigger("Shoot");
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
@@ -38,17 +55,21 @@ public class PlayerShoot : MonoBehaviour
         {
             rb.AddForce(firePoint.right * bulletforce * -1f, ForceMode2D.Impulse);
         }
-
-        if (GetComponent<MagicPower>().currentMagicPower < 20)
+        if (MP != null)
         {
-            GetComponent<MagicPower>().currentMagicPower = 0;
-        }
-        else
-        {
-            GetComponent<MagicPower>().currentMagicPower -= 20;
+            if (MP.currentMagicPower < 20)
+            {
+                MP.currentMagicPower = 0;
+            }
+            else
+            {
+                MP.currentMagicPower -= 20;
+            }
+
+            MP.magicBar.SetMagic(MP.currentMagicPower);
         }
 
-        GetComponent<MagicPower>().magicBar.SetMagic(GetComponent<MagicPower>().currentMagicPower);
+        
         Destroy(bullet, 1f);
     }
 

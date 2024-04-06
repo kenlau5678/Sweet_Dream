@@ -10,7 +10,7 @@ public class MagicPower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (magicBar == null) return;
         currentMagicPower = maxMagicPower;
         magicBar.SetMaxMagic(maxMagicPower);
         StartCoroutine("MagicRevert");

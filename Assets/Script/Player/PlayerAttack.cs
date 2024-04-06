@@ -28,6 +28,7 @@ public class PlayerAttack : MonoBehaviour
             //canmove = true;
             if (Input.GetMouseButtonDown(0))
             {
+                if(DialogueManager.Instance.isDialogueActive) { return; }
                 Attack();
                 //canmove = false;
 

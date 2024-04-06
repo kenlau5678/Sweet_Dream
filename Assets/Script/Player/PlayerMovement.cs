@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (CheckForActionBlockers()) return;
-
+        
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash()); // Start dash coroutine
@@ -108,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (CheckForActionBlockers()) return;
-
         ProcessInputs();
         Move();
         isOnGroundCheck();
@@ -128,7 +127,10 @@ public class PlayerMovement : MonoBehaviour
         {
             moveX = 1;
         }
-
+        if (DialogueManager.Instance.isDialogueActive) 
+        {
+            moveX = 0;
+        }
         moveDirection = new Vector2(moveX, 0).normalized; // Unit vector for movement
 
         // Flip character and set dash direction
@@ -160,6 +162,10 @@ public class PlayerMovement : MonoBehaviour
     // Jump logic
     void Jump()
     {
+        if (DialogueManager.Instance.isDialogueActive)
+        {
+            return;
+        }
         UpdateCoyoteTime();
         UpdateJumpBuffer();
 
