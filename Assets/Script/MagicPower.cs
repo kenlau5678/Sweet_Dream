@@ -40,7 +40,7 @@ public class MagicPower : MonoBehaviour
             }
             magicBar.SetMagic(currentMagicPower);
             Debug.Log(currentMagicPower);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(5);
         }
     }
 }

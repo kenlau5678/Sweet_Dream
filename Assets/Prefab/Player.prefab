@@ -14960,7 +14960,7 @@ MonoBehaviour:
   speed: 5
   moveX: 0
   feetPos: {fileID: 1255614237395334384}
-  checkRadius: 0.1
+  checkRadius: 0.05
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -15211,6 +15211,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6343764934464126821, guid: 648642cabd84aeb45b7a20097736a585, type: 3}
   bulletforce: 20
   animator: {fileID: 5688358137913681782}
+  ShootRate: 2
 --- !u!114 &295683890180163100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15233,6 +15234,7 @@ MonoBehaviour:
   light: {fileID: 0}
   animator: {fileID: 5688358137913681782}
   Blood: {fileID: 252756945353382284}
+  BG: {fileID: 0}
 --- !u!114 &2546534930990581885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15359,4 +15361,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871b114731549f74daff950905f48ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 15
+  health: 10

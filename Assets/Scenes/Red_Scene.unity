@@ -864,6 +864,14 @@ PrefabInstance:
       propertyPath: level
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2486379149113561593, guid: 9505f9887c61ce54f9fd066d57ec3654, type: 3}
+      propertyPath: ShootRate
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2546534930990581885, guid: 9505f9887c61ce54f9fd066d57ec3654, type: 3}
+      propertyPath: AttackRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2546534930990581885, guid: 9505f9887c61ce54f9fd066d57ec3654, type: 3}
       propertyPath: attackRange
       value: 1.11
@@ -4306,7 +4314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6247852202471710529, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.2685936
+      value: -0.2683677
       objectReference: {fileID: 0}
     - target: {fileID: 6247852202471710529, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4318,7 +4326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6458450948093538976, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.2685936
+      value: -0.2683677
       objectReference: {fileID: 0}
     - target: {fileID: 6458450948093538976, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7189,7 +7197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1213388098596768788, guid: 531710eef6ba1bc4da9b9da71c722a8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.62
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 1243871975469963304, guid: 531710eef6ba1bc4da9b9da71c722a8a, type: 3}
       propertyPath: player
@@ -7241,7 +7249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6160926518440839182, guid: 531710eef6ba1bc4da9b9da71c722a8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.29
+      value: 4.05
       objectReference: {fileID: 0}
     - target: {fileID: 6160926518440839182, guid: 531710eef6ba1bc4da9b9da71c722a8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8312,6 +8320,10 @@ PrefabInstance:
     - target: {fileID: 1378023880986677492, guid: 6349945d95134014b82eece0db7538b2, type: 3}
       propertyPath: m_Name
       value: DeathPlatform (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623095508575294557, guid: 6349945d95134014b82eece0db7538b2, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

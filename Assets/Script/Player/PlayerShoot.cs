@@ -9,6 +9,8 @@ public class PlayerShoot : MonoBehaviour
     public float bulletforce = 2f;
     public Animator animator;
     private MagicPower MP;
+    float nextShootTime = 0f;
+    public float ShootRate = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +32,13 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Time.time >= nextShootTime)
         {
-            Shoot();
+            if (Input.GetMouseButtonDown(1))
+            {
+                Shoot();
+                nextShootTime = Time.time + 1f /ShootRate;
+            }
         }
     }
 
