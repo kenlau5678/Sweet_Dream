@@ -30,9 +30,11 @@ public class SavePoint : MonoBehaviour
             Image fadeImage = fadeObject.GetComponent<Image>();
 
             collision.GetComponent<PlayerMovement>().SavePos = transform.position;
+            AudioManager.instance.PlaySFX("Interative");
             fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1f);
             fadeImage.DOFade(0, fadeTime);
             this.GetComponent<SaveGameData>().Save();
+           
         }
     }
 }

@@ -53,7 +53,7 @@ public class Monster : MonoBehaviour
 		health -= damage;
 		if (healthBar != null)
 		{ healthBar.SetHealth(health); }
-            
+        AudioManager.instance.PlaySFX("Hit");
         CameraShake.Instance.shakeCamera(intensity, shaketime);
 		Debug.Log("Takeed");
 		if(Blood!= null)

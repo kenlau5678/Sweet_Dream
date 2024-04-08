@@ -33,9 +33,10 @@ public class UIManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-
+            
             if (isPause)
             {
+                AudioManager.instance.PlaySFX("Close");
                 if (openingMenu == "Pause")
                 {
                     Resume();
@@ -52,11 +53,14 @@ public class UIManager : MonoBehaviour
                 {
                     CloseControl();
                 }
+                
             }
             else
             {
                 Pause();
+                AudioManager.instance.PlaySFX("Interative");
             }
+            
 
 
 

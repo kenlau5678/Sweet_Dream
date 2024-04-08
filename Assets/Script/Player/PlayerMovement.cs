@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveX = 1;
         }
-        if (DialogueManager.Instance.isDialogueActive) 
+        if (DialogueManager.Instance.isDialogueActive)
         {
             moveX = 0;
         }
@@ -149,9 +149,23 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
 
-        // Set animation state for running
-        animator.SetBool("IsRun", moveDirection != Vector2.zero);
+        // Set animation state for running and control walk sound effect
+        bool isRunning = moveDirection != Vector2.zero;
+        animator.SetBool("IsRun", isRunning);
+        if (isRunning && !AudioManager.instance.IsPlayingSFX("Walk")&&isOnGround)
+        {
+            AudioManager.instance.PlaySFXLoop("Walk"); // Ensure this method plays the sound effect in loop
+        }
+        else if (!isRunning)
+        {
+            AudioManager.instance.StopSFX("Walk");
+        }
+        else
+        {
+            AudioManager.instance.StopSFX("Walk");
+        }
     }
+
 
     // Move the player
     void Move()

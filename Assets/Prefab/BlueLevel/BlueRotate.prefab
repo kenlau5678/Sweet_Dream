@@ -108,6 +108,7 @@ MonoBehaviour:
   rotateDuration: 1
   intensity: 1.5
   frequency: 1.2
+  player: {fileID: 0}
 --- !u!114 &4599207193032015719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,4 +193,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4.74
+  m_Radius: 2.38

@@ -11,7 +11,7 @@ public class MovePlatform : MonoBehaviour
     private bool isPlayerNearby = false; // 玩家是否靠近
     private bool hasMoved = false; // 平台是否已经移动
     public GameObject MoveObject; // 要移动的对象
-
+    public GameObject delObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +31,7 @@ public class MovePlatform : MonoBehaviour
 
             // 使用 DOTween 移动到目标位置
             MoveObject.transform.DOMove(targetPosition, moveDuration).SetEase(Ease.InOutQuad);
+            if(delObject) delObject.SetActive(false);
         }
     }
 

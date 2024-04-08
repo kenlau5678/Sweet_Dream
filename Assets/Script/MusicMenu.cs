@@ -31,7 +31,7 @@ public class MusicMenu : MonoBehaviour
 
     public void ToggleSFX()
     {
-
+        AudioManager.instance.ToggleSFX();
         if (AudioManager.instance.sfxSource.mute)
         {
             sfxLabel.GetComponent<ButtonSelect>().currentColor = Color.gray;
@@ -40,7 +40,7 @@ public class MusicMenu : MonoBehaviour
         {
             sfxLabel.GetComponent<ButtonSelect>().currentColor = Color.white;
         }
-        AudioManager.instance.ToggleSFX();
+        
     }
 
     public void MusicVolume()

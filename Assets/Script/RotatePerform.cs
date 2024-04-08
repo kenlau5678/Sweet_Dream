@@ -17,10 +17,12 @@ public class RotatePerform : MonoBehaviour
     public float rotateDuration = 1f;
     public float intensity;
     public float frequency;
+    GameObject Player;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -31,9 +33,26 @@ public class RotatePerform : MonoBehaviour
             isRotating = true;
             float angle = rotateForward ? RotateAngle : -RotateAngle; // Determine direction based on rotateForward
             CameraShake.Instance.shakeCameraWithFrequency(intensity, frequency, rotateDuration);
+
+            // Disable player movement during rotation
+            if (player != null)
+            {
+                player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            }
+
             RotateObject.transform.DORotate(new Vector3(0, 0, RotateObject.transform.eulerAngles.z + angle), rotateDuration, RotateMode.FastBeyond360)
-                .OnComplete(() => isRotating = false);
+                .OnComplete(() =>
+                {
+                    // Re-enable player movement after rotation
+                    if (player != null)
+                    {
+                        player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                    }
+                    isRotating = false;
+                });
+
             currentCount++;
+
             if (currentCount >= maxCount)
             {
                 rotateForward = !rotateForward; // Switch direction
@@ -48,6 +67,7 @@ public class RotatePerform : MonoBehaviour
         {
             canRotate = true;
             Light.DOColor(Color.white, 1f); // Change the light color to white over 1 second
+            
         }
     }
 

@@ -57,6 +57,7 @@ public class PlayerHealth : MonoBehaviour
         {
             healthBar.SetHealth(currentHeath);
         }
+        AudioManager.instance.PlaySFX("Heal");
     }
 
     public void TakeDamage(int damage)
@@ -85,9 +86,11 @@ public class PlayerHealth : MonoBehaviour
         var deathColor = new Color(25f / 255f, 25f / 255f, 25f / 255f);
         light.DOColor(deathColor, 0.2f).OnComplete(() => light.DOColor(Color.white, 1f));
         BG.DOColor(deathColor, 0.2f).OnComplete(() => BG.DOColor(Color.white, 1f)); // 同时变化BG颜色
+        AudioManager.instance.PlaySFX("Hit");
         CameraShake.Instance.shakeCamera(3 * intensity, shaketime);
         // gameObject.SetActive(false);
         //GetComponent<Collider2D>().enabled = false; 
+        animator.SetTrigger("Die");
         Invoke("Reborn", 0.75f);
     }
 

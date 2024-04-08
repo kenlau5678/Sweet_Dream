@@ -51,6 +51,7 @@ public class PlayerShoot : MonoBehaviour
 
 
         animator.SetTrigger("Shoot");
+        AudioManager.instance.PlaySFX("Shoot");
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (transform.lossyScale.x > 0)

@@ -7,6 +7,8 @@ public class MagicPower : MonoBehaviour
     public MagicBar magicBar;
     public int maxMagicPower = 100;
     public int currentMagicPower;
+
+   
     // Start is called before the first frame update
     void Start()
     {
