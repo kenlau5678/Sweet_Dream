@@ -34,9 +34,12 @@ public class Boss2 : MonoBehaviour
          if (Input.GetKeyDown(KeyCode.J)) //模拟受伤
         {
            
-            TakeDamage(10);
-            animator.ResetTrigger("Hurt");
+            TakeDamage(1);
+            
         }
+        
+        
+        
 		
 	}
 	public void LookAtPlayer()
