@@ -11,6 +11,7 @@ TagManager:
   - Virtual Camera
   - Boss
   - Box
+  - Boss2
   layers:
   - Default
   - TransparentFX

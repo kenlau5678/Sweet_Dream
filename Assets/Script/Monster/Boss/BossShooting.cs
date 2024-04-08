@@ -54,7 +54,7 @@ public class BossShooting : MonoBehaviour
          // 显示枪
             gunRenderer.enabled = true;
             // 获取枪口位置和方向
-        Vector3 gunPosition = FirePoint.position; // 你需要替换成实际的枪口位置
+        Vector3 gunPosition = FirePoint.position; // 替换成实际的枪口位置
         Vector3 gunDirection = FirePoint.right; 
 
         // 创建射线

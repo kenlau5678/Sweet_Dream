@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss2Shooting : MonoBehaviour
 {
-   public Transform leftShootPoint; // 左射击点
+    public Transform leftShootPoint; // 左射击点
     public Transform rightShootPoint; // 右射击点
     public GameObject laserPrefab; // 镭射预制体
 
