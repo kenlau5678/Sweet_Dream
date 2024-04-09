@@ -6,10 +6,10 @@ public class BossWaveAttack : MonoBehaviour
 {
     public GameObject WavePrefab; // 圆的预制体
     public Transform startPoint; 
-    public float expandSpeed = 3f; // 初始扩大速度
-    public float acceleration = 1f;
+    public float expandSpeed = 0.1f; // 初始扩大速度
+    public float acceleration = 8f;
     private float currentExpandSpeed;
-    public float maxRadius = 20f; // 最大半径
+    public float maxRadius = 15f; // 最大半径
 
     void Start()
     {
@@ -27,6 +27,7 @@ public class BossWaveAttack : MonoBehaviour
     }
     IEnumerator ExpandCircle(Transform circleTransform)
     {
+        currentExpandSpeed = expandSpeed;
         float radius = 0f;
         while (radius < maxRadius)
         {
