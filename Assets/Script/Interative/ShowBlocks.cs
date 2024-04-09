@@ -8,6 +8,7 @@ public class ShowBlocks : MonoBehaviour
     public GameObject[] blocks; // 在 Unity 编辑器中指定这些 GameObjects
     public bool isTrigger;
     public float fadeDuration = 1f; // 消失的持续时间
+    public GameObject keyUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,12 +28,17 @@ public class ShowBlocks : MonoBehaviour
     {
         if(isTrigger && Input.GetKeyDown(KeyCode.E))
         {
+            if(keyUI)
+            {
+                keyUI.SetActive(false);
+            }
             foreach (GameObject block in blocks)
             {
                 
                 block.SetActive(true);
                 block.GetComponent<SpriteRenderer>().DOFade(1f, fadeDuration);
             }
+            
             this.GetComponent<SpriteRenderer>().DOFade(0f,fadeDuration).OnComplete(() => gameObject.SetActive(false)); ;
         }
     }
