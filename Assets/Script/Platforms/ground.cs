@@ -21,6 +21,7 @@ public class ground : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerMovement>().creatDust();
+            AudioManager.instance.PlaySFX("Ground");
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
 
 public class MovePlatform : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class MovePlatform : MonoBehaviour
     private bool hasMoved = false; // 平台是否已经移动
     public GameObject MoveObject; // 要移动的对象
     public GameObject delObject;
+    public float lightIntensityOnEnter = 4f; // Desired intensity when the player enters the trigger zone
+    public float lightIntensityOnExit = 0.5f;  // Desired intensity when the player exits the trigger zone
+    public float lightChangeDuration = 1f;   // Duration of the intensity change
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +46,11 @@ public class MovePlatform : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = true;
+            var light2D = GetComponent<Light2D>();
+            if (light2D != null)
+            {
+                DOTween.To(() => light2D.intensity, x => light2D.intensity = x, lightIntensityOnEnter, lightChangeDuration);
+            }
         }
     }
 
@@ -50,6 +60,11 @@ public class MovePlatform : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = false;
+            var light2D = GetComponent<Light2D>();
+            if (light2D != null)
+            {
+                DOTween.To(() => light2D.intensity, x => light2D.intensity = x, lightIntensityOnExit, lightChangeDuration);
+            }
         }
     }
 }
