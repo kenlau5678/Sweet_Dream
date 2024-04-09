@@ -2,29 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveAnimController : StateMachineBehaviour
+public class FireRainAnimController : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // 获取 Boss 对象的引用
-        GameObject boss2 = GameObject.Find("Boss2");
-        if (boss2 != null)
+        GameObject fireBallManager = GameObject.Find("FireBallManager");
+        if (fireBallManager != null)
         {
-            BossWaveAttack bosswaveAttack = boss2.GetComponent<BossWaveAttack>();
-            if (bosswaveAttack != null)
-            {
-                bosswaveAttack.SpawnCircle();
+            FireBallManager fireBall = fireBallManager.GetComponent<FireBallManager>();
+            if (fireBall != null)
+           {
+                fireBall.SpawnFireBall();
             }
             else
             {
-                Debug.LogWarning("Boss2 script not found on Boss2 object.");
-            }  
+                Debug.LogWarning("Not found on fireBallManager object.");
+            }
             
         }
         else
         {
-            Debug.LogWarning("Boss2 object not found.");
+            Debug.LogWarning("FireBallManager object not found.");
         }
     }
 
