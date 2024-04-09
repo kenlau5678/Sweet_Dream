@@ -4,88 +4,53 @@ using UnityEngine;
 
 public class Boss2LaserShoot : MonoBehaviour
 {
-    public Transform player; // 玩家的 Transform
-    public Transform leftShootPoint; // 左射击点
-    public Transform rightShootPoint; // 右射击点
-    private Transform shootPoint;
-    public LineRenderer warningLine; // 预警线
-    public GameObject laserPrefab; // 镭射预制体
-    public float chargeDuration = 1f; // 蓄力持续时间
+    public GameObject warningLaserPrefab; // 预警镭射预制体
+    public GameObject damageLaserPrefab; // 伤害镭射预制体
+    public Transform shootPoint; // 射击点
+    public Transform player; // 玩家对象
 
-    private Vector3 shootPosition; // 镭射射击位置
-    private bool isCharging = false; // 是否正在蓄力
-    private float chargeTimer = 0f; // 蓄力计时器
+    private Vector3 lastAimPosition; // 最后一次瞄准的坐标
 
     void Start()
     {
-        // 初始化预警线
-        warningLine.enabled = false;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        // 随机选择左右射击点
-        shootPoint = Random.Range(0, 2) == 0 ? leftShootPoint : rightShootPoint;
+        StartCoroutine(ShootLaser());
     }
 
-    void Update()
+    IEnumerator ShootLaser()
     {
-        if (!isCharging)
+         // 生成预警镭射
+        GameObject warningLaser = Instantiate(warningLaserPrefab, shootPoint.position, Quaternion.identity);
+
+        while (true)
         {
-            // 进入蓄力阶段
-            Charge();
+            // 让预警镭射朝向玩家的当前坐标
+            Vector3 directionToPlayer = player.position - shootPoint.position;
+            float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+            warningLaser.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+            yield return null; // 等待下一帧更新
+
+            // 如果预警镭射朝向玩家，则结束循环
+            if (Mathf.Abs(warningLaser.transform.eulerAngles.z - angle) < 0.5f)
+                break;
         }
-        else
-        {
-            // 蓄力阶段持续时间
-            chargeTimer += Time.deltaTime;
-            if (chargeTimer >= chargeDuration)
-            {
-                // 进入射击阶段
-                Shoot();
-            }
-            else
-            {
-                // 实时跟踪玩家位置并更新预警线
-                UpdateWarningLine();
-            }
-        }
-    }
 
-    void Charge()
-    {
-        // 显示预警线
-        warningLine.enabled = true;
+        // 销毁预警镭射
+        Destroy(warningLaser);
 
-        // 更新预警线位置
-        UpdateWarningLine();
+        // 记录最后一刻的坐标
+        lastAimPosition = player.position;
 
-        // 进入蓄力阶段
-        isCharging = true;
-        chargeTimer = 0f;
-    }
+        // 销毁预警镭射
+        Destroy(warningLaser);
 
-    void Shoot()
-    {
-        // 隐藏预警线
-        warningLine.enabled = false;
-
-        // 生成镭射并设置射击位置
-        GameObject laser = Instantiate(laserPrefab, shootPosition, Quaternion.identity);
-
-        // 进入冷却阶段
-        isCharging = false;
-        if (chargeTimer >= chargeDuration)
-            {
-                Destroy(laser);
-            }
         
-    }
 
-    void UpdateWarningLine()
-    {
-        // 计算射击位置
-        shootPosition = player.position;
+        // 生成伤害镭射
+        GameObject damageLaser = Instantiate(damageLaserPrefab, shootPoint.position, Quaternion.identity);
 
-        // 更新预警线位置
-        warningLine.SetPosition(0, shootPoint.position);
-        warningLine.SetPosition(1, shootPosition);
+        Vector3 damageDirection = lastAimPosition - shootPoint.position;
+        // 设置伤害镭射的终点为记录下来的坐标
+        damageLaser.transform.up = damageDirection.normalized;
     }
 }
