@@ -1,7 +1,5 @@
 using DG.Tweening;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class hourglass : MonoBehaviour
@@ -12,9 +10,10 @@ public class hourglass : MonoBehaviour
     public float hourAngles;
     public float minuteAngles;
     public Animator animator;
-    int isstay = 0;
+    private int isstay = 0;
+    private float cooldownDuration = 1f; // Duration of cooldown in seconds
+    private float lastInteractionTime = -Mathf.Infinity; // Track the last interaction time
 
-    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -26,22 +25,23 @@ public class hourglass : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             isstay = 0;
             Debug.Log(isstay);
         }
-        
     }
 
     private void Update()
     {
-        if (isstay ==1 && Input.GetKeyDown(KeyCode.E))
+        if (isstay == 1 && Input.GetKeyDown(KeyCode.E) && Time.time >= lastInteractionTime + cooldownDuration)
         {
+            lastInteractionTime = Time.time; // Update the last interaction time
+
             Debug.Log("OK");
             StartCoroutine(hourhand.GetComponent<HandRotation>().RotationCoroutine());
             StartCoroutine(minutehand.GetComponent<HandRotation>().RotationCoroutine());
-            CameraShake.Instance.shakeCameraWithFrequency(1f,2f,1f);
+            CameraShake.Instance.shakeCameraWithFrequency(1f, 2f, 1f);
             if (rotateFlag == true)
             {
                 animator.SetTrigger("Rotate");
@@ -53,11 +53,5 @@ public class hourglass : MonoBehaviour
                 rotateFlag = true;
             }
         }
-
-
     }
-
-
-
-
 }
