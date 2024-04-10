@@ -29,7 +29,7 @@ public class Boss2LaserController : StateMachineBehaviour
             Debug.LogWarning("Boss2 object not found.");
         }
         // 启动协程来等待三秒钟
-        animator.StartCoroutine(AnimateBoss());
+        //animator.StartCoroutine(AnimateBoss());
         
     }
 
