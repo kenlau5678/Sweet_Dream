@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireBallManager : MonoBehaviour
 {
     [SerializeField] GameObject[] FireBallPrefabs;
+    Animator anim;
    public void SpawnFireBall()//生成
     {
         int temp = Random.Range(0, 10), r=0;

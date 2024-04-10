@@ -12,18 +12,30 @@ public class Boss2LaserShoot : MonoBehaviour
     private Vector3 lastAimPosition; // 最后一次瞄准的坐标
     private GameObject damageLaser; // 伤害镭射对象
 
-    void Start()
+    public bool shootCheck = false;
+
+    // void Start()
+    // {
+    //     //animator = GetComponent<Animator>();
+    //     StartCoroutine(ShootLaser());
+        
+    // }
+
+    public void ShootCiteFunc()//供动画脚本引用
     {
+        shootCheck = true;
         StartCoroutine(ShootLaser());
     }
-
     IEnumerator ShootLaser()
     {
-        while (true)
+        while (shootCheck)
         {
             // 销毁之前生成的伤害镭射
             if (damageLaser != null)
-                Destroy(damageLaser);
+                {
+                    Destroy(damageLaser);
+                    shootCheck = false;
+                }
 
             // 生成预警镭射
             GameObject warningLaser = Instantiate(warningLaserPrefab, shootPoint.position, Quaternion.identity);
@@ -43,7 +55,7 @@ public class Boss2LaserShoot : MonoBehaviour
             }
 
             // 等待一段时间后发射
-            yield return new WaitForSeconds(0.5f); // 这里的 0.5f 表示等待的时间，你可以根据需要调整
+            yield return new WaitForSeconds(0.2f); // 这里的 0.5f 表示等待的时间，你可以根据需要调整
 
             // 销毁预警镭射
             Destroy(warningLaser);
@@ -60,7 +72,8 @@ public class Boss2LaserShoot : MonoBehaviour
             damageLaser.transform.localRotation = Quaternion.Euler(0f, 0f, damageAngle);
 
             // 等待一段时间后继续下一次循环
-            yield return new WaitForSeconds(2f); // 这里的 2f 表示发射间隔，你可以根据需要调整
+            yield return new WaitForSeconds(2f); // 这里的 2f 表示发射间隔，可以根据需要调整
         }
+
     }
 }
