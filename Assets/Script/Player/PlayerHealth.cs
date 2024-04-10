@@ -62,19 +62,29 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHeath -= damage;
+        currentHeath -= damage;//扣血
+
+        //血条UI改变
         if (healthBar != null)
         {
             healthBar.SetHealth(currentHeath);
         }
+
+        //受伤粒子特效
         if (Blood != null) Blood.Play();
+
+        //镜头抖动
         CameraShake.Instance.shakeCamera(intensity, shaketime);
+
+        //顿帧时停效果
         this.GetComponent<TimeStop>().StopTime(0.1f, 10, 0.1f);
-        // 应用颜色变化
+
+        //画面变黑效果
         var darkColor = new Color(100f / 255f, 100f / 255f, 100f / 255f);
         light.DOColor(darkColor, 0.1f).OnComplete(() => light.DOColor(Color.white, 1f));
         BG.DOColor(darkColor, 0.1f).OnComplete(() => BG.DOColor(Color.white, 1f)); // 同时变化BG颜色
 
+        //判定是否死亡
         if (currentHeath <= 0)
         {
             Die();
