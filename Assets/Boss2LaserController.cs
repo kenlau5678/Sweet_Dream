@@ -6,7 +6,7 @@ public class Boss2LaserController : StateMachineBehaviour
 {
     public GameObject boss2;
     public float timer;
-    float timeDuration = 8.5f;
+    public float timeDuration = 8.5f;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
