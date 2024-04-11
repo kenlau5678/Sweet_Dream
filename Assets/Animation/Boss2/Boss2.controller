@@ -533,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss2: {fileID: 3315484336044660868, guid: a8e7c33613183614fa96fe0da123844a, type: 3}
   timer: 0
+  timeDuration: 8.5
 --- !u!114 &4389863693543375936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -699,7 +700,7 @@ AnimatorStateMachine:
     m_Position: {x: 600, y: -100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4261429448233610546}
-    m_Position: {x: 160, y: 10, z: 0}
+    m_Position: {x: 40, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3974661570689421384}
     m_Position: {x: 90, y: 240, z: 0}
