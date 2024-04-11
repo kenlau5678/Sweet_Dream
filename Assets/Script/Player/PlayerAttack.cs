@@ -57,6 +57,10 @@ public class PlayerAttack : MonoBehaviour
                 enemy.GetComponent<BossHeart>().TakeDamage(attackDamage);
 
             }
+            else if(enemy.tag == "Boss1")
+            {
+                enemy.GetComponent<Boss>().TakeDamage(attackDamage);
+            }
             Debug.Log("attack");
             if (AchievementSystem.Instance != null)
             {

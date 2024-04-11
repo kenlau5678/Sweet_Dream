@@ -12,6 +12,7 @@ public class BossGunWalk : StateMachineBehaviour
     public float distanceToPlayer;
     public float speed;
     Boss boss;
+    Monster monster;
     Transform player;
 	Rigidbody2D rb;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -22,6 +23,7 @@ public class BossGunWalk : StateMachineBehaviour
        player = GameObject.FindGameObjectWithTag("Player").transform;
        rb = animator.GetComponent<Rigidbody2D>();
        boss = animator.GetComponent<Boss>();
+       monster = animator.GetComponent<Monster>();
        animator.SetBool("isShoot",false);
     }
 
@@ -31,7 +33,7 @@ public class BossGunWalk : StateMachineBehaviour
         animator.SetBool("isShoot",false);
        if(attackTimer <= 0)
         {
-            if(rand <=2)//30% switch to hand attack
+            if(rand <=1)//10% switch to hand attack
             {
                 animator.SetTrigger("ToHandAttack");
             }

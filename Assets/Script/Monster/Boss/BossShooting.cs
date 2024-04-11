@@ -28,7 +28,8 @@ public class BossShooting : MonoBehaviour
         // 根据布尔值控制枪的可见性
         if (isShoot == true)
         {
-           
+            // 显示枪
+            gunRenderer.enabled = true;
             if (player != null)
             {
                 // 计算玩家与怪物手臂节点之间的方向
@@ -51,8 +52,7 @@ public class BossShooting : MonoBehaviour
     }
     void Shoot()
     {
-         // 显示枪
-            gunRenderer.enabled = true;
+         
             // 获取枪口位置和方向
         Vector3 gunPosition = FirePoint.position; // 替换成实际的枪口位置
         Vector3 gunDirection = FirePoint.right; 

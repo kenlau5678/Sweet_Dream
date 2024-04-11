@@ -87,10 +87,10 @@ public class Monster : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            // ¸øÍæ¼ÒÔì³ÉÉËº¦
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½
             collision.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(20);
 
-            // »÷ÍËÍæ¼Ò
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             PlayerHit playerhit = collision.collider.GetComponent<PlayerHit>();
             if (playerhit != null)
             {

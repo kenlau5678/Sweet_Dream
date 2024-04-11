@@ -13,7 +13,7 @@ public class BossHandAttack : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         rand = Random.Range(0,10);//switch 3 different attack modes
-        attackTimer = Random.Range(minTime,maxTime) + 1f;
+        //attackTimer = Random.Range(minTime,maxTime) + 1f;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

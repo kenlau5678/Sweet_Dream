@@ -12,8 +12,9 @@ public class BossHandWalk : StateMachineBehaviour
     public float distanceToPlayer;
     public float speed = 5f;
     public float shootRange = 12f;
-    public float dashRange = 6f;
+    public float dashRange = 4f;
     Boss boss;
+    Monster monster;
     Transform player;
 	Rigidbody2D rb;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -24,6 +25,7 @@ public class BossHandWalk : StateMachineBehaviour
        player = GameObject.FindGameObjectWithTag("Player").transform;
        rb = animator.GetComponent<Rigidbody2D>();
        boss = animator.GetComponent<Boss>();
+       monster = animator.GetComponent<Monster>();
 
     }
 
@@ -36,9 +38,9 @@ public class BossHandWalk : StateMachineBehaviour
         Vector2 target = new Vector2(player.position.x, rb.position.y);
 		Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
 	    rb.MovePosition(newPos);
-        //switch other animations
-       // if(attackTimer <= 0)
-        //{
+        
+       if(attackTimer <= 0)
+        {
             if(distanceToPlayer >= shootRange )
             {
                 Debug.Log("GUNNNN");
@@ -57,16 +59,17 @@ public class BossHandWalk : StateMachineBehaviour
             // {
             //     animator.SetTrigger("ToGunAttack");
             // }
-        // }
-        // else{
-        //     attackTimer -= Time.deltaTime;
-        // }
+        }
+        else{
+            attackTimer -= Time.deltaTime;
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        animator.SetBool("isHandWalk",false);
+       attackTimer = 2f;
     }
 
    

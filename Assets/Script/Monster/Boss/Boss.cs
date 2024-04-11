@@ -4,27 +4,38 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+	public HealthBar healthBar;
     public Transform player;
-	public float maxHeath = 100f;
-    public float currentHeath;
+	public int maxHeath = 250;
+    public int health;
 
 	public bool isFlipped = false;
 	public float attackRange = 5f;
 
-	public float hitSpeed;//受击后退速度
-	private bool isHit;//受击判定
-	private Vector2 hitDirection;//击退方向
+
+	private bool isDead = false;
 	private AnimatorStateInfo info;//动画状态
 	private Animator animator;
-	new private Rigidbody2D rigidbody;
+	new private Rigidbody2D rb;
 
+	//Effect 
+	public float knockbackForce = 5f;
+    public float intensity;
+    public float shaketime;
+
+	public ParticleSystem Blood;
 
 	void Start()
 	{
 		animator = transform.GetComponent<Animator>();
-		rigidbody = transform.GetComponent<Rigidbody2D>();
+		rb = transform.GetComponent<Rigidbody2D>();
 
-		currentHeath = maxHeath;
+		health = maxHeath;
+		if (healthBar!=null)
+		{
+            
+            healthBar.SetMaxhealth(maxHeath);
+        }
 	}
 
 	void Update()
@@ -32,12 +43,12 @@ public class Boss : MonoBehaviour
 		DistanceToPlayer();
 		LookAtPlayer();
 		info = animator.GetCurrentAnimatorStateInfo(0);
-		if(isHit)
-		{
-			rigidbody.velocity = hitDirection * hitSpeed;
-			if(info.normalizedTime >= 0.6f)
-			{ isHit = false;}
-		}
+		if (Input.GetKeyDown(KeyCode.J))
+        {
+            TakeDamage(10); // 假设每次按下'J'键，Boss会受到10点伤害
+        }
+		
+
 	}
 	public void LookAtPlayer()
 	{
@@ -69,19 +80,32 @@ public class Boss : MonoBehaviour
 		}
 		
 	}
-	public void GetHit(Vector2 hitDirection)
+	
+	public void TakeDamage(int damage)  //受伤代码
 	{
-		//transform.localScale = new Vector3(-hitDirection.x,1,1);//受击朝向伤害来源
-		isHit = true;
-		this.hitDirection = hitDirection;
+		if (isDead) return; // 如果Boss已经死亡，直接返回，不再执行下面的代码
+		health -= damage;
+		if (healthBar != null)
+		{ healthBar.SetHealth(health); }
+		AudioManager.instance.PlaySFX("Hit");
+		CameraShake.Instance.shakeCamera(intensity, shaketime);
+		Debug.Log("Boss gets hit, hp:"+health);
 		animator.SetTrigger("Hit");
-	}
-	public void TakeDamage(float damage)
-	{
-		currentHeath -= damage;
-		Debug.Log("monster gets hit");
-		animator.SetTrigger("Hit");
-		if(currentHeath <= 0)
+		if(Blood!= null)
+		{
+			Blood.Play();
+		}
+		if (transform.position.x - player.transform.position.x > 0)
+		{
+
+			rb.AddForce(Vector2.right * knockbackForce, ForceMode2D.Impulse);
+		}
+		else
+		{
+			rb.AddForce(Vector2.left * knockbackForce, ForceMode2D.Impulse);
+
+		}
+		if(health <= 0)
 		{
 			Die();
 		}
@@ -89,7 +113,40 @@ public class Boss : MonoBehaviour
 	void Die()
 	{
 		//Instantiate(deathEffect, transform.position, Quaternion.identity); //deathAnimator
-		
+		if (isDead) return; // 防止重复调用
+        isDead = true;
+		animator.SetTrigger("Die");
+		Invoke("DestroyObject", 5f);
+	}
+	private void DestroyObject()
+	{
 		Destroy(gameObject);
 	}
+	
+	private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Player")
+        {
+            // ���������˺�
+            collision.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(20);
+
+            // �������
+            PlayerHit playerhit = collision.collider.GetComponent<PlayerHit>();
+            if (playerhit != null)
+            {
+                playerhit.GetComponent<PlayerMovement>().isHit = true;
+                if (transform.position.x - playerhit.transform.position.x > 0)
+                {
+
+                    rb.AddForce(Vector2.right * knockbackForce, ForceMode2D.Impulse);
+                    playerhit.GetHit(playerhit.transform.position - transform.position);
+                }
+                else
+                {
+                    rb.AddForce(Vector2.left * knockbackForce, ForceMode2D.Impulse);
+                    playerhit.GetHit(playerhit.transform.position - transform.position);
+                }
+            }
+        }
+    }
 }
