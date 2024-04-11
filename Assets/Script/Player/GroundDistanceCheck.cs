@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class GroundDistanceCheck : MonoBehaviour
 {
-    public LayerMask groundLayer; // ÓÃÓÚÈ·¶¨ÄÄÐ©²ã±»ÊÓÎªµØÃæµÄLayerMask
-    public float triggerDistance = 1.0f; // ´¥·¢ÌØ¶¨º¯ÊýµÄ¾àÀëãÐÖµ
+    public LayerMask groundLayer; // ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½Ð©ï¿½ã±»ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½LayerMask
+    public float triggerDistance = 1.0f; // ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 
-    public Vector3 lastFeetPointPosition = Vector3.zero; // ÉÏÒ»¸ö½Ó´¥µãµÄÎ»ÖÃ
-    private bool hasLastPoint = false; // ÊÇ·ñÒÑ¾­¼ÇÂ¼ÁËÉÏÒ»¸ö½Ó´¥µã
-    public float intensity;
-    public float shaketime;
-    public float frequency;
+    public Vector3 lastFeetPointPosition = Vector3.zero; // ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+    private bool hasLastPoint = false; // ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½
+    public float intensity = 5f;
+    public float shaketime = 0.2f;
+    public float frequency = 0.2f;
     public Transform feetPos;
     public float checkRadius;
     void Update()
     {
         
-        // ´Ó FeetPoint ÏòÏÂÉäÏß¼ì²âÒÔÑ°ÕÒµØÃæ
+        // ï¿½ï¿½ FeetPoint ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½Òµï¿½ï¿½ï¿½
         if (Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer))
         {
             if (hasLastPoint)
@@ -24,7 +24,7 @@ public class GroundDistanceCheck : MonoBehaviour
                 float distance = lastFeetPointPosition.y-feetPos.position.y;
                 if (distance > triggerDistance)
                 {
-                    // µ±¾àÀë´óÓÚãÐÖµÊ±´¥·¢ÌØ¶¨º¯Êý
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÊ±ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½
                     CameraShake.Instance.shakeCameraWithFrequency(intensity, frequency, shaketime);
                     if(AudioManager.instance!=null)
                     {
@@ -33,7 +33,7 @@ public class GroundDistanceCheck : MonoBehaviour
                 }
             }
 
-            // ¸üÐÂÉÏÒ»¸ö½Ó´¥µãµÄÎ»ÖÃ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
             lastFeetPointPosition = feetPos.position;
             hasLastPoint = true;
         }

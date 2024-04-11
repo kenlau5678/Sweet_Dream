@@ -10,6 +10,9 @@ public class BossWaveAttack : MonoBehaviour
     public float acceleration = 8f;
     private float currentExpandSpeed;
     public float maxRadius = 15f; // 最大半径
+    public float intensity;
+    public float shaketime;
+    public float frequency;
 
     void Start()
     {
@@ -22,8 +25,10 @@ public class BossWaveAttack : MonoBehaviour
     {
         // 在Boss头部生成圆
         GameObject circle = Instantiate(WavePrefab, startPoint.position, Quaternion.identity);
+        CameraShake.Instance.shakeCameraWithFrequency(intensity, frequency, shaketime);
         // 开始逐渐扩大圆的半径
         StartCoroutine(ExpandCircle(circle.transform));
+        
     }
     IEnumerator ExpandCircle(Transform circleTransform)
     {
@@ -31,6 +36,7 @@ public class BossWaveAttack : MonoBehaviour
         float radius = 0f;
         while (radius < maxRadius)
         {
+            
             radius += currentExpandSpeed * Time.deltaTime;
             // 设置圆的半径
             circleTransform.localScale = new Vector3(radius, radius, 1f);
