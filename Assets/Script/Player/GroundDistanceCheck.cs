@@ -26,6 +26,10 @@ public class GroundDistanceCheck : MonoBehaviour
                 {
                     // 当距离大于阈值时触发特定函数
                     CameraShake.Instance.shakeCameraWithFrequency(intensity, frequency, shaketime);
+                    if(AudioManager.instance!=null)
+                    {
+                        AudioManager.instance.PlaySFX("Down");
+                    }
                 }
             }
 
