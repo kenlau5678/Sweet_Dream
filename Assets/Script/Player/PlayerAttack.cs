@@ -47,7 +47,16 @@ public class PlayerAttack : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Monster>().TakeDamage(attackDamage);//enemy take damage
+            if(enemy.tag == "Monster")
+            {
+                enemy.GetComponent<Monster>().TakeDamage(attackDamage);//enemy take damage
+
+            }
+            else if(enemy.tag == "Boss")
+            {
+                enemy.GetComponent<BossHeart>().TakeDamage(attackDamage);
+
+            }
             Debug.Log("attack");
             if (AchievementSystem.Instance != null)
             {

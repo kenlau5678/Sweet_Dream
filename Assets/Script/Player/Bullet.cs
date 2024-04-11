@@ -17,12 +17,18 @@ public class Bullet : MonoBehaviour
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.5f);
 
-            if (collision.collider.tag == "Monster"|| collision.collider.tag == "Boss")
+            if (collision.collider.tag == "Monster")
             {
                 Debug.Log("monster");
                 CameraShake.Instance.shakeCamera(intensity, shaketime);
                 collision.collider.GetComponent<Monster>().TakeDamage(damage);
                 //collision.collider.GetComponent<Boss>().TakeDamage(damage);
+            }
+            else if(collision.collider.tag == "Boss")
+            {
+                Debug.Log("Boss");
+                CameraShake.Instance.shakeCamera(intensity, shaketime);
+                collision.collider.GetComponent<BossHeart>().TakeDamage(damage);
             }
             Destroy(gameObject);
         }
