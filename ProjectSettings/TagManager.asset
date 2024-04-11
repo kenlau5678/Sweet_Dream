@@ -12,6 +12,7 @@ TagManager:
   - Boss
   - Box
   - Boss2
+  - FireBallManager
   layers:
   - Default
   - TransparentFX
