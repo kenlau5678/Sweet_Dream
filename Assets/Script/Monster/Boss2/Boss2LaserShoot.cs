@@ -14,12 +14,11 @@ public class Boss2LaserShoot : MonoBehaviour
 
     public bool shootCheck = false;
 
-    // void Start()
-    // {
-    //     //animator = GetComponent<Animator>();
-    //     StartCoroutine(ShootLaser());
+    void Start()
+    {
+        //animator = GetComponent<Animator>();
         
-    // }
+    }
 
     public void ShootCiteFunc()//供动画脚本引用
     {

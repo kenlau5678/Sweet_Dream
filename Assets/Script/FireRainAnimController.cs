@@ -4,39 +4,40 @@ using UnityEngine;
 
 public class FireRainAnimController : StateMachineBehaviour
 {
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    public GameObject fireBallManager;
+    float timer;
+    float timeDuration = 3f;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameObject fireBallManager = GameObject.Find("FireBallManager");
+        Instantiate(fireBallManager);
         if (fireBallManager != null)
         {
-            FireBallManager fireBall = fireBallManager.GetComponent<FireBallManager>();
-            if (fireBall != null)
-           {
-                fireBall.SpawnFireBall();
-            }
-            else
-            {
-                Debug.LogWarning("Not found on fireBallManager object.");
-            }
-            
+            fireBallManager.SetActive(true);
         }
         else
         {
             Debug.LogWarning("FireBallManager object not found.");
         }
+        timer = 0;
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       
+        timer += Time.deltaTime;
+        if (timer >= timeDuration)
+        {
+            animator.SetTrigger("Idle");
+        }
     }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    // 在状态退出时禁用 FireBallManager
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       
+        // if (fireBallManager != null)
+        // {
+        //     fireBallManager.SetActive(false);
+        // }
+        animator.SetBool("FireRain",true);
     }
 
     
