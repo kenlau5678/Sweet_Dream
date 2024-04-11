@@ -134,3 +134,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveDamage: 10
+  changeTime: 2
+  changSpeed: 3

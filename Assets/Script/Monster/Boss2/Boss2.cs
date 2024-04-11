@@ -19,6 +19,7 @@ public class Boss2 : MonoBehaviour
 
 	void Start()
 	{
+
 		animator = transform.GetComponent<Animator>();
 		rigidbody = transform.GetComponent<Rigidbody2D>();
 

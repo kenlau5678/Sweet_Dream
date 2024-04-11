@@ -8,7 +8,7 @@ public class Boss2idle : StateMachineBehaviour
     bool isLaser = false;
     public int idleCount = 0;
     public float timer;
-    public float timeDuration = 3f;
+    public float timeDuration = 0.5f; //Buffer time
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,14 +19,16 @@ public class Boss2idle : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
       timer += Time.deltaTime;
-       if(idleCount == 1)
-       { animator.SetBool("isLaser", true);}
-       if (idleCount >= 4 || timer >= timeDuration)
-       {
-         isWave = true;
-       } 
-       if(isWave)
-       {   animator.SetTrigger("Wave");}
+        if (idleCount == 1) 
+        {}
+        else if (idleCount % 2 == 1 )
+        {
+            animator.SetBool("isLaser", true);
+        }
+        else if (idleCount % 2 == 0 )
+        {
+            animator.SetBool("isWave", true);
+        } 
 
     }
 

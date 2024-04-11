@@ -29,7 +29,11 @@ public class DownPlatform : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            isPlayerOnPlatform = true;
+            if(collision.collider.transform.position.y>transform.position.y)
+            {
+                isPlayerOnPlatform = true;
+            }
+            
         }
     }
 

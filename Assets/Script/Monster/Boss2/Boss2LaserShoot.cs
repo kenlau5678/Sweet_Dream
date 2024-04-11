@@ -56,7 +56,7 @@ public class Boss2LaserShoot : MonoBehaviour
             }
 
             // 等待一段时间后发射
-            yield return new WaitForSeconds(0.2f); // 这里的 0.xf 表示等待的时间，你可以根据需要调整
+            yield return new WaitForSeconds(0.75f); // 这里的 0.xf 表示等待的时间，你可以根据需要调整
 
             // 销毁预警镭射
             Destroy(warningLaser);
@@ -73,7 +73,7 @@ public class Boss2LaserShoot : MonoBehaviour
             damageLaser.transform.localRotation = Quaternion.Euler(0f, 0f, damageAngle);
 
             // 等待一段时间后继续下一次循环
-            yield return new WaitForSeconds(1.5f); // 下一次发射间隔
+            yield return new WaitForSeconds(0.5f); // 下一次发射间隔
             // 销毁之前生成的伤害镭射
             if (damageLaser != null)
                 {

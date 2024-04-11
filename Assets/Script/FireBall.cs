@@ -9,6 +9,7 @@ public class FireBall : MonoBehaviour
     private FireBallManager fireBallManager;
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
+    public int damage;
     void Start()
     {
         fireBallManager = transform.parent.GetComponent<FireBallManager>();
@@ -37,11 +38,21 @@ public class FireBall : MonoBehaviour
         }
         
     }
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Player"))
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(other.gameObject.tag);
+        if (other.CompareTag("Player"))
+        {
+            fireBallManager.SpawnFireBall();
+            Destroy(gameObject);
+            other.GetComponent<PlayerHealth>().TakeDamage(damage);
+        }
+        else if (other.CompareTag("Ground"))
         {
             fireBallManager.SpawnFireBall();
             Destroy(gameObject);
         }
+
+
     }
 }

@@ -1,11 +1,7 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
-using static UnityEngine.ParticleSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -68,13 +64,22 @@ public class PlayerMovement : MonoBehaviour
     private float _fallSpeedYDampingChangeThreshold;
 
     public bool isHit = false;
+    private float originalSpeed; // 原始速度
+    private float originalIntensity; // 原始亮度
 
+    public Light2D light2D;
     PlayerHit playerHitComponent;
     private void Start()
     {
         // 获取 PlayerHit 组件并存储在一个变量中
         playerHitComponent = GetComponent<PlayerHit>();
         _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
+
+        originalSpeed = speed;
+        if (light2D != null)
+        {
+            originalIntensity = light2D.intensity;
+        }
     }
 
 
@@ -93,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (CheckForActionBlockers()) return;
-        
+
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash()); // Start dash coroutine
@@ -152,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
         // Set animation state for running and control walk sound effect
         bool isRunning = moveDirection != Vector2.zero;
         animator.SetBool("IsRun", isRunning);
-        if (isRunning && !AudioManager.instance.IsPlayingSFX("Walk")&&isOnGround)
+        if (isRunning && !AudioManager.instance.IsPlayingSFX("Walk") && isOnGround)
         {
             AudioManager.instance.PlaySFXLoop("Walk"); // Ensure this method plays the sound effect in loop
         }
@@ -266,7 +271,7 @@ public class PlayerMovement : MonoBehaviour
         }
         jumpBufferCounter = 0f;
         creatDust();
-        if(AudioManager.instance != null)
+        if (AudioManager.instance != null)
         {
             AudioManager.instance.PlaySFX("Jump");
         }
@@ -365,5 +370,26 @@ public class PlayerMovement : MonoBehaviour
     {
         UpOrDown = UD;
         Physics2D.gravity = new Vector2(0f, -1 * UpOrDown * Physics2D.gravity.y);
+    }
+
+    public void ChangeSpeed(float newSpeed, float changeTime, float targetIntensity = 0.6f)
+    {
+        // 改变速度
+        DOTween.To(() => speed, x => speed = x, newSpeed, changeTime).OnComplete(() =>
+        {
+            // 完成后恢复原始速度
+            DOTween.To(() => speed, x => speed = x, originalSpeed, changeTime);
+        });
+
+        // 检查light2D是否已被赋值
+        if (light2D != null)
+        {
+            // 在指定时间内过渡到目标亮度
+            DOTween.To(() => light2D.intensity, x => light2D.intensity = x, targetIntensity, changeTime).OnComplete(() =>
+            {
+                // 完成后恢复原始亮度
+                DOTween.To(() => light2D.intensity, x => light2D.intensity = x, originalIntensity, changeTime);
+            });
+        }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LaserBarForBoss2 : MonoBehaviour
 {
+    public int damage;
     // Start is called before the first frame update
     // void Start()
     // {
@@ -16,9 +17,10 @@ public class LaserBarForBoss2 : MonoBehaviour
         
     // }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.name == "Player")
+        if(other.gameObject.tag == "Player")
         {
             Debug.Log("Laser Bar hit player");
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
     }
 }

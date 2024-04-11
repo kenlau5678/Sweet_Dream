@@ -12,8 +12,10 @@ public class BossHeart : MonoBehaviour
     public float shaketime = 0.2f;
     public Animator animator;
     public ParticleSystem Blood;
+    public GameObject LoadObject;
     void Start()
     {
+        LoadObject.SetActive(false);
         currentHP = MaxHP;
         if (healthBar != null)
         {
@@ -46,6 +48,7 @@ public class BossHeart : MonoBehaviour
         {
             transform.parent.gameObject.SetActive(false);
         }
+        LoadObject.SetActive(true);
     }
 
 

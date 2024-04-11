@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource, sfxSource, loopSfxSource; // Add a separate AudioSource for looped SFX
 
     private Dictionary<string, AudioSource> loopedSfxSources = new Dictionary<string, AudioSource>();
-
+    public bool isBoss = false;
     private void Awake()
     {
         if (instance == null)
@@ -30,7 +30,16 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayMusic("BG");
+        if(isBoss)
+        {
+            PlayMusic("Boss BG");
+        }
+        else
+        {
+            PlayMusic("BG");
+        }
+
+
     }
 
     public void PlayMusic(string name)

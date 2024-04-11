@@ -5,8 +5,8 @@ using UnityEngine;
 public class FireRainAnimController : StateMachineBehaviour
 {
     public GameObject fireBallManager;
-    float timer;
-    float timeDuration = 3f;
+    public float timer;
+    float timeDuration = 1f;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

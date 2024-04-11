@@ -12,6 +12,10 @@ public class ClickPlot : MonoBehaviour
     public GameObject fadeOut;
     public string startSceneName;
 
+    private void Start()
+    {
+        AudioManager.instance.PlayMusic("BG");
+    }
     private void Update()
     {
         // 檢查是否有點擊輸入且不在冷卻中

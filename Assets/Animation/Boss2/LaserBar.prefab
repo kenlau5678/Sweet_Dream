@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3740478475581851127}
   - component: {fileID: 256951559203103257}
-  - component: {fileID: 2242682777023414451}
   - component: {fileID: 2467386100324076479}
+  - component: {fileID: 2132486414639736779}
   m_Layer: 0
   m_Name: LaserBar
   m_TagString: Untagged
@@ -138,7 +138,20 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!61 &2242682777023414451
+--- !u!114 &2467386100324076479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907090210646758284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc8b26b3e9ba4e14b9a239daf4c1f1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+--- !u!61 &2132486414639736779
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,7 +183,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 4.9754634, y: -0.018116415}
+  m_Offset: {x: 0, y: -10}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -181,17 +194,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.541814, y: 0.56520665}
+  m_Size: {x: 1, y: 21}
   m_EdgeRadius: 0
---- !u!114 &2467386100324076479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6907090210646758284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc8b26b3e9ba4e14b9a239daf4c1f1db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
