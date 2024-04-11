@@ -90,7 +90,7 @@ public class Boss : MonoBehaviour
 		AudioManager.instance.PlaySFX("Hit");
 		CameraShake.Instance.shakeCamera(intensity, shaketime);
 		Debug.Log("Boss gets hit, hp:"+health);
-		animator.SetTrigger("Hit");
+		animator.SetTrigger("Hit"); //Boss受击动画
 		if(Blood!= null)
 		{
 			Blood.Play();

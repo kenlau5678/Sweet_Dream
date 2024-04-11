@@ -11,8 +11,8 @@ public class BossHandWalk : StateMachineBehaviour
 
     public float distanceToPlayer;
     public float speed = 5f;
-    public float shootRange = 12f;
-    public float dashRange = 4f;
+    public float shootRange = 8f;
+    public float dashRange = 3f;
     Boss boss;
     Monster monster;
     Transform player;
@@ -20,7 +20,7 @@ public class BossHandWalk : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       rand = Random.Range(0,2);//switch 2 different attack modes
+    //    rand = Random.Range(0,2);//switch 2 different attack modes
        attackTimer = Random.Range(minTime,maxTime);//random attack time
        player = GameObject.FindGameObjectWithTag("Player").transform;
        rb = animator.GetComponent<Rigidbody2D>();
@@ -39,8 +39,8 @@ public class BossHandWalk : StateMachineBehaviour
 		Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
 	    rb.MovePosition(newPos);
         
-       if(attackTimer <= 0)
-        {
+    //    if(attackTimer <= 0)
+    //     {
             if(distanceToPlayer >= shootRange )
             {
                 Debug.Log("GUNNNN");
@@ -51,18 +51,11 @@ public class BossHandWalk : StateMachineBehaviour
                 Debug.Log("dash");
                 animator.SetTrigger("ToHandAttack");
             }
-            //  if(rand == 0)
-            // {
-            //     animator.SetTrigger("ToHandAttack");
-            // }
-            // else
-            // {
-            //     animator.SetTrigger("ToGunAttack");
-            // }
-        }
-        else{
-            attackTimer -= Time.deltaTime;
-        }
+            //若在 dashrange ~ shootRange,则走路
+        // }
+        // else{
+        //     attackTimer -= Time.deltaTime;
+        // }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
