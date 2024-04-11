@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClickPlot : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class ClickPlot : MonoBehaviour
     private int currentIndex = 0;
     private bool isCoolingDown = false;
     public float coolDown;
+    public GameObject fadeOut;
+    public string startSceneName;
+
     private void Update()
     {
         // 檢查是否有點擊輸入且不在冷卻中
@@ -36,5 +40,19 @@ public class ClickPlot : MonoBehaviour
             itemsToShow[currentIndex].SetActive(true); // 顯示當前索引處的項目
             currentIndex++;
         }
+
+        else if (currentIndex == itemsToShow.Count)
+        {
+            if (fadeOut != null)
+            {
+                fadeOut.GetComponent<Fade>().FadeOut();
+                currentIndex++;
+            }
+        }
+        else
+        {
+            SceneManager.LoadScene(startSceneName);
+        }
     }
+
 }

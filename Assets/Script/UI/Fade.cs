@@ -51,6 +51,10 @@ public class Fade : MonoBehaviour
     {
         if (fade == INOUT.fadeout)
         {
+            if(AudioManager.instance!=null)
+            {
+                AudioManager.instance.PlaySFX("Interative");
+            }
             DOTween.To(() => fadeImage.color, x => fadeImage.color = x, new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1), fadetime);
             if (fadeText != null)
             {
