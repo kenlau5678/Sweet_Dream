@@ -80,10 +80,13 @@
 
 ### 人物设计
 - 以精灵为题，用拟人化的方式画出主体，人物色调以蓝色为主，突显出人物的速度感。
-![梦境精灵](ame-screenshot.png)
+
+<img src="Art work/Player un/Player_Un-1.png" width=auto height="300px">
 ### 怪物设计
 - 小怪及boss用了深红及深紫，与关卡颜色的作用一样，两只小怪以虫及蝙蝠为形象，而boss则先拟人化以盔甲的状态出现，第二阶段就变为类液态的型像出现，与第一阶段作出被拘束及解开束缚的对比。
-
+<img src="Art work/小怪1/怪1-1.png" width=auto height="300px">
+<img src="Art work/小怪2/怪2-1.png" width=auto height="300px">
+<img src="Art work/Boss_attack_1/Boss_attack_1-11.png" width=auto height="300px">
 
 ## 五、分工
 - **辛启轩：** 游戏美术，角色设计，UI设计，场景设计。
