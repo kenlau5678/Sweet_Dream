@@ -1082,7 +1082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6247852202471710529, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.504746
+      value: 2.5243697
       objectReference: {fileID: 0}
     - target: {fileID: 6247852202471710529, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1094,7 +1094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6458450948093538976, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.865401
+      value: -4.8655763
       objectReference: {fileID: 0}
     - target: {fileID: 6458450948093538976, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5646,6 +5646,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 909319228}
+    - target: {fileID: 1330953550464160823, guid: a8e7c33613183614fa96fe0da123844a, type: 3}
+      propertyPath: frequency
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1330953550464160823, guid: a8e7c33613183614fa96fe0da123844a, type: 3}
+      propertyPath: intensity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1330953550464160823, guid: a8e7c33613183614fa96fe0da123844a, type: 3}
+      propertyPath: shaketime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3315484336044660868, guid: a8e7c33613183614fa96fe0da123844a, type: 3}
       propertyPath: m_Name
       value: Boss2
