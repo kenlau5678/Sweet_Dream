@@ -1258,7 +1258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6247852202471710529, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.517774
+      value: 2.504746
       objectReference: {fileID: 0}
     - target: {fileID: 6247852202471710529, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1270,7 +1270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6458450948093538976, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.865517
+      value: -4.865401
       objectReference: {fileID: 0}
     - target: {fileID: 6458450948093538976, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3024,6 +3024,7 @@ MonoBehaviour:
   damageLaserPrefab: {fileID: 6907090210646758284, guid: 279d2f84f3fa9044ea1acfb8c09a83aa, type: 3}
   shootPoint: {fileID: 497257831}
   player: {fileID: 909319228}
+  shootCheck: 0
 --- !u!114 &822007715
 MonoBehaviour:
   m_ObjectHideFlags: 0

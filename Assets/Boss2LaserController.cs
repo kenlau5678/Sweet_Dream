@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Boss2LaserController : StateMachineBehaviour
 {
-    float timer;
+    public GameObject boss2;
+    public float timer;
+    float timeDuration = 8.5f;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        timer = 0;
        // 获取 Boss 对象的引用
-        GameObject boss2 = GameObject.Find("Boss2");
+        boss2 = GameObject.Find("Boss2");
         if (boss2 != null)
         {
             Boss2LaserShoot boss2LaserShoot = boss2.GetComponent<Boss2LaserShoot>();
@@ -28,15 +31,17 @@ public class Boss2LaserController : StateMachineBehaviour
         {
             Debug.LogWarning("Boss2 object not found.");
         }
-        // 启动协程来等待三秒钟
-        //animator.StartCoroutine(AnimateBoss());
         
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        timer += Time.deltaTime;
+        if (timer >= timeDuration)
+        {
+            animator.SetBool("isLaser", false);
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -45,15 +50,4 @@ public class Boss2LaserController : StateMachineBehaviour
        
     }
 
-    IEnumerator AnimateBoss()
-        {
-     
-
-        // 等待动画运行三秒
-        yield return new WaitForSeconds(3f);
-
-
-        // 退出动画
-
-        }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FireBallManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class FireBallManager : MonoBehaviour
     Animator anim;
    public void SpawnFireBall()//生成
     {
+       
         int temp = Random.Range(0, 10), r=0;
         if(temp>=7)
         {
