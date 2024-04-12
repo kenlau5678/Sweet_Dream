@@ -26,7 +26,6 @@ public class BossHandWalk : StateMachineBehaviour
        rb = animator.GetComponent<Rigidbody2D>();
        boss = animator.GetComponent<Boss>();
        monster = animator.GetComponent<Monster>();
-
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -39,8 +38,7 @@ public class BossHandWalk : StateMachineBehaviour
 		Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
 	    rb.MovePosition(newPos);
         
-    //    if(attackTimer <= 0)
-    //     {
+   
             if(distanceToPlayer >= shootRange )
             {
                 Debug.Log("GUNNNN");
@@ -51,11 +49,6 @@ public class BossHandWalk : StateMachineBehaviour
                 Debug.Log("dash");
                 animator.SetTrigger("ToHandAttack");
             }
-            //若在 dashrange ~ shootRange,则走路
-        // }
-        // else{
-        //     attackTimer -= Time.deltaTime;
-        // }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
