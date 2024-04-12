@@ -25,6 +25,7 @@ public class Boss : MonoBehaviour
 
 	public ParticleSystem Blood;
 
+	public GameObject showObject;
 	void Start()
 	{
 		animator = transform.GetComponent<Animator>();
@@ -36,6 +37,7 @@ public class Boss : MonoBehaviour
             
             healthBar.SetMaxhealth(maxHeath);
         }
+		showObject.SetActive(false);
 	}
 
 	void Update()
@@ -43,10 +45,6 @@ public class Boss : MonoBehaviour
 		DistanceToPlayer();
 		LookAtPlayer();
 		info = animator.GetCurrentAnimatorStateInfo(0);
-		if (Input.GetKeyDown(KeyCode.J))
-        {
-            TakeDamage(10); // 假设每次按下'J'键，Boss会受到10点伤害
-        }
 		
 
 	}
@@ -121,6 +119,7 @@ public class Boss : MonoBehaviour
 	private void DestroyObject()
 	{
 		Destroy(gameObject);
+		showObject.SetActive(true);
 	}
 	
 	private void OnCollisionEnter2D(Collision2D collision)

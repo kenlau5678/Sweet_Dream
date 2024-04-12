@@ -15,6 +15,7 @@ public class BossHeart : MonoBehaviour
     public GameObject LoadObject;
     void Start()
     {
+        AudioManager.instance.PlayMusic("Boss BG");
         LoadObject.SetActive(false);
         currentHP = MaxHP;
         if (healthBar != null)
@@ -23,6 +24,7 @@ public class BossHeart : MonoBehaviour
             healthBar.SetMaxhealth(MaxHP);
         }
     }
+
     public void TakeDamage(int damage)
     {
         currentHP -= damage;

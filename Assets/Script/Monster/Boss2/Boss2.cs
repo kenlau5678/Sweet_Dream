@@ -19,12 +19,13 @@ public class Boss2 : MonoBehaviour
 
 	void Start()
 	{
-
-		animator = transform.GetComponent<Animator>();
+        AudioManager.instance.PlayMusic("Boss BG");
+        animator = transform.GetComponent<Animator>();
 		rigidbody = transform.GetComponent<Rigidbody2D>();
 
 		currentHeath = maxHeath;
-	}
+    }
+
 
 	void Update()
 	{
@@ -32,12 +33,6 @@ public class Boss2 : MonoBehaviour
 		//LookAtPlayer();
 		info = animator.GetCurrentAnimatorStateInfo(0);
 
-         if (Input.GetKeyDown(KeyCode.J)) //模拟受伤
-        {
-           
-            TakeDamage(1);
-            
-        }
         
         
         

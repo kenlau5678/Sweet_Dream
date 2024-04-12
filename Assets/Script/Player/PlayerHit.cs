@@ -27,7 +27,7 @@ public class PlayerHit : MonoBehaviour
             transform.localScale = new Vector3(-newScaleX, transform.localScale.y, transform.localScale.z);
 
             this.hitDirection = hitDirection.normalized;
-            AudioManager.instance.PlaySFX("Hit");
+            
             StartCoroutine(HitBack());
         }
     }

@@ -30,6 +30,10 @@ public class Bullet : MonoBehaviour
                 CameraShake.Instance.shakeCamera(intensity, shaketime);
                 collision.collider.GetComponent<BossHeart>().TakeDamage(damage);
             }
+            else if (collision.collider.tag == "Boss1")
+            {
+                collision.collider.GetComponent<Boss>().TakeDamage(damage);
+            }
             Destroy(gameObject);
         }
     }

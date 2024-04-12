@@ -30,14 +30,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        if(isBoss)
-        {
-            PlayMusic("Boss BG");
-        }
-        else
-        {
+        
             PlayMusic("BG");
-        }
 
 
     }

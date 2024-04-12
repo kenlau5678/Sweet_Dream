@@ -71,6 +71,7 @@ public class PlayerHealth : MonoBehaviour
         }
         //受伤粒子特效
         if (Blood != null) Blood.Play();
+        AudioManager.instance.PlaySFX("Hit");
         //镜头抖动
         CameraShake.Instance.shakeCamera(intensity, shaketime);
         //顿帧时停效果
