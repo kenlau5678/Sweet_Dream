@@ -8428,6 +8428,7 @@ MonoBehaviour:
   musicSource: {fileID: 1027699996}
   sfxSource: {fileID: 1406479500}
   loopSfxSource: {fileID: 1980081167}
+  isBoss: 0
 --- !u!4 &457927390
 Transform:
   m_ObjectHideFlags: 0
@@ -18664,7 +18665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1190307170731912633, guid: 7eeb3c01dfc999248a3a68d8b105313e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 70.637695
+      value: 71.1
       objectReference: {fileID: 0}
     - target: {fileID: 1190307170731912633, guid: 7eeb3c01dfc999248a3a68d8b105313e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -37702,7 +37703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6247852202471710529, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9990641
+      value: -1.9990385
       objectReference: {fileID: 0}
     - target: {fileID: 6247852202471710529, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -37710,7 +37711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6458450948093538976, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9990641
+      value: -1.9990385
       objectReference: {fileID: 0}
     - target: {fileID: 6458450948093538976, guid: 19c5ce0cb15dee6408bf2eaa9ebe32c6, type: 3}
       propertyPath: m_LocalPosition.y
